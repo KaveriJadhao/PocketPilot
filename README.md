@@ -117,11 +117,6 @@ Open with Live Server in VS Code.
 ![Rewards](Screenshots/Rewards.png)
 
 
-### Mood Tracker
-
-![Mood Tracker](Screenshots/Mood Tracker.png)
-
-
 ### Setting
 
 ![Setting](Screenshots/Setting.png)
