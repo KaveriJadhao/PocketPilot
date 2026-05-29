@@ -87,6 +87,44 @@ Open with Live Server in VS Code.
 - Mobile App Version
 - Real Authentication System
 - Expense OCR from Receipts
+## 📸 Screenshots
+
+### Signup Page
+
+![Onboarding](Screenshots/Signup.png)
+
+### Login Page
+
+![Login](Screenshots/Login.png)
+
+### Dashboard
+
+![Dashboard](Screenshots/Dashboard1.png)
+![Dashboard](Screenshots/Dashboard2.png)
+![Dashboard](Screenshots/Dashboard3.png)
+
+### Voice AI
+
+![VoiceAI](Screenshots/VoiceAI.png)
+
+
+### Analytics
+
+![Analytics](Screenshots/Rewards.png)
+
+### RewardS
+
+![Rewards](Screenshots/Rewards.png)
+
+
+### Mood Tracker
+
+![Mood Tracker](Screenshots/Mood Tracker.png)
+
+
+### Setting
+
+![Setting](Screenshots/Setting.png)
 
 ## 👩‍💻 Author
 
