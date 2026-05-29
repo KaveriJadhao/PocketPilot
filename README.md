@@ -110,9 +110,9 @@ Open with Live Server in VS Code.
 
 ### Analytics
 
-![Analytics](Screenshots/Rewards.png)
+![Analytics](Screenshots/Analytics.png)
 
-### RewardS
+### Rewards
 
 ![Rewards](Screenshots/Rewards.png)
 
