@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Expense - PocketPilot</title>
+
+  <link rel="stylesheet" href="../css/add-expense.css"/>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- LEFT SIDE -->
+
+    <div class="left-section">
+
+      <div class="logo">
+        <i class="fa-solid fa-wallet"></i>
+        PocketPilot
+      </div>
+
+      <h1>Add New Expense 💸</h1>
+
+      <p>
+        Track your spending smartly and let AI analyze your habits.
+      </p>
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png"
+        alt="expense"
+      />
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="right-section">
+
+      <form id="expenseForm">
+
+        <div class="input-group">
+          <label>Expense Title</label>
+          <input
+            type="text"
+            id="title"
+            placeholder="Example: Pizza"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Amount</label>
+          <input
+            type="number"
+            id="amount"
+            placeholder="Enter amount"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Category</label>
+
+          <select id="category">
+
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Entertainment</option>
+            <option>Education</option>
+            <option>Bills</option>
+
+          </select>
+
+        </div>
+
+        <!-- MOOD -->
+
+        <div class="input-group">
+
+          <label>Select Mood</label>
+
+          <div class="moods">
+
+            <div class="mood">😊 Happy</div>
+
+            <div class="mood">😩 Stressed</div>
+
+            <div class="mood">😴 Bored</div>
+
+            <div class="mood">😔 Sad</div>
+
+          </div>
+
+        </div>
+
+        <!-- IMAGE -->
+
+        <div class="input-group">
+
+          <label>Upload Receipt</label>
+
+          <input type="file" id="receipt"/>
+
+        </div>
+
+        <button type="submit">
+          Save Expense
+        </button>
+
+      </form>
+
+      <!-- EXPENSE LIST -->
+
+      <div class="expense-list">
+
+        <h2>Recent Expenses</h2>
+
+        <div id="expenseContainer"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div id="toast" class="toast">
+    ✅ Expense Added Successfully
+</div>
+  <script src="../js/add-expense.js"></script>
+
+</body>
+</html>

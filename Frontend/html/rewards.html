@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rewards - PocketPilot</title>
+
+  <link rel="stylesheet" href="../css/rewards.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <i class="fa-solid fa-wallet"></i>
+      PocketPilot
+    </div>
+
+   <ul class="menu">
+
+  <li>
+    <a href="dashboard.html">
+      <i class="fa-solid fa-house"></i>
+      Dashboard
+    </a>
+  </li>
+
+  <li>
+    <a href="analytics.html">
+      <i class="fa-solid fa-chart-line"></i>
+      Analytics
+    </a>
+  </li>
+
+  <li>
+    <a href="voice.html">
+      <i class="fa-solid fa-microphone"></i>
+      Voice AI
+    </a>
+  </li>
+
+  <li class="active">
+    <a href="rewards.html">
+      <i class="fa-solid fa-gift"></i>
+      Rewards
+    </a>
+  </li>
+
+  <li>
+    <a href="mood.html">
+      <i class="fa-solid fa-face-smile"></i>
+      Mood Tracker
+    </a>
+  </li>
+
+  <li>
+    <a href="settings.html">
+      <i class="fa-solid fa-gear"></i>
+      Settings
+    </a>
+  </li>
+
+</ul>
+  </div>
+
+  <div class="main-content">
+
+    <div class="topbar">
+      <div>
+        <h1>Rewards Center 🎁</h1>
+        <p>Earn gems, unlock levels, and redeem student-friendly rewards.</p>
+      </div>
+
+      <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
+    </div>
+
+    <div class="reward-summary">
+      <div class="summary-card">
+        <h3>Current Gems</h3>
+        <h1 id="gemsValue">0 💎</h1>
+      </div>
+
+      <div class="summary-card">
+        <h3>Current Level</h3>
+        <h1 id="levelValue">Level 1 🎮</h1>
+      </div>
+
+      <div class="summary-card">
+        <h3>Next Level</h3>
+        <p id="nextLevelText">Progress to Level 2</p>
+        <div class="progress-bar">
+          <div class="progress" id="rewardProgress"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Achievements</h2>
+
+      <div class="milestones">
+        <div id="milestone50" class="milestone">🥉 Bronze Saver — 50 Gems</div>
+        <div id="milestone100" class="milestone">🥈 Silver Saver — 100 Gems</div>
+        <div id="milestone200" class="milestone">🥇 Gold Saver — 200 Gems</div>
+        <div id="milestone500" class="milestone">👑 Money Master — 500 Gems</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Available Rewards</h2>
+
+      <div class="reward-grid">
+        <div class="reward-card">
+          <h3>☕ Coffee Coupon</h3>
+          <p>50 Gems</p>
+          <button>Redeem</button>
+        </div>
+
+        <div class="reward-card">
+          <h3>🍕 Food Coupon</h3>
+          <p>100 Gems</p>
+          <button>Redeem</button>
+        </div>
+
+        <div class="reward-card">
+          <h3>🎬 Movie Voucher</h3>
+          <p>200 Gems</p>
+          <button>Redeem</button>
+        </div>
+
+        <div class="reward-card">
+          <h3>🎁 Amazon Voucher</h3>
+          <p>500 Gems</p>
+          <button>Redeem</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../js/rewards.js"></script>
+</body>
+</html>

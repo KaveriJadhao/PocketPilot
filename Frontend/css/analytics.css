@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  display:flex;
+  background:#f4f7ff;
+  color:#111827;
+}
+
+.sidebar{
+  width:260px;
+  min-height:100vh;
+  background:white;
+  padding:30px 20px;
+  position:fixed;
+  box-shadow:0 0 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+  font-size:28px;
+  font-weight:700;
+  color:#6c63ff;
+  margin-bottom:50px;
+}
+
+.logo i{
+  margin-right:10px;
+}
+
+.menu{
+  list-style:none;
+}
+
+.menu li{
+  margin-bottom:15px;
+  border-radius:14px;
+  transition:0.3s;
+}
+
+.menu a{
+  text-decoration:none;
+  color:#374151;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:18px;
+  font-weight:500;
+}
+
+.menu li.active,
+.menu li:hover{
+  background:#6c63ff;
+}
+
+.menu li.active a,
+.menu li:hover a{
+  color:white;
+}
+
+.main-content{
+  margin-left:260px;
+  width:100%;
+  padding:40px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:35px;
+}
+
+.topbar h1{
+  font-size:36px;
+}
+
+.topbar p{
+  color:#6b7280;
+}
+
+.back-btn{
+  background:#6c63ff;
+  color:white;
+  padding:14px 22px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+  margin-bottom:35px;
+}
+
+.card{
+  background:white;
+  padding:28px;
+  border-radius:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.06);
+  transition:0.3s;
+}
+
+.card:hover,
+.chart-card:hover{
+  transform:translateY(-6px);
+}
+
+.card h3{
+  color:#6b7280;
+  margin-bottom:12px;
+}
+
+.card h2{
+  font-size:28px;
+}
+
+.charts-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.chart-card{
+  background:white;
+  padding:30px;
+  border-radius:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.06);
+  transition:0.3s;
+}
+
+.chart-card h2{
+  margin-bottom:20px;
+}
+
+@media(max-width:1100px){
+  .cards,
+  .charts-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:900px){
+  .sidebar{
+    display:none;
+  }
+
+  .main-content{
+    margin-left:0;
+    padding:20px;
+  }
+
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+  }
+}
+
+@media(max-width:650px){
+  .cards,
+  .charts-grid{
+    grid-template-columns:1fr;
+  }
+}
