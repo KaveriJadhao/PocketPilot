@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice AI - PocketPilot</title>
+
+  <link rel="stylesheet" href="../css/voice.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="logo"><i class="fa-solid fa-wallet"></i> PocketPilot</div>
+
+    <ul class="menu">
+      <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
+      <li class="active"><a href="voice.html"><i class="fa-solid fa-microphone"></i> Voice AI</a></li>
+      <li><a href="rewards.html"><i class="fa-solid fa-gift"></i> Rewards</a></li>
+      <li><a href="mood.html"><i class="fa-solid fa-face-smile"></i> Mood Tracker</a></li>
+      <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div>
+        <h1>Voice AI Assistant 🎤</h1>
+        <p>Add expenses and ask finance questions using your voice.</p>
+      </div>
+
+      <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
+    </div>
+
+    <div class="voice-card">
+      <button id="voiceBtn" class="voice-btn">
+        <i class="fa-solid fa-microphone"></i>
+      </button>
+
+      <h2>Tap and Speak</h2>
+      <p>Try saying: “Spent 200 on pizza”</p>
+
+      <div class="voice-output">
+        <h3>Your Command</h3>
+        <p id="spokenText">Nothing yet...</p>
+      </div>
+
+      <div class="result-box">
+        <h3>Detected Expense</h3>
+        <p id="detectedData">No expense detected yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/voice.js"></script>
+</body>
+</html>

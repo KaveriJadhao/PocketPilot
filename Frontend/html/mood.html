@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mood Tracker - PocketPilot</title>
+  <link rel="stylesheet" href="../css/mood.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="logo"><i class="fa-solid fa-wallet"></i> PocketPilot</div>
+
+    <ul class="menu">
+
+  <li class="active">
+    <a href="dashboard.html">
+      <i class="fa-solid fa-house"></i>
+      Dashboard
+    </a>
+  </li>
+
+  <li>
+    <a href="analytics.html">
+      <i class="fa-solid fa-chart-line"></i>
+      Analytics
+    </a>
+  </li>
+
+  <li>
+    <a href="voice.html">
+      <i class="fa-solid fa-microphone"></i>
+      Voice AI
+    </a>
+  </li>
+
+  <li>
+    <a href="rewards.html">
+      <i class="fa-solid fa-gift"></i>
+      Rewards
+    </a>
+  </li>
+
+  <li class="active">
+    <a href="mood.html">
+      <i class="fa-solid fa-face-smile"></i>
+      Mood Tracker
+    </a>
+  </li>
+
+  <li>
+    <a href="settings.html">
+      <i class="fa-solid fa-gear"></i>
+      Settings
+    </a>
+  </li>
+
+</ul>
+  </div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div>
+        <h1>Mood Spending Tracker 😊</h1>
+        <p>Understand how your mood affects your spending.</p>
+      </div>
+
+      <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
+    </div>
+
+    <div class="mood-cards">
+      <div class="mood-card happy">
+        <h3>😊 Happy</h3>
+        <h1 id="happyAmount">₹0</h1>
+      </div>
+
+      <div class="mood-card stressed">
+        <h3>😩 Stressed</h3>
+        <h1 id="stressedAmount">₹0</h1>
+      </div>
+
+      <div class="mood-card bored">
+        <h3>😴 Bored</h3>
+        <h1 id="boredAmount">₹0</h1>
+      </div>
+
+      <div class="mood-card sad">
+        <h3>😔 Sad</h3>
+        <h1 id="sadAmount">₹0</h1>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Recent Mood Transactions</h2>
+      <div id="moodTransactions" class="transactions"></div>
+    </div>
+  </div>
+
+  <script src="../js/mood.js"></script>
+</body>
+</html>

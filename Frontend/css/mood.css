@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  display:flex;
+  background:#f4f7ff;
+  color:#111827;
+}
+
+.sidebar{
+  width:260px;
+  min-height:100vh;
+  background:white;
+  padding:30px 20px;
+  position:fixed;
+  box-shadow:0 0 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+  font-size:28px;
+  font-weight:700;
+  color:#6c63ff;
+  margin-bottom:50px;
+}
+
+.menu{
+  list-style:none;
+}
+
+.menu li{
+  margin-bottom:15px;
+  border-radius:14px;
+}
+
+.menu a{
+  display:block;
+  padding:18px;
+  text-decoration:none;
+  color:#374151;
+  font-weight:500;
+}
+
+.menu li.active,
+.menu li:hover{
+  background:#6c63ff;
+}
+
+.menu li.active a,
+.menu li:hover a{
+  color:white;
+}
+
+.main-content{
+  margin-left:260px;
+  width:100%;
+  padding:40px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:35px;
+}
+
+.topbar h1{
+  font-size:36px;
+}
+
+.topbar p{
+  color:#6b7280;
+}
+
+.back-btn{
+  background:#6c63ff;
+  color:white;
+  padding:14px 22px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.mood-cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+}
+
+.mood-card{
+  background:white;
+  padding:30px;
+  border-radius:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.06);
+  transition:0.3s;
+}
+
+.mood-card:hover{
+  transform:translateY(-8px);
+}
+
+.happy{ border-left:6px solid #22c55e; }
+.stressed{ border-left:6px solid #ef4444; }
+.bored{ border-left:6px solid #6366f1; }
+.sad{ border-left:6px solid #f59e0b; }
+
+.mood-card h3{
+  color:#6b7280;
+  margin-bottom:15px;
+}
+
+.mood-card h1{
+  font-size:32px;
+}
+
+.section{
+  margin-top:45px;
+}
+
+.section h2{
+  margin-bottom:20px;
+}
+
+.transactions{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.transaction{
+  background:white;
+  padding:20px 25px;
+  border-radius:22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+.transaction p{
+  color:#6b7280;
+}
+
+.amount{
+  color:#ef4444;
+  font-weight:700;
+  font-size:22px;
+}
+
+@media(max-width:1000px){
+  .mood-cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:900px){
+  .sidebar{
+    display:none;
+  }
+
+  .main-content{
+    margin-left:0;
+    padding:20px;
+  }
+
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+  }
+}
+
+@media(max-width:600px){
+  .mood-cards{
+    grid-template-columns:1fr;
+  }
+}
+.menu a{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+    width:100%;
+    height:100%;
+}
+.menu a{
+    text-decoration:none;
+    color:inherit;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}

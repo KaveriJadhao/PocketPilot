@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Welcome - PocketPilot</title>
+
+  <link rel="stylesheet" href="../css/onboarding.css" />
+</head>
+
+<body>
+
+  <div class="onboarding-container">
+
+    <div class="onboarding-left">
+      <h1>Welcome to PocketPilot 🧭</h1>
+      <p>Let’s personalize your money journey.</p>
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png"
+        alt="money"
+      />
+    </div>
+
+    <div class="onboarding-right">
+
+      <form id="onboardingForm">
+
+        <h2>Setup Your Profile</h2>
+
+        <label>Your Name</label>
+        <input type="text" id="name" placeholder="Example: Kaveri" required />
+
+        <label>Monthly Budget</label>
+        <input type="number" id="budget" placeholder="Example: 15000" required />
+
+        <label>Savings Goal</label>
+        <input type="number" id="goal" placeholder="Example: 5000" required />
+
+        <button type="submit">Continue to Dashboard</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="../js/onboarding.js"></script>
+</body>
+</html>

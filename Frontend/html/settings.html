@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings - PocketPilot</title>
+
+<link rel="stylesheet" href="../css/settings.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        <i class="fa-solid fa-wallet"></i>
+        PocketPilot
+    </div>
+
+    <ul class="menu">
+
+        <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+
+        <li><a href="analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
+
+        <li><a href="voice.html"><i class="fa-solid fa-microphone"></i> Voice AI</a></li>
+
+        <li><a href="rewards.html"><i class="fa-solid fa-gift"></i> Rewards</a></li>
+
+        <li><a href="mood.html"><i class="fa-solid fa-face-smile"></i> Mood Tracker</a></li>
+
+        <li class="active">
+            <a href="settings.html">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="main-content">
+
+    <h1>Settings ⚙️</h1>
+
+    <div class="settings-card">
+
+        <label>User Name</label>
+        <input type="text" id="userName" placeholder="Enter your name">
+
+        <label>Monthly Budget</label>
+        <input type="number" id="budget" placeholder="5000">
+
+        <label>Savings Goal</label>
+        <input type="number" id="goal" placeholder="10000">
+
+        <div class="toggle-row">
+            <span>Dark Mode</span>
+            <input type="checkbox" id="darkToggle">
+        </div>
+
+        <div class="toggle-row">
+            <span>Notifications</span>
+            <input type="checkbox" id="notifyToggle">
+        </div>
+
+        <button id="saveBtn">
+            Save Settings
+        </button>
+        <button id="resetBtn" class="reset-btn">
+    Reset All Data
+</button>
+
+    </div>
+
+</div>
+
+<script src="../js/settings.js"></script>
+
+</body>
+</html>

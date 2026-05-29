@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - PocketPilot</title>
+
+  <link rel="stylesheet" href="../css/dashboard.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <i class="fa-solid fa-wallet"></i>
+      PocketPilot
+    </div>
+
+    <ul class="menu">
+      <li class="active"><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
+      <li><a href="voice.html"><i class="fa-solid fa-microphone"></i> Voice AI</a></li>
+      <li><a href="rewards.html"><i class="fa-solid fa-gift"></i> Rewards</a></li>
+      <li><a href="mood.html"><i class="fa-solid fa-face-smile"></i> Mood Tracker</a></li>
+      <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+
+    <div class="topbar">
+      <div class="topbar-left">
+        <h1 id="dashboardUserName">Hello, Kaveri 👋</h1>
+        <p>Track your money smarter with AI.</p>
+      </div>
+
+      <div class="topbar-buttons">
+        <button id="darkModeToggle" class="dark-btn">🌙</button>
+
+        <button class="add-expense-btn" onclick="window.location.href='add-expense.html'">
+          + Add Expense
+        </button>
+      </div>
+    </div>
+
+    <div id="welcomeState" class="welcome-state">
+      <div>
+        <h2>Welcome to PocketPilot 👋</h2>
+        <p>Add your first expense to start tracking spending, rewards, moods, and savings.</p>
+      </div>
+
+      <button onclick="window.location.href='add-expense.html'">
+        + Add First Expense
+      </button>
+    </div>
+
+    <div class="cards">
+
+      <div class="card balance">
+        <h3>Total Balance</h3>
+        <h2 id="totalBalance">₹0</h2>
+        <p>Your monthly budget</p>
+      </div>
+
+      <div class="card expenses">
+        <h3>Monthly Expenses</h3>
+        <h2 id="monthlyExpenses">₹0</h2>
+        <p>Track every rupee</p>
+      </div>
+
+      <div class="card savings">
+        <h3>Total Savings</h3>
+        <h2 id="totalSavings">₹0</h2>
+        <p>Balance after expenses</p>
+      </div>
+
+      <div class="card streak">
+        <h3>Saving Streak 🔥</h3>
+        <h2 id="streakDays">1 Day</h2>
+        <p>Keep it going!</p>
+      </div>
+
+      <div class="card level">
+        <h3>Level 🎮</h3>
+        <h2 id="levelValue">1</h2>
+        <p>Keep earning gems!</p>
+      </div>
+
+      <div class="card analytics-card">
+        <h3>Analytics</h3>
+
+        <div class="chart-container">
+          <canvas id="expenseChart"></canvas>
+        </div>
+
+        <div class="analytics-labels">
+          <div class="label-item"><span class="color food-color"></span> Food</div>
+          <div class="label-item"><span class="color travel-color"></span> Travel</div>
+          <div class="label-item"><span class="color shopping-color"></span> Shopping</div>
+          <div class="label-item"><span class="color other-color"></span> Other</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dashboard-grid" id="dashboardGrid">
+
+      <div class="left-column">
+
+        <div class="section">
+          <div class="section-title">
+            <h2>Recent Transactions</h2>
+          </div>
+
+          <div class="transactions-container" id="transactionsContainer"></div>
+        </div>
+
+        <div id="starterGuide" class="starter-guide">
+          <div>
+            <h2>Keep Building Healthy Money Habits 💰</h2>
+
+            <p>
+              Track expenses, earn gems, unlock rewards and improve your savings habits.
+            </p>
+
+            <button onclick="window.location.href='add-expense.html'">
+              Add First Expense
+            </button>
+          </div>
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png"
+            alt="money"
+          >
+        </div>
+
+      </div>
+
+      <div class="right-column">
+
+        <div class="section">
+          <div class="section-title">
+            <h2>Budget Progress</h2>
+          </div>
+
+          <div class="budget-container">
+
+            <div class="budget-card">
+              <div class="budget-info">
+                <h3>Food Budget</h3>
+                <p id="foodBudgetText">₹0 / ₹5000</p>
+              </div>
+
+              <div class="progress-bar">
+                <div class="progress food-progress"></div>
+              </div>
+            </div>
+
+            <div class="budget-card">
+              <div class="budget-info">
+                <h3>Travel Budget</h3>
+                <p id="travelBudgetText">₹0 / ₹10000</p>
+              </div>
+
+              <div class="progress-bar">
+                <div class="progress travel-progress"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            <h2>Monthly Spending Trend</h2>
+          </div>
+
+          <div class="line-chart-card">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="bottom-grid" id="bottomGrid">
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Mood Spending Tracker</h2>
+        </div>
+
+        <div class="mood-container">
+          <div class="mood happy">😊 Happy</div>
+          <div class="mood stressed">😩 Stressed</div>
+          <div class="mood bored">😴 Bored</div>
+          <div class="mood sad">😔 Sad</div>
+        </div>
+      </div>
+
+      <div class="reward-box">
+        <div class="reward-content">
+          <h3>Rewards & Gems</h3>
+
+          <h1 id="gemsValue">0 💎</h1>
+          <p id="levelDisplay">Level 1 🎮</p>
+
+          <p class="next-level-text">Progress to Level 2</p>
+
+          <div class="reward-progress-bar">
+            <div class="reward-progress" id="rewardProgress"></div>
+          </div>
+        </div>
+
+        <button onclick="window.location.href='rewards.html'">
+          <h3>View Rewards</h3>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="bottom-ai-grid">
+
+      <div class="section">
+        <div class="section-title">
+          <h2>🤖 AI Insights</h2>
+        </div>
+
+        <div id="aiInsightCard" class="ai-insight-card">
+          Loading insights...
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>🔔 Smart Alerts</h2>
+        </div>
+
+        <div class="alerts-box" id="alertsBox">
+          Loading alerts...
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
