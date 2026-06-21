@@ -2,19 +2,30 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-const aiRoutes = require("./routes/aiRoutes");
 
 const expenseRoutes = require("./routes/expenseRoutes");
 const userRoutes = require("./routes/userRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
+/* MIDDLEWARE */
 app.use(cors());
 app.use(express.json());
 
+/* TEST ROUTE */
+app.get("/test", (req, res) => {
+    res.send("Correct PocketPilot backend is running");
+});
+
+/* ROUTES */
 app.use("/api/expenses", expenseRoutes);
-app.use("/api/ai", aiRoutes);
+console.log("Expense route loaded");
+
 app.use("/api/user", userRoutes);
+app.use("/api/ai", aiRoutes);
+
+/* DATABASE */
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
 
@@ -26,7 +37,5 @@ mongoose.connect(process.env.MONGO_URI)
 
 })
 .catch((error) => {
-
-    console.log(error);
-
+    console.log("MongoDB Error:", error);
 });
