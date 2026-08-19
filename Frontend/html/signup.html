@@ -4,37 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Create Account — PocketPilot</title>
-  <link rel="stylesheet" href="../css/variables.css">
-  <link rel="stylesheet" href="../css/typography.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="../css/auth.css">
+  
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 
 <body class="auth-page">
 
   <div class="auth-container">
+    <!-- Left Info Hero -->
     <div class="auth-left">
       <div>
-        <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.15rem;">
-          <div class="logo-icon" style="width: 30px; height: 30px; font-size: 0.9rem; border-radius: var(--radius-xs); background: var(--primary); color: white; display: flex; align-items: center; justify-content: center;">
+        <a href="index.html" class="nav-brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff; font-weight: 800; font-size: 1.25rem;">
+          <div class="logo-icon" style="width: 34px; height: 34px; font-size: 1rem; border-radius: var(--radius-xs); background: rgba(255, 255, 255, 0.2); color: #ffffff; display: flex; align-items: center; justify-content: center;">
             <i class="fa-solid fa-layer-group"></i>
           </div>
           <span>PocketPilot</span>
         </a>
 
-        <div style="margin-top: 50px;">
-          <h1 style="font-size: 1.75rem; line-height: 1.25; margin-bottom: 8px;">Take control of your pocket money</h1>
-          <p style="font-size: 0.875rem; color: var(--text-secondary);">Track your daily expenses, stay on budget, and earn rewards as a student.</p>
+        <div style="margin-top: 48px;">
+          <h1 style="font-size: 1.85rem; line-height: 1.25; margin-bottom: 12px; font-weight: 800; color: #ffffff;">
+            Take control of your pocket money
+          </h1>
+          <p style="font-size: 0.9375rem; color: rgba(255, 255, 255, 0.85); line-height: 1.5;">
+            Join college students tracking daily expenses, saving for goals, and earning rewards.
+          </p>
         </div>
       </div>
 
-      <div style="padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);">
-        <small style="font-weight: 700; color: var(--text-muted); text-transform: uppercase;">100% Free for Students</small>
-        <p style="font-size: 0.75rem; margin-top: 2px; color: var(--text-secondary);">No credit card needed. Start tracking in seconds.</p>
+      <div style="padding: 16px 20px; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-sm); color: #ffffff;">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fde047; margin-bottom: 4px;">
+          <i class="fa-solid fa-graduation-cap"></i> 100% Free for Students
+        </div>
+        <p style="font-size: 0.8125rem; color: rgba(255, 255, 255, 0.9); margin: 0;">No credit card needed. Get set up in under 30 seconds.</p>
       </div>
     </div>
 
+    <!-- Right Signup Form -->
     <div class="auth-right">
       <form class="auth-form" id="signupForm">
         <h2>Create Account</h2>
@@ -42,25 +51,43 @@
 
         <div class="form-group">
           <label class="form-label" for="signupName">Full Name</label>
-          <input type="text" id="signupName" class="form-input" placeholder="e.g. Kaveri Jadhao" required>
+          <div style="position: relative; display: flex; align-items: center;">
+            <i class="fa-solid fa-user" style="position: absolute; left: 14px; color: var(--text-muted); font-size: 0.875rem;"></i>
+            <input type="text" id="signupName" class="form-input" style="padding-left: 38px;" placeholder="e.g. Kaveri Jadhao" required>
+          </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="signupEmail">Email Address</label>
-          <input type="email" id="signupEmail" class="form-input" placeholder="student@university.edu" required>
+          <div style="position: relative; display: flex; align-items: center;">
+            <i class="fa-solid fa-envelope" style="position: absolute; left: 14px; color: var(--text-muted); font-size: 0.875rem;"></i>
+            <input type="email" id="signupEmail" class="form-input" style="padding-left: 38px;" placeholder="student@university.edu" required>
+          </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="signupPassword">Password</label>
-          <input type="password" id="signupPassword" class="form-input" placeholder="At least 6 characters" minlength="6" required>
+          <div style="position: relative; display: flex; align-items: center;">
+            <i class="fa-solid fa-lock" style="position: absolute; left: 14px; color: var(--text-muted); font-size: 0.875rem;"></i>
+            <input type="password" id="signupPassword" class="form-input" style="padding-left: 38px; padding-right: 38px;" placeholder="At least 6 characters" minlength="6" required>
+            <button type="button" id="toggleSignupPasswordBtn" class="password-eye-btn" style="position: absolute; right: 10px; background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px;" title="Show/Hide password">
+              <i class="fa-solid fa-eye" id="signupEyeIcon"></i>
+            </button>
+          </div>
         </div>
 
-        <button type="submit" id="signupBtn" class="btn btn-primary" style="width: 100%; padding: 10px; margin-top: 6px;">
-          Create Free Account
+        <button type="submit" id="signupBtn" class="btn btn-primary" style="width: 100%; padding: 12px; font-weight: 700; font-size: 0.9375rem; margin-top: 8px;">
+          <i class="fa-solid fa-arrow-right"></i> Create Free Account
         </button>
 
-        <button type="button" id="guestBtn" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
-          <i class="fa-solid fa-arrow-right-to-bracket"></i> Quick Demo / Continue as Guest
+        <div style="display: flex; align-items: center; gap: 12px; margin: 18px 0;">
+          <hr style="flex: 1; border: none; border-top: 1px solid var(--border);">
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">or</span>
+          <hr style="flex: 1; border: none; border-top: 1px solid var(--border);">
+        </div>
+
+        <button type="button" id="guestBtn" class="btn btn-secondary" style="width: 100%; padding: 10px; font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <i class="fa-solid fa-sparkles" style="color: var(--primary);"></i> Try Demo as Guest
         </button>
 
         <p class="auth-footer-text">

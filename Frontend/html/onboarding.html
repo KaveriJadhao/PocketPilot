@@ -3,46 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome - PocketPilot</title>
+  <title>Setup Profile — PocketPilot</title>
+  
   <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/onboarding.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 
-<body>
+<body class="onboarding-page">
 
-  <div class="onboarding-container">
+  <div class="onboarding-card-wrapper">
+    <!-- Left Hero Column -->
+    <div class="onboarding-hero">
+      <div>
+        <a href="index.html" class="onboarding-brand">
+          <div class="logo-icon">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <span>PocketPilot</span>
+        </a>
 
-    <div class="onboarding-left">
-      <h1>Welcome to PocketPilot 🧭</h1>
-      <p>Let’s personalize your student money journey with smart budgets and AI insights.</p>
+        <div class="onboarding-hero-text">
+          <h1>Welcome to PocketPilot 🧭</h1>
+          <p>Let's personalize your student money tracker with simple budgets and smart AI tips.</p>
+        </div>
+      </div>
 
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png"
-        alt="money"
-      />
+      <div class="onboarding-perks-list">
+        <div class="perk-pill">
+          <i class="fa-solid fa-microphone"></i>
+          <span>Add expenses with your voice in seconds</span>
+        </div>
+        <div class="perk-pill">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Track where your pocket money goes</span>
+        </div>
+        <div class="perk-pill">
+          <i class="fa-solid fa-gift"></i>
+          <span>Earn gems and unlock food discount coupons</span>
+        </div>
+      </div>
     </div>
 
-    <div class="onboarding-right">
+    <!-- Right Form Column -->
+    <div class="onboarding-form-container">
+      <form id="onboardingForm" class="onboarding-form">
+        <div class="form-header">
+          <h2>Setup Your Profile</h2>
+          <p>Choose an avatar and set your monthly pocket money target.</p>
+        </div>
 
-      <form id="onboardingForm">
+        <!-- Avatar Selector -->
+        <div class="form-group">
+          <label class="form-label">Choose Your Avatar</label>
+          <div class="onboarding-avatar-grid">
+            <div class="avatar-item active" data-seed="KaveriPilot">
+              <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="Pilot">
+            </div>
+            <div class="avatar-item" data-seed="ScholarAlex">
+              <img src="../assets/avatars/avatar-2.svg" onerror="this.src='../assets/avatar.png'" alt="Scholar">
+            </div>
+            <div class="avatar-item" data-seed="FinanceGenius">
+              <img src="../assets/avatars/avatar-3.svg" onerror="this.src='../assets/avatar.png'" alt="Finance">
+            </div>
+            <div class="avatar-item" data-seed="PilotNova">
+              <img src="../assets/avatars/avatar-4.svg" onerror="this.src='../assets/avatar.png'" alt="Nova">
+            </div>
+          </div>
+        </div>
 
-        <h2>Setup Your Profile</h2>
+        <!-- Name Input -->
+        <div class="form-group">
+          <label class="form-label" for="name">Your Name</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-user input-icon"></i>
+            <input type="text" id="name" class="form-input" placeholder="e.g. Kaveri" required />
+          </div>
+        </div>
 
-        <label for="name">Your Name</label>
-        <input type="text" id="name" placeholder="Example: Kaveri" required />
+        <!-- Monthly Budget -->
+        <div class="form-group">
+          <label class="form-label" for="budget">Monthly Budget / Pocket Money (₹)</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-wallet input-icon"></i>
+            <input type="number" id="budget" class="form-input" placeholder="15000" min="100" required />
+          </div>
+          <div class="preset-pills-row">
+            <button type="button" class="preset-pill" data-target="budget" data-val="5000">₹5,000</button>
+            <button type="button" class="preset-pill" data-target="budget" data-val="10000">₹10,000</button>
+            <button type="button" class="preset-pill" data-target="budget" data-val="15000">₹15,000</button>
+            <button type="button" class="preset-pill" data-target="budget" data-val="20000">₹20,000</button>
+          </div>
+        </div>
 
-        <label for="budget">Monthly Allowance / Budget (₹)</label>
-        <input type="number" id="budget" placeholder="Example: 15000" min="100" required />
+        <!-- Savings Goal -->
+        <div class="form-group">
+          <label class="form-label" for="goal">Monthly Savings Goal (₹)</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-piggy-bank input-icon"></i>
+            <input type="number" id="goal" class="form-input" placeholder="5000" min="0" required />
+          </div>
+          <div class="preset-pills-row">
+            <button type="button" class="preset-pill" data-target="goal" data-val="1000">₹1,000</button>
+            <button type="button" class="preset-pill" data-target="goal" data-val="3000">₹3,000</button>
+            <button type="button" class="preset-pill" data-target="goal" data-val="5000">₹5,000</button>
+          </div>
+        </div>
 
-        <label for="goal">Monthly Savings Goal (₹)</label>
-        <input type="number" id="goal" placeholder="Example: 5000" min="0" required />
-
-        <button type="submit" id="submitBtn">Continue to Dashboard</button>
-
+        <button type="submit" id="submitBtn" class="btn btn-primary onboarding-submit-btn">
+          <span>Go to Dashboard</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
       </form>
-
     </div>
-
   </div>
 
   <div id="toast" class="toast"></div>

@@ -325,6 +325,11 @@ const api = {
 
   // Global Command Palette (Ctrl+K / Cmd+K)
   setupGlobalCommandPalette() {
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes("login") || path.includes("signup") || path.includes("onboarding") || path.endsWith("index.html") || path === "/") {
+      return;
+    }
+
     let modal = document.getElementById("commandPaletteModal");
     if (!modal) {
       modal = document.createElement("div");
