@@ -68,7 +68,7 @@ function setupGuestLogin(btn) {
   btn.addEventListener("click", async () => {
     try {
       btn.disabled = true;
-      btn.innerText = "Loading Demo...";
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Loading Demo...`;
       await api.guestLogin();
       api.showToast("Demo Mode Activated! 🚀", "success");
       setTimeout(() => {
@@ -85,3 +85,38 @@ function setupGuestLogin(btn) {
 
 setupGuestLogin(guestBtn);
 setupGuestLogin(guestLoginBtn);
+
+/* PASSWORD EYE TOGGLE */
+const toggleLoginPassBtn = document.getElementById("togglePasswordBtn");
+if (toggleLoginPassBtn) {
+  toggleLoginPassBtn.addEventListener("click", () => {
+    const input = document.getElementById("loginPassword");
+    const icon = document.getElementById("eyeIcon");
+    if (input && icon) {
+      if (input.type === "password") {
+        input.type = "text";
+        icon.className = "fa-solid fa-eye-slash";
+      } else {
+        input.type = "password";
+        icon.className = "fa-solid fa-eye";
+      }
+    }
+  });
+}
+
+const toggleSignupPassBtn = document.getElementById("toggleSignupPasswordBtn");
+if (toggleSignupPassBtn) {
+  toggleSignupPassBtn.addEventListener("click", () => {
+    const input = document.getElementById("signupPassword");
+    const icon = document.getElementById("signupEyeIcon");
+    if (input && icon) {
+      if (input.type === "password") {
+        input.type = "text";
+        icon.className = "fa-solid fa-eye-slash";
+      } else {
+        input.type = "password";
+        icon.className = "fa-solid fa-eye";
+      }
+    }
+  });
+}

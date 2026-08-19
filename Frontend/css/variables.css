@@ -156,3 +156,12 @@ img, svg, video, canvas {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+/* Modal Overlay Base Rule */
+.modal-overlay {
+  display: none;
+}
+
+.modal-overlay.active {
+  display: flex !important;
+}
