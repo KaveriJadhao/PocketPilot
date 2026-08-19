@@ -3,144 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rewards - PocketPilot</title>
-
+  <title>Rewards — PocketPilot</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/sidebar.css" />
   <link rel="stylesheet" href="../css/rewards.css" />
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 <body>
 
-  <div class="sidebar">
-    <div class="logo">
-      <i class="fa-solid fa-wallet"></i>
-      PocketPilot
-    </div>
-
-   <ul class="menu">
-
-  <li>
-    <a href="dashboard.html">
-      <i class="fa-solid fa-house"></i>
-      Dashboard
+  <!-- Mobile Topbar -->
+  <div class="mobile-topbar">
+    <a href="dashboard.html" class="mobile-brand">
+      <div class="logo-icon" style="width: 26px; height: 26px; font-size: 0.8rem;"><i class="fa-solid fa-layer-group"></i></div>
+      <span>PocketPilot</span>
     </a>
-  </li>
-
-  <li>
-    <a href="analytics.html">
-      <i class="fa-solid fa-chart-line"></i>
-      Analytics
-    </a>
-  </li>
-
-  <li>
-    <a href="voice.html">
-      <i class="fa-solid fa-microphone"></i>
-      Voice AI
-    </a>
-  </li>
-
-  <li class="active">
-    <a href="rewards.html">
-      <i class="fa-solid fa-gift"></i>
-      Rewards
-    </a>
-  </li>
-
-  <li>
-    <a href="mood.html">
-      <i class="fa-solid fa-face-smile"></i>
-      Mood Tracker
-    </a>
-  </li>
-
-  <li>
-    <a href="settings.html">
-      <i class="fa-solid fa-gear"></i>
-      Settings
-    </a>
-  </li>
-
-</ul>
+    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
   </div>
 
-  <div class="main-content">
-
-    <div class="topbar">
-      <div>
-        <h1>Rewards Center 🎁</h1>
-        <p>Earn gems, unlock levels, and redeem student-friendly rewards.</p>
-      </div>
-
-      <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
-    </div>
-
-    <div class="reward-summary">
-      <div class="summary-card">
-        <h3>Current Gems</h3>
-        <h1 id="gemsValue">0 💎</h1>
-      </div>
-
-      <div class="summary-card">
-        <h3>Current Level</h3>
-        <h1 id="levelValue">Level 1 🎮</h1>
-      </div>
-
-      <div class="summary-card">
-        <h3>Next Level</h3>
-        <p id="nextLevelText">Progress to Level 2</p>
-        <div class="progress-bar">
-          <div class="progress" id="rewardProgress"></div>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="dashboard.html" class="sidebar-logo">
+        <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div>
+          <h2>PocketPilot</h2>
+          <span>Student Finance</span>
         </div>
+      </a>
+
+      <div class="menu-title">Main</div>
+      <ul class="menu">
+        <li>
+          <a href="dashboard.html">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li>
+          <a href="add-expense.html">
+            <i class="fa-solid fa-plus-circle"></i>
+            <span>Expenses</span>
+          </a>
+        </li>
+        <li>
+          <a href="analytics.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="voice.html">
+            <i class="fa-solid fa-microphone"></i>
+            <span>Voice Assistant</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="menu-title">Tools & Rewards</div>
+      <ul class="menu">
+        <li class="active">
+          <a href="rewards.html">
+            <i class="fa-solid fa-award"></i>
+            <span>Rewards Hub</span>
+          </a>
+        </li>
+        <li>
+          <a href="mood.html">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>Mood Patterns</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-user">
+        <div class="sidebar-user-info">
+          <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="User" id="userAvatar">
+          <div>
+            <h4 id="sidebarUserName">Kaveri</h4>
+            <small id="sidebarUserEmail">Student Plan</small>
+          </div>
+        </div>
+        <a href="settings.html" style="color: var(--text-muted);" title="Settings">
+          <i class="fa-solid fa-gear"></i>
+        </a>
       </div>
-    </div>
+    </aside>
 
-    <div class="section">
-      <h2>Achievements</h2>
-
-      <div class="milestones">
-        <div id="milestone50" class="milestone">🥉 Bronze Saver — 50 Gems</div>
-        <div id="milestone100" class="milestone">🥈 Silver Saver — 100 Gems</div>
-        <div id="milestone200" class="milestone">🥇 Gold Saver — 200 Gems</div>
-        <div id="milestone500" class="milestone">👑 Money Master — 500 Gems</div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>Available Rewards</h2>
-
-      <div class="reward-grid">
-        <div class="reward-card">
-          <h3>☕ Coffee Coupon</h3>
-          <p>50 Gems</p>
-          <button>Redeem</button>
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1>Rewards & Perks</h1>
         </div>
 
-        <div class="reward-card">
-          <h3>🍕 Food Coupon</h3>
-          <p>100 Gems</p>
-          <button>Redeem</button>
+        <div class="topbar-buttons">
+          <button id="themeToggleBtn" class="icon-btn" title="Toggle Theme">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+          </button>
+          <a href="dashboard.html" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Overview
+          </a>
+        </div>
+      </header>
+
+      <!-- Digital Student Pass & Level Progression -->
+      <section class="rewards-top-layout">
+        <!-- PocketPilot Digital Student Pass -->
+        <div class="digital-student-pass">
+          <div class="pass-header">
+            <div class="pass-brand">
+              <div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div>
+              <span>PocketPilot Pass</span>
+            </div>
+            <span class="pass-badge">Student Member</span>
+          </div>
+
+          <div class="pass-body">
+            <div class="balance-label">My Gems</div>
+            <div class="gems-count" id="gemsValue">0 Gems</div>
+          </div>
+
+          <div class="pass-footer">
+            <div>
+              <div class="pass-holder-name" id="cardUserName">Kaveri</div>
+              <div class="pass-id">ID: PP-2026-8819</div>
+            </div>
+            <div style="text-align: right;">
+              <div class="pass-tier" id="levelValue">Level 1 Scholar</div>
+            </div>
+          </div>
         </div>
 
-        <div class="reward-card">
-          <h3>🎬 Movie Voucher</h3>
-          <p>200 Gems</p>
-          <button>Redeem</button>
+        <!-- Tier Progression Card -->
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="section-title" style="margin-bottom: 8px;">
+              <h2>Level Progress</h2>
+              <span class="badge badge-sapphire" id="nextLevelBadge">Level 2 in 25 Gems</span>
+            </div>
+
+            <div class="progress-track" style="height: 6px; margin: 12px 0;">
+              <div class="progress-fill" id="rewardProgress" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="milestones-track">
+            <div id="milestone50" class="milestone-badge">
+              <div class="badge-icon"><i class="fa-solid fa-shield"></i></div>
+              <h4>Bronze</h4>
+              <small>50 Gems</small>
+            </div>
+
+            <div id="milestone100" class="milestone-badge">
+              <div class="badge-icon"><i class="fa-solid fa-medal"></i></div>
+              <h4>Silver</h4>
+              <small>100 Gems</small>
+            </div>
+
+            <div id="milestone200" class="milestone-badge">
+              <div class="badge-icon"><i class="fa-solid fa-trophy"></i></div>
+              <h4>Gold</h4>
+              <small>200 Gems</small>
+            </div>
+
+            <div id="milestone500" class="milestone-badge">
+              <div class="badge-icon"><i class="fa-solid fa-crown"></i></div>
+              <h4>Platinum</h4>
+              <small>500 Gems</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Claimable Perks Section -->
+      <section>
+        <div class="section-title">
+          <h2>Rewards & Coupons</h2>
         </div>
 
-        <div class="reward-card">
-          <h3>🎁 Amazon Voucher</h3>
-          <p>500 Gems</p>
-          <button>Redeem</button>
-        </div>
-      </div>
-    </div>
+        <div class="reward-cards-grid">
+          <div class="reward-voucher-card">
+            <div>
+              <div class="voucher-header">
+                <div class="voucher-icon"><i class="fa-solid fa-mug-saucer"></i></div>
+                <div>
+                  <h3>Campus Cafe Pass</h3>
+                  <span class="badge badge-sapphire">50 Gems</span>
+                </div>
+              </div>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                Get ₹50 off on campus cafe drinks and snacks.
+              </p>
+            </div>
+            <button class="btn btn-primary redeem-btn" data-cost="50" data-name="Campus Cafe Pass" style="margin-top: 16px;">
+              Claim Reward
+            </button>
+          </div>
 
+          <div class="reward-voucher-card">
+            <div>
+              <div class="voucher-header">
+                <div class="voucher-icon"><i class="fa-solid fa-utensils"></i></div>
+                <div>
+                  <h3>Food Delivery Coupon</h3>
+                  <span class="badge badge-emerald">100 Gems</span>
+                </div>
+              </div>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                Get ₹100 discount coupon for online food orders.
+              </p>
+            </div>
+            <button class="btn btn-primary redeem-btn" data-cost="100" data-name="Food Delivery Coupon" style="margin-top: 16px;">
+              Claim Reward
+            </button>
+          </div>
+
+          <div class="reward-voucher-card">
+            <div>
+              <div class="voucher-header">
+                <div class="voucher-icon"><i class="fa-solid fa-film"></i></div>
+                <div>
+                  <h3>Movie Ticket Voucher</h3>
+                  <span class="badge badge-amber">200 Gems</span>
+                </div>
+              </div>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                Get ₹150 off on weekend movie tickets.
+              </p>
+            </div>
+            <button class="btn btn-primary redeem-btn" data-cost="200" data-name="Movie Ticket Voucher" style="margin-top: 16px;">
+              Claim Reward
+            </button>
+          </div>
+
+          <div class="reward-voucher-card">
+            <div>
+              <div class="voucher-header">
+                <div class="voucher-icon"><i class="fa-solid fa-book-open"></i></div>
+                <div>
+                  <h3>Amazon Book Coupon</h3>
+                  <span class="badge badge-rose">500 Gems</span>
+                </div>
+              </div>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                Get ₹300 Amazon gift card for study books.
+              </p>
+            </div>
+            <button class="btn btn-primary redeem-btn" data-cost="500" data-name="Amazon Book Coupon" style="margin-top: 16px;">
+              Claim Reward
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
+  <div id="toast" class="toast"></div>
+
+  <script src="../js/api.js"></script>
   <script src="../js/rewards.js"></script>
 </body>
 </html>

@@ -1,106 +1,147 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-body{
-    min-height:100vh;
-    background:#f4f7ff;
+body {
+  min-height: 100vh;
+  background: #f4f7ff;
+  overflow-x: hidden;
+  width: 100%;
 }
 
-.onboarding-container{
-    min-height:100vh;
-    display:grid;
-    grid-template-columns:1fr 1fr;
+.onboarding-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.onboarding-left{
-    background:linear-gradient(135deg,#6c63ff,#4da8ff);
-    color:white;
-    padding:70px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+.onboarding-left {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  color: white;
+  padding: 60px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
-.onboarding-left h1{
-    font-size:52px;
-    line-height:1.2;
-    margin-bottom:20px;
+.onboarding-left h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-weight: 800;
 }
 
-.onboarding-left p{
-    font-size:20px;
-    margin-bottom:40px;
+.onboarding-left p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 36px;
+  opacity: 0.9;
 }
 
-.onboarding-left img{
-    width:320px;
+.onboarding-left img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
 }
 
-.onboarding-right{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px;
+.onboarding-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 24px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-form{
-    width:100%;
-    max-width:450px;
-    background:white;
-    padding:40px;
-    border-radius:28px;
-    box-shadow:0 15px 35px rgba(0,0,0,0.08);
+form {
+  width: 100%;
+  max-width: 440px;
+  background: white;
+  padding: 36px 28px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
-form h2{
-    font-size:34px;
-    margin-bottom:30px;
+form h2 {
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  margin-bottom: 24px;
+  font-weight: 800;
 }
 
-label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:600;
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
 }
 
-input{
-    width:100%;
-    padding:15px;
-    border:none;
-    background:#f3f4f6;
-    border-radius:14px;
-    margin-bottom:22px;
-    font-size:15px;
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
 }
 
-button{
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:14px;
-    background:#6c63ff;
-    color:white;
-    font-size:17px;
-    font-weight:700;
-    cursor:pointer;
+input:focus {
+  border-color: #2563eb;
+  background: #ffffff;
 }
 
-button:hover{
-    background:#574bff;
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-@media(max-width:900px){
-    .onboarding-container{
-        grid-template-columns:1fr;
-    }
+button:hover {
+  background: #1d4ed8;
+}
 
-    .onboarding-left{
-        display:none;
-    }
+@media (max-width: 900px) {
+  .onboarding-container {
+    grid-template-columns: 1fr;
+  }
+
+  .onboarding-left {
+    display: none;
+  }
+
+  .onboarding-right {
+    padding: 24px 16px;
+  }
+
+  form {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .onboarding-right {
+    padding: 16px 12px;
+  }
+
+  form {
+    padding: 20px 14px;
+  }
 }

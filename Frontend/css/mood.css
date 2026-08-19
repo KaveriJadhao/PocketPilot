@@ -1,196 +1,151 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* ============================================================
+   PocketPilot Mood Patterns — Behavioral Finance Intelligence
+   ============================================================ */
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
+.mood-top-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 20px;
+  margin-bottom: 24px;
+  width: 100%;
 }
 
-body{
-  display:flex;
-  background:#f4f7ff;
-  color:#111827;
+.iq-score-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
-.sidebar{
-  width:260px;
-  min-height:100vh;
-  background:white;
-  padding:30px 20px;
-  position:fixed;
-  box-shadow:0 0 20px rgba(0,0,0,0.05);
+.iq-circle-meter {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0;
 }
 
-.logo{
-  font-size:28px;
-  font-weight:700;
-  color:#6c63ff;
-  margin-bottom:50px;
+.iq-number {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
-.menu{
-  list-style:none;
+.mood-behavior-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
 }
 
-.menu li{
-  margin-bottom:15px;
-  border-radius:14px;
+.mood-behavior-item {
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
-.menu a{
-  display:block;
-  padding:18px;
-  text-decoration:none;
-  color:#374151;
-  font-weight:500;
+.mood-behavior-item .item-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
-.menu li.active,
-.menu li:hover{
-  background:#6c63ff;
+.mood-behavior-item .item-amount {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 4px 0 2px;
 }
 
-.menu li.active a,
-.menu li:hover a{
-  color:white;
+.mood-filter-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-.main-content{
-  margin-left:260px;
-  width:100%;
-  padding:40px;
+.mood-tab-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:35px;
+.mood-tab-btn.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
 }
 
-.topbar h1{
-  font-size:36px;
-}
+/* ============================================================
+   Mood Patterns Clean Responsive Media Queries
+   ============================================================ */
+@media (max-width: 900px) {
+  .mood-top-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 16px !important;
+  }
 
-.topbar p{
-  color:#6b7280;
-}
-
-.back-btn{
-  background:#6c63ff;
-  color:white;
-  padding:14px 22px;
-  border-radius:14px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-.mood-cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:25px;
-}
-
-.mood-card{
-  background:white;
-  padding:30px;
-  border-radius:24px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.06);
-  transition:0.3s;
-}
-
-.mood-card:hover{
-  transform:translateY(-8px);
-}
-
-.happy{ border-left:6px solid #22c55e; }
-.stressed{ border-left:6px solid #ef4444; }
-.bored{ border-left:6px solid #6366f1; }
-.sad{ border-left:6px solid #f59e0b; }
-
-.mood-card h3{
-  color:#6b7280;
-  margin-bottom:15px;
-}
-
-.mood-card h1{
-  font-size:32px;
-}
-
-.section{
-  margin-top:45px;
-}
-
-.section h2{
-  margin-bottom:20px;
-}
-
-.transactions{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-.transaction{
-  background:white;
-  padding:20px 25px;
-  border-radius:22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 8px 20px rgba(0,0,0,0.05);
-}
-
-.transaction p{
-  color:#6b7280;
-}
-
-.amount{
-  color:#ef4444;
-  font-weight:700;
-  font-size:22px;
-}
-
-@media(max-width:1000px){
-  .mood-cards{
-    grid-template-columns:repeat(2,1fr);
+  .iq-score-card {
+    padding: 16px !important;
   }
 }
 
-@media(max-width:900px){
-  .sidebar{
-    display:none;
+@media (max-width: 480px) {
+  .mood-behavior-cards {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
   }
 
-  .main-content{
-    margin-left:0;
-    padding:20px;
+  .mood-behavior-item {
+    padding: 10px 10px !important;
   }
 
-  .topbar{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:20px;
+  .mood-behavior-item .item-amount {
+    font-size: 1.15rem !important;
+  }
+
+  .mood-filter-tabs {
+    gap: 4px !important;
+  }
+
+  .mood-tab-btn {
+    padding: 5px 8px !important;
+    font-size: 0.7rem !important;
   }
 }
 
-@media(max-width:600px){
-  .mood-cards{
-    grid-template-columns:1fr;
+@media (max-width: 360px) {
+  .mood-behavior-cards {
+    gap: 6px !important;
   }
-}
-.menu a{
-    text-decoration:none;
-    color:inherit;
-    display:block;
-    width:100%;
-    height:100%;
-}
-.menu a{
-    text-decoration:none;
-    color:inherit;
-    display:flex;
-    align-items:center;
-    gap:12px;
+
+  .mood-behavior-item {
+    padding: 8px 8px !important;
+  }
+
+  .mood-behavior-item .item-amount {
+    font-size: 1.05rem !important;
+  }
 }

@@ -3,100 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mood Tracker - PocketPilot</title>
+  <title>Mood Patterns — PocketPilot</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/sidebar.css" />
   <link rel="stylesheet" href="../css/mood.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 <body>
 
-  <div class="sidebar">
-    <div class="logo"><i class="fa-solid fa-wallet"></i> PocketPilot</div>
-
-    <ul class="menu">
-
-  <li class="active">
-    <a href="dashboard.html">
-      <i class="fa-solid fa-house"></i>
-      Dashboard
+  <!-- Mobile Topbar -->
+  <div class="mobile-topbar">
+    <a href="dashboard.html" class="mobile-brand">
+      <div class="logo-icon" style="width: 26px; height: 26px; font-size: 0.8rem;"><i class="fa-solid fa-layer-group"></i></div>
+      <span>PocketPilot</span>
     </a>
-  </li>
-
-  <li>
-    <a href="analytics.html">
-      <i class="fa-solid fa-chart-line"></i>
-      Analytics
-    </a>
-  </li>
-
-  <li>
-    <a href="voice.html">
-      <i class="fa-solid fa-microphone"></i>
-      Voice AI
-    </a>
-  </li>
-
-  <li>
-    <a href="rewards.html">
-      <i class="fa-solid fa-gift"></i>
-      Rewards
-    </a>
-  </li>
-
-  <li class="active">
-    <a href="mood.html">
-      <i class="fa-solid fa-face-smile"></i>
-      Mood Tracker
-    </a>
-  </li>
-
-  <li>
-    <a href="settings.html">
-      <i class="fa-solid fa-gear"></i>
-      Settings
-    </a>
-  </li>
-
-</ul>
+    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
   </div>
 
-  <div class="main-content">
-    <div class="topbar">
-      <div>
-        <h1>Mood Spending Tracker 😊</h1>
-        <p>Understand how your mood affects your spending.</p>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="dashboard.html" class="sidebar-logo">
+        <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div>
+          <h2>PocketPilot</h2>
+          <span>Student Finance</span>
+        </div>
+      </a>
+
+      <div class="menu-title">Main</div>
+      <ul class="menu">
+        <li>
+          <a href="dashboard.html">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li>
+          <a href="add-expense.html">
+            <i class="fa-solid fa-plus-circle"></i>
+            <span>Expenses</span>
+          </a>
+        </li>
+        <li>
+          <a href="analytics.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="voice.html">
+            <i class="fa-solid fa-microphone"></i>
+            <span>Voice Assistant</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="menu-title">Tools & Rewards</div>
+      <ul class="menu">
+        <li>
+          <a href="rewards.html">
+            <i class="fa-solid fa-award"></i>
+            <span>Rewards Hub</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="mood.html">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>Mood Patterns</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-user">
+        <div class="sidebar-user-info">
+          <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="User" id="userAvatar">
+          <div>
+            <h4 id="sidebarUserName">Kaveri</h4>
+            <small id="sidebarUserEmail">Student Plan</small>
+          </div>
+        </div>
+        <a href="settings.html" style="color: var(--text-muted);" title="Settings">
+          <i class="fa-solid fa-gear"></i>
+        </a>
       </div>
+    </aside>
 
-      <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
-    </div>
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1>Mood & Spending Habits</h1>
+        </div>
 
-    <div class="mood-cards">
-      <div class="mood-card happy">
-        <h3>😊 Happy</h3>
-        <h1 id="happyAmount">₹0</h1>
-      </div>
+        <div class="topbar-buttons">
+          <button id="themeToggleBtn" class="icon-btn" title="Toggle Theme">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+          </button>
+          <a href="dashboard.html" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Overview
+          </a>
+        </div>
+      </header>
 
-      <div class="mood-card stressed">
-        <h3>😩 Stressed</h3>
-        <h1 id="stressedAmount">₹0</h1>
-      </div>
+      <!-- Behavioral IQ & 4 States Matrix -->
+      <section class="mood-top-grid">
+        <!-- Spending Control Index -->
+        <div class="iq-score-card">
+          <div class="section-title" style="margin-bottom: 4px;">
+            <h2>Spending Habit Score</h2>
+            <span class="badge badge-emerald" id="iqBadge">Good Habits</span>
+          </div>
 
-      <div class="mood-card bored">
-        <h3>😴 Bored</h3>
-        <h1 id="boredAmount">₹0</h1>
-      </div>
+          <div class="iq-circle-meter">
+            <div class="iq-number" id="iqNumber">88%</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.9375rem; color: var(--text-primary);" id="iqLabel">Healthy Habits</div>
+              <small id="iqSubtext">Planned purchases</small>
+            </div>
+          </div>
 
-      <div class="mood-card sad">
-        <h3>😔 Sad</h3>
-        <h1 id="sadAmount">₹0</h1>
-      </div>
-    </div>
+          <div style="background: var(--bg-subtle); border-radius: var(--radius-xs); padding: 8px 12px; border: 1px solid var(--border);">
+            <p style="font-size: 0.75rem; color: var(--text-secondary);" id="behavioralTip">
+              Tracking your expenses regularly helps you avoid impulse shopping.
+            </p>
+          </div>
+        </div>
 
-    <div class="section">
-      <h2>Recent Mood Transactions</h2>
-      <div id="moodTransactions" class="transactions"></div>
-    </div>
+        <!-- 4 Behavioral Pillars -->
+        <div class="mood-behavior-cards">
+          <div class="mood-behavior-item" style="border-left: 3px solid var(--accent-emerald);">
+            <div class="item-title">
+              <i class="fa-solid fa-circle-check" style="color: var(--accent-emerald);"></i>
+              Happy & Planned
+            </div>
+            <div class="item-amount" id="happyAmount">₹0</div>
+            <small id="happySub">0% of total</small>
+          </div>
+
+          <div class="mood-behavior-item" style="border-left: 3px solid var(--accent-rose);">
+            <div class="item-title">
+              <i class="fa-solid fa-bolt" style="color: var(--accent-rose);"></i>
+              Stressed Spending
+            </div>
+            <div class="item-amount" id="stressedAmount">₹0</div>
+            <small id="stressedSub">0% of total</small>
+          </div>
+
+          <div class="mood-behavior-item" style="border-left: 3px solid var(--accent-amber);">
+            <div class="item-title">
+              <i class="fa-solid fa-clock" style="color: var(--accent-amber);"></i>
+              Bored Spending
+            </div>
+            <div class="item-amount" id="boredAmount">₹0</div>
+            <small id="boredSub">0% of total</small>
+          </div>
+
+          <div class="mood-behavior-item" style="border-left: 3px solid var(--primary);">
+            <div class="item-title">
+              <i class="fa-solid fa-cloud" style="color: var(--primary);"></i>
+              Sad / Low Mood
+            </div>
+            <div class="item-amount" id="sadAmount">₹0</div>
+            <small id="sadSub">0% of total</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filterable Behavioral Ledger -->
+      <section class="card">
+        <div class="section-title">
+          <h2>Spending by Mood</h2>
+        </div>
+
+        <div class="mood-filter-tabs">
+          <button class="mood-tab-btn active" data-mood="all">All</button>
+          <button class="mood-tab-btn" data-mood="happy">Happy</button>
+          <button class="mood-tab-btn" data-mood="stressed">Stressed</button>
+          <button class="mood-tab-btn" data-mood="bored">Bored</button>
+          <button class="mood-tab-btn" data-mood="sad">Sad</button>
+        </div>
+
+        <div id="moodTransactions"></div>
+      </section>
+    </main>
   </div>
 
+  <div id="toast" class="toast"></div>
+
+  <script src="../js/api.js"></script>
   <script src="../js/mood.js"></script>
 </body>
 </html>

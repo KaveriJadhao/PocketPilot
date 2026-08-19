@@ -1,0 +1,27 @@
+{
+  "name": "pocketpilot",
+  "version": "2.5.0",
+  "description": "PocketPilot — Easy Student Budget & Expense Tracker",
+  "main": "Backend/server.js",
+  "scripts": {
+    "start": "node Backend/server.js",
+    "dev": "nodemon Backend/server.js",
+    "build": "cd Backend && npm install",
+    "postinstall": "cd Backend && npm install"
+  },
+  "dependencies": {
+    "axios": "^1.16.1",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "groq-sdk": "^1.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "author": "Kaveri Jadhao",
+  "license": "ISC"
+}

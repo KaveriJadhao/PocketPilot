@@ -1,77 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Signup - PocketPilot</title>
-
+  <title>Create Account — PocketPilot</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/typography.css">
+  <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/auth.css">
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 
-<body>
+<body class="auth-page">
 
   <div class="auth-container">
-
     <div class="auth-left">
+      <div>
+        <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.15rem;">
+          <div class="logo-icon" style="width: 30px; height: 30px; font-size: 0.9rem; border-radius: var(--radius-xs); background: var(--primary); color: white; display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <span>PocketPilot</span>
+        </a>
 
-      <div class="logo">
-        <i class="fa-solid fa-wallet"></i>
-        PocketPilot
+        <div style="margin-top: 50px;">
+          <h1 style="font-size: 1.75rem; line-height: 1.25; margin-bottom: 8px;">Take control of your pocket money</h1>
+          <p style="font-size: 0.875rem; color: var(--text-secondary);">Track your daily expenses, stay on budget, and earn rewards as a student.</p>
+        </div>
       </div>
 
-      <h1>Create Account 🚀</h1>
-
-      <p>
-        Start your smart financial journey with AI-powered insights and rewards.
-      </p>
-
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
-        alt="signup"
-      />
-
+      <div style="padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+        <small style="font-weight: 700; color: var(--text-muted); text-transform: uppercase;">100% Free for Students</small>
+        <p style="font-size: 0.75rem; margin-top: 2px; color: var(--text-secondary);">No credit card needed. Start tracking in seconds.</p>
+      </div>
     </div>
 
     <div class="auth-right">
-
       <form class="auth-form" id="signupForm">
+        <h2>Create Account</h2>
+        <p class="subtitle">Set up your free student profile</p>
 
-        <h2>Signup</h2>
-
-        <div class="input-box">
-          <i class="fa-solid fa-user"></i>
-          <input type="text" placeholder="Full Name" required>
+        <div class="form-group">
+          <label class="form-label" for="signupName">Full Name</label>
+          <input type="text" id="signupName" class="form-input" placeholder="e.g. Kaveri Jadhao" required>
         </div>
 
-        <div class="input-box">
-          <i class="fa-solid fa-envelope"></i>
-          <input type="email" placeholder="Email Address" required>
+        <div class="form-group">
+          <label class="form-label" for="signupEmail">Email Address</label>
+          <input type="email" id="signupEmail" class="form-input" placeholder="student@university.edu" required>
         </div>
 
-        <div class="input-box">
-          <i class="fa-solid fa-lock"></i>
-          <input type="password" placeholder="Create Password" required>
+        <div class="form-group">
+          <label class="form-label" for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" class="form-input" placeholder="At least 6 characters" minlength="6" required>
         </div>
 
-        <button type="submit">Create Account</button>
+        <button type="submit" id="signupBtn" class="btn btn-primary" style="width: 100%; padding: 10px; margin-top: 6px;">
+          Create Free Account
+        </button>
 
-        <p class="bottom-text">
-          Already have an account?
-          <a href="login.html">Login</a>
+        <button type="button" id="guestBtn" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Quick Demo / Continue as Guest
+        </button>
+
+        <p class="auth-footer-text">
+          Already have an account? <a href="login.html">Sign In</a>
         </p>
-
       </form>
-
     </div>
-
   </div>
 
-  <script src="../js/auth.js"></script>
+  <div id="toast" class="toast"></div>
 
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

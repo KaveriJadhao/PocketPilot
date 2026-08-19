@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "_id": "default_user_1",
+      "name": "Kaveri",
+      "email": "student@university.edu",
+      "monthlyBudget": 16000,
+      "savingsGoal": 6000,
+      "streak": 1,
+      "gems": 45,
+      "level": 1,
+      "theme": "light",
+      "createdAt": "2026-08-15T14:50:27.411Z"
+    }
+  ],
+  "expenses": []
+}

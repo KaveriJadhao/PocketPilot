@@ -1,160 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* ============================================================
+   PocketPilot Auth Styles (Login & Signup — Fully Responsive)
+   ============================================================ */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--bg);
+  box-sizing: border-box;
+  width: 100%;
 }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f4f7ff;
-    padding:20px;
+.auth-container {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  width: 100%;
+  max-width: 960px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.auth-container{
-    width:100%;
-    max-width:1200px;
-    min-height:700px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    background:white;
-    border-radius:30px;
-    overflow:hidden;
-    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+.auth-left {
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-sky-light));
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--border);
+  box-sizing: border-box;
 }
 
-/* LEFT SIDE */
-
-.auth-left{
-    background:linear-gradient(135deg,#6c63ff,#4da8ff);
-    color:white;
-    padding:60px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+.auth-right {
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
-.logo{
-    font-size:30px;
-    font-weight:700;
-    margin-bottom:40px;
+.auth-form h2 {
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  margin-bottom: 6px;
 }
 
-.logo i{
-    margin-right:10px;
+.auth-form p.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  margin-bottom: 28px;
 }
 
-.auth-left h1{
-    font-size:50px;
-    line-height:1.2;
-    margin-bottom:20px;
+.auth-footer-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
-.auth-left p{
-    font-size:18px;
-    line-height:1.7;
-    margin-bottom:40px;
+.auth-footer-text a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.auth-left img{
-    width:300px;
+@media (max-width: 768px) {
+  .auth-page {
+    padding: 16px 12px;
+  }
+
+  .auth-container {
+    grid-template-columns: 1fr !important;
+    max-width: 440px;
+    border-radius: var(--radius-lg);
+  }
+
+  .auth-left {
+    display: none !important;
+  }
+
+  .auth-right {
+    padding: 28px 20px !important;
+  }
 }
 
-/* RIGHT SIDE */
+@media (max-width: 360px) {
+  .auth-page {
+    padding: 12px 8px;
+  }
 
-.auth-right{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px;
-}
-
-.auth-form{
-    width:100%;
-    max-width:400px;
-}
-
-.auth-form h2{
-    font-size:40px;
-    margin-bottom:40px;
-    color:#111827;
-}
-
-.input-box{
-    width:100%;
-    height:60px;
-    background:#f3f4f6;
-    border-radius:14px;
-    margin-bottom:25px;
-    display:flex;
-    align-items:center;
-    padding:0 20px;
-}
-
-.input-box i{
-    color:#6c63ff;
-    margin-right:15px;
-}
-
-.input-box input{
-    width:100%;
-    border:none;
-    outline:none;
-    background:none;
-    font-size:16px;
-}
-
-.auth-form button{
-    width:100%;
-    height:60px;
-    border:none;
-    border-radius:14px;
-    background:#6c63ff;
-    color:white;
-    font-size:17px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.auth-form button:hover{
-    background:#574bff;
-}
-
-.bottom-text{
-    text-align:center;
-    margin-top:25px;
-    color:#6b7280;
-}
-
-.bottom-text a{
-    text-decoration:none;
-    color:#6c63ff;
-    font-weight:600;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-    .auth-container{
-        grid-template-columns:1fr;
-    }
-
-    .auth-left{
-        display:none;
-    }
-
-}
-.menu a{
-    text-decoration:none;
-    color:inherit;
-    display:flex;
-    align-items:center;
-    gap:12px;
+  .auth-right {
+    padding: 22px 14px !important;
+  }
 }

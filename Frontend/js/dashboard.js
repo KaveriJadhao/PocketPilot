@@ -1,366 +1,618 @@
 let pieChart = null;
 let lineChart = null;
+let quickModalMood = "Happy";
+let allDashboardExpenses = [];
+let dashboardSearchQuery = "";
 
-async function getExpenses(){
-    const response = await fetch("http://localhost:5000/api/expenses");
-    return await response.json();
+function formatCurrency(amount) {
+  return "₹" + Number(amount || 0).toLocaleString("en-IN");
 }
 
-async function getUser(){
-    const response = await fetch("http://localhost:5000/api/user");
-    return await response.json();
+function formatDate(dateString) {
+  if (!dateString) return "Recent";
+  const d = new Date(dateString);
+  if (isNaN(d.getTime())) return "Recent";
+  return d.toLocaleDateString("en-IN", { month: "short", day: "numeric" });
 }
 
-function loadSettingsData(){
-    const savedName = localStorage.getItem("userName") || "User";
-
-    document.getElementById("dashboardUserName").innerText =
-        "Hello, " + savedName + " 👋";
+function getCategoryBadge(category) {
+  const cat = (category || "").toLowerCase();
+  if (cat.includes("food")) return `<span class="badge badge-sapphire">Food & Dining</span>`;
+  if (cat.includes("travel")) return `<span class="badge badge-emerald">Transit</span>`;
+  if (cat.includes("shopping")) return `<span class="badge badge-amber">Shopping</span>`;
+  if (cat.includes("education") || cat.includes("book")) return `<span class="badge badge-sapphire">Education</span>`;
+  if (cat.includes("bill") || cat.includes("recharge")) return `<span class="badge badge-rose">Utilities</span>`;
+  return `<span class="badge badge-neutral">${escapeHtml(category || "Other")}</span>`;
 }
 
-async function loadDashboardData(){
-
-    const expenses = await getExpenses();
-
-    const starterGuide = document.getElementById("starterGuide");
-    starterGuide.style.display = "flex";
-
-    const welcomeState = document.getElementById("welcomeState");
-
-    if(expenses.length === 0){
-        welcomeState.style.display = "flex";
-    }
-    else{
-        welcomeState.style.display = "none";
-    }
-
-    let totalExpenses = 0;
-
-    expenses.forEach((expense)=>{
-        totalExpenses += Number(expense.amount);
-    });
-
-    const totalBalance =
-        Number(localStorage.getItem("monthlyBudget")) || 15000;
-
-    const savings = totalBalance - totalExpenses;
-
-    document.getElementById("monthlyExpenses").innerText =
-        `₹ ${totalExpenses}`;
-
-    document.getElementById("totalBalance").innerText =
-        `₹ ${totalBalance}`;
-
-    document.getElementById("totalSavings").innerText =
-        `₹ ${savings}`;
+function getMoodBadge(mood) {
+  const m = (mood || "").toLowerCase();
+  if (m.includes("happy") || m.includes("positive")) return `<span class="badge badge-emerald">Positive</span>`;
+  if (m.includes("stressed") || m.includes("stress")) return `<span class="badge badge-rose">Stress</span>`;
+  if (m.includes("bored")) return `<span class="badge badge-amber">Boredom</span>`;
+  if (m.includes("sad") || m.includes("low")) return `<span class="badge badge-sapphire">Low</span>`;
+  return `<span class="badge badge-neutral">${escapeHtml(mood || "Neutral")}</span>`;
 }
 
-async function loadUserData(){
+function getGreeting(name) {
+  const hour = new Date().getHours();
+  let timeGreeting = "Welcome back";
+  if (hour < 12) timeGreeting = "Good morning";
+  else if (hour < 17) timeGreeting = "Good afternoon";
+  else timeGreeting = "Good evening";
 
-    const user = await getUser();
-
-    document.getElementById("streakDays").innerText =
-        user.streak === 1 ? "1 Day" : user.streak + " Days";
-
-    document.getElementById("levelValue").innerText =
-        "Level " + user.level;
-
-    document.getElementById("gemsValue").innerText =
-        user.gems + " 💎";
-
-    document.getElementById("levelDisplay").innerText =
-        "Level " + user.level + " 🎮";
-
-    document.querySelector(".next-level-text").innerText =
-        "Progress to Level " + (user.level + 1);
-
-    const progress = user.gems % 50;
-
-    document.getElementById("rewardProgress").style.width =
-        (progress / 50) * 100 + "%";
+  return name && name !== "Student" ? `${timeGreeting}, ${name}` : timeGreeting;
 }
 
-async function loadChart(){
+async function loadUserData() {
+  const user = await api.getUser();
+  const userName = user.name || localStorage.getItem("userName") || "Student";
+  const email = user.email || "Student Account";
 
-    const expenses = await getExpenses();
+  const greetingEl = document.getElementById("dashboardGreeting");
+  if (greetingEl) greetingEl.innerText = getGreeting(userName);
 
-    let food = 0;
-    let travel = 0;
-    let shopping = 0;
-    let other = 0;
+  const sidebarNameEl = document.getElementById("sidebarUserName");
+  if (sidebarNameEl) sidebarNameEl.innerText = userName;
 
-    expenses.forEach((exp)=>{
-        const category = exp.category.toLowerCase();
+  const sidebarEmailEl = document.getElementById("sidebarUserEmail");
+  if (sidebarEmailEl) sidebarEmailEl.innerText = email;
 
-        if(category === "food"){
-            food += Number(exp.amount);
-        }
-        else if(category === "travel"){
-            travel += Number(exp.amount);
-        }
-        else if(category === "shopping"){
-            shopping += Number(exp.amount);
-        }
-        else{
-            other += Number(exp.amount);
-        }
-    });
+  const streakEl = document.getElementById("streakDays");
+  if (streakEl) streakEl.innerText = user.streak === 1 ? "1 Day" : `${user.streak || 1} Days`;
 
-    if(expenses.length === 0){
-        food = 1;
-        travel = 1;
-        shopping = 1;
-        other = 1;
-    }
+  const levelValEl = document.getElementById("levelValue");
+  if (levelValEl) levelValEl.innerText = `Level ${user.level || 1}`;
 
-    const ctx = document.getElementById("expenseChart");
+  const gemsValEl = document.getElementById("gemsValue");
+  if (gemsValEl) gemsValEl.innerText = `${user.gems || 0} Gems`;
 
-    if(pieChart){
-        pieChart.destroy();
-    }
+  return user;
+}
 
-    pieChart = new Chart(ctx, {
-        type:"doughnut",
-        data:{
-            labels:["Food", "Travel", "Shopping", "Other"],
-            datasets:[{
-                data:[food, travel, shopping, other],
-                backgroundColor:[
-                    "#6c63ff",
-                    "#22c55e",
-                    "#f59e0b",
-                    "#ef4444"
-                ],
-                borderWidth:0
-            }]
+async function loadDashboardData(expenses, user) {
+  let totalExpenses = 0;
+  expenses.forEach((expense) => {
+    totalExpenses += Number(expense.amount || 0);
+  });
+
+  const totalBalance = Number(user.monthlyBudget) || Number(localStorage.getItem("monthlyBudget")) || 15000;
+  const savings = Math.max(0, totalBalance - totalExpenses);
+  const spentPct = totalBalance > 0 ? Math.min(Math.round((totalExpenses / totalBalance) * 100), 100) : 0;
+
+  // Fluid Counter Animations
+  const monthlyExpEl = document.getElementById("monthlyExpenses");
+  if (monthlyExpEl) api.animateValue(monthlyExpEl, 0, totalExpenses, 700, "₹");
+
+  const totalBalEl = document.getElementById("totalBalance");
+  if (totalBalEl) api.animateValue(totalBalEl, 0, totalBalance, 700, "₹");
+
+  const totalSavEl = document.getElementById("totalSavings");
+  if (totalSavEl) api.animateValue(totalSavEl, 0, savings, 700, "₹");
+
+  const spentPctEl = document.getElementById("spentPercentageFooter");
+  if (spentPctEl) spentPctEl.innerText = `${spentPct}% of allocation used`;
+}
+
+function loadCategoryChart(expenses) {
+  let food = 0;
+  let travel = 0;
+  let shopping = 0;
+  let other = 0;
+
+  expenses.forEach((exp) => {
+    const category = (exp.category || "").toLowerCase();
+    const amount = Number(exp.amount || 0);
+    if (category.includes("food")) food += amount;
+    else if (category.includes("travel")) travel += amount;
+    else if (category.includes("shopping")) shopping += amount;
+    else other += amount;
+  });
+
+  const hasData = food > 0 || travel > 0 || shopping > 0 || other > 0;
+  const chartData = hasData ? [food, travel, shopping, other] : [25, 25, 25, 25];
+  const chartColors = hasData
+    ? ["#2563eb", "#059669", "#d97706", "#e11d48"]
+    : ["rgba(37, 99, 235, 0.15)", "rgba(5, 150, 105, 0.15)", "rgba(217, 119, 6, 0.15)", "rgba(225, 29, 72, 0.15)"];
+
+  const ctx = document.getElementById("expenseChart");
+  if (!ctx) return;
+
+  if (pieChart) {
+    pieChart.destroy();
+  }
+
+  pieChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["Food & Dining", "Travel & Transit", "Shopping", "Other"],
+      datasets: [
+        {
+          data: chartData,
+          backgroundColor: chartColors,
+          borderWidth: 0,
+          hoverOffset: hasData ? 3 : 0,
         },
-        options:{
-            responsive:true,
-            plugins:{
-                legend:{
-                    display:false
-                }
-            }
-        }
-    });
-}
-
-async function loadTransactions(){
-
-    const expenses = await getExpenses();
-
-    const container =
-        document.getElementById("transactionsContainer");
-
-    container.innerHTML = "";
-
-    if(expenses.length === 0){
-        container.innerHTML = `
-            <div class="transaction">
-                <div class="transaction-left">
-                    <h3>No transactions yet</h3>
-                    <p>Your recent expenses will appear here.</p>
-                </div>
-                <div class="transaction-amount">₹0</div>
-            </div>
-        `;
-        return;
-    }
-
-    expenses.slice(0,5).forEach((expense)=>{
-        container.innerHTML += `
-            <div class="transaction">
-                <div class="transaction-left">
-                    <h3>${expense.title}</h3>
-                    <p>${expense.category} • ${expense.mood || "No mood"}</p>
-                </div>
-
-                <div class="transaction-amount">
-                    ₹${expense.amount}
-                </div>
-            </div>
-        `;
-    });
-}
-
-async function loadBudgetProgress(){
-
-    const expenses = await getExpenses();
-
-    let foodTotal = 0;
-    let travelTotal = 0;
-
-    expenses.forEach((expense)=>{
-        const category = expense.category.toLowerCase();
-
-        if(category === "food"){
-            foodTotal += Number(expense.amount);
-        }
-
-        if(category === "travel"){
-            travelTotal += Number(expense.amount);
-        }
-    });
-
-    const foodLimit = 5000;
-    const travelLimit = 10000;
-
-    const foodPercent = Math.min((foodTotal / foodLimit) * 100, 100);
-    const travelPercent = Math.min((travelTotal / travelLimit) * 100, 100);
-
-    document.querySelector(".food-progress").style.width =
-        `${foodPercent}%`;
-
-    document.querySelector(".travel-progress").style.width =
-        `${travelPercent}%`;
-
-    document.getElementById("foodBudgetText").innerText =
-        `₹${foodTotal} / ₹${foodLimit}`;
-
-    document.getElementById("travelBudgetText").innerText =
-        `₹${travelTotal} / ₹${travelLimit}`;
-}
-
-async function loadLineChart(){
-
-    const expenses = await getExpenses();
-
-    const weeklyData = [0,0,0,0,0,0,0];
-
-    expenses.forEach((expense,index)=>{
-        const weekIndex = index % 7;
-        weeklyData[weekIndex] += Number(expense.amount);
-    });
-
-    const ctx = document.getElementById("lineChart");
-
-    if(lineChart){
-        lineChart.destroy();
-    }
-
-    lineChart = new Chart(ctx, {
-        type:"line",
-        data:{
-            labels:["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-            datasets:[{
-                data:weeklyData,
-                borderColor:"#6c63ff",
-                backgroundColor:"rgba(108,99,255,0.1)",
-                fill:true,
-                tension:0.4
-            }]
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: "75%",
+      animation: {
+        animateRotate: true,
+        animateScale: true,
+        duration: 750,
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          enabled: hasData,
+          backgroundColor: "rgba(15, 23, 42, 0.95)",
+          titleFont: { family: "Plus Jakarta Sans", size: 12 },
+          bodyFont: { family: "Plus Jakarta Sans", size: 12, weight: "600" },
+          padding: 8,
+          cornerRadius: 6,
+          callbacks: {
+            label: (ctx) => ` ${ctx.label}: ₹${ctx.raw.toLocaleString("en-IN")}`,
+          },
         },
-        options:{
-            responsive:true,
-            plugins:{
-                legend:{
-                    display:false
-                }
-            },
-            scales:{
-                y:{
-                    beginAtZero:true
-                }
-            }
-        }
+      },
+    },
+  });
+}
+
+function loadWeeklyTrendChart(expenses) {
+  const isDark = document.body.classList.contains("dark");
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const dayTotals = [0, 0, 0, 0, 0, 0, 0];
+
+  expenses.forEach((expense) => {
+    const expenseDate = expense.date ? new Date(expense.date) : new Date(expense.createdAt || Date.now());
+    let jsDay = expenseDate.getDay();
+    let dayIndex = jsDay === 0 ? 6 : jsDay - 1;
+    dayTotals[dayIndex] += Number(expense.amount || 0);
+  });
+
+  const ctx = document.getElementById("lineChart");
+  if (!ctx) return;
+
+  if (lineChart) {
+    lineChart.destroy();
+  }
+
+  lineChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: daysOfWeek,
+      datasets: [
+        {
+          label: "Expenditure",
+          data: dayTotals,
+          borderColor: "#2563eb",
+          backgroundColor: isDark ? "rgba(37, 99, 235, 0.2)" : "rgba(37, 99, 235, 0.05)",
+          fill: true,
+          tension: 0.3,
+          pointRadius: 3.5,
+          pointBackgroundColor: "#2563eb",
+          pointBorderColor: "#ffffff",
+          pointBorderWidth: 1.5,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 750,
+        easing: "easeOutQuart",
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "rgba(15, 23, 42, 0.95)",
+          titleFont: { family: "Plus Jakarta Sans" },
+          bodyFont: { family: "Plus Jakarta Sans", weight: "600" },
+          padding: 8,
+          cornerRadius: 6,
+          callbacks: {
+            label: (ctx) => ` ₹${ctx.raw.toLocaleString("en-IN")}`,
+          },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: isDark ? "rgba(255, 255, 255, 0.04)" : "rgba(0, 0, 0, 0.04)",
+          },
+          ticks: {
+            color: isDark ? "#94a3b8" : "#64748b",
+            font: { family: "Plus Jakarta Sans", size: 10 },
+            callback: (v) => "₹" + v,
+          },
+        },
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: isDark ? "#94a3b8" : "#64748b",
+            font: { family: "Plus Jakarta Sans", size: 10 },
+          },
+        },
+      },
+    },
+  });
+}
+
+let activeDashboardCat = "all";
+
+function setupCategoryFilterPills() {
+  const pills = document.querySelectorAll(".cat-filter-btn");
+  pills.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      pills.forEach((p) => {
+        p.style.borderColor = "var(--border)";
+        p.style.background = "var(--surface)";
+        p.style.color = "var(--text-secondary)";
+      });
+      btn.style.borderColor = "var(--primary)";
+      btn.style.background = "var(--primary-light)";
+      btn.style.color = "var(--primary)";
+      activeDashboardCat = btn.getAttribute("data-cat") || "all";
+      api.playSound("click");
+      loadTransactionsList();
     });
+  });
 }
 
-async function loadAIInsights(){
+function loadTransactionsList() {
+  const container = document.getElementById("transactionsContainer");
+  if (!container) return;
 
-    try{
-        const response =
-            await fetch("http://localhost:5000/api/ai/insights");
+  container.innerHTML = "";
 
-        const data = await response.json();
+  let filtered = allDashboardExpenses;
 
-        document.getElementById("aiInsightCard").innerText =
-            data.insight;
-    }
-    catch(error){
-        document.getElementById("aiInsightCard").innerText =
-            "Unable to load AI insights.";
-    }
-}
+  // Filter by category pill
+  if (activeDashboardCat && activeDashboardCat !== "all") {
+    filtered = filtered.filter((e) => {
+      const cat = (e.category || "").toLowerCase();
+      if (activeDashboardCat === "food") return cat.includes("food");
+      if (activeDashboardCat === "travel") return cat.includes("travel") || cat.includes("transit");
+      if (activeDashboardCat === "shopping") return cat.includes("shopping");
+      if (activeDashboardCat === "education") return cat.includes("education") || cat.includes("book");
+      if (activeDashboardCat === "other") return !cat.includes("food") && !cat.includes("travel") && !cat.includes("shopping") && !cat.includes("education");
+      return true;
+    });
+  }
 
-async function loadSmartAlerts(){
+  // Filter by search query
+  if (dashboardSearchQuery) {
+    filtered = filtered.filter((e) => {
+      const title = (e.title || "").toLowerCase();
+      const cat = (e.category || "").toLowerCase();
+      const mood = (e.mood || "").toLowerCase();
+      const amt = String(e.amount || "");
+      return title.includes(dashboardSearchQuery) || cat.includes(dashboardSearchQuery) || mood.includes(dashboardSearchQuery) || amt.includes(dashboardSearchQuery);
+    });
+  }
 
-    const expenses = await getExpenses();
+  if (!allDashboardExpenses || allDashboardExpenses.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 20px 14px; background: var(--bg-subtle); border: 1px dashed var(--border-strong); border-radius: var(--radius-md); text-align: center; width: 100%; box-sizing: border-box; overflow: hidden;">
+        <h4 style="font-size: 0.95rem; margin-bottom: 4px; color: var(--text-primary);">No expenses recorded yet</h4>
+        <p style="font-size: 0.8125rem; color: var(--text-muted); max-width: 380px; margin: 0 auto 16px;">
+          Add your first expense or tap a quick shortcut below to start tracking!
+        </p>
 
-    const alertsBox = document.getElementById("alertsBox");
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 14px; width: 100%;">
+          <button class="starter-chip" data-title="Canteen Lunch" data-amount="120" data-cat="Food" data-mood="Happy">🍔 Lunch ₹120</button>
+          <button class="starter-chip" data-title="Coffee" data-amount="40" data-cat="Food" data-mood="Happy">☕ Coffee ₹40</button>
+          <button class="starter-chip" data-title="Metro Pass" data-amount="200" data-cat="Travel" data-mood="Happy">🚌 Metro ₹200</button>
+          <button class="starter-chip" data-title="Study Books" data-amount="350" data-cat="Education" data-mood="Happy">📚 Books ₹350</button>
+        </div>
 
-    let food = 0;
-    let total = 0;
+        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; width: 100%;">
+          <button class="btn btn-primary" onclick="openQuickAddModal()" style="font-size: 0.8125rem; padding: 8px 14px; min-width: 130px;">
+            <i class="fa-solid fa-plus"></i> Add Expense
+          </button>
+          <a href="voice.html" class="btn btn-secondary" style="font-size: 0.8125rem; padding: 8px 14px; min-width: 110px;">
+            <i class="fa-solid fa-microphone"></i> Voice Add
+          </a>
+        </div>
+      </div>
+    `;
 
-    expenses.forEach((expense)=>{
-        total += Number(expense.amount);
+    const starterChips = container.querySelectorAll(".starter-chip");
+    starterChips.forEach((chip) => {
+      chip.addEventListener("click", async () => {
+        const title = chip.getAttribute("data-title");
+        const amount = Number(chip.getAttribute("data-amount"));
+        const category = chip.getAttribute("data-cat");
+        const mood = chip.getAttribute("data-mood") || "Happy";
 
-        if(expense.category.toLowerCase() === "food"){
-            food += Number(expense.amount);
+        chip.disabled = true;
+        chip.innerText = "Adding...";
+
+        try {
+          await api.addExpense({
+            title,
+            amount,
+            category,
+            mood,
+            date: new Date().toISOString().split("T")[0],
+          });
+          api.showToast(`Added ₹${amount} for ${title}`, "success");
+          await initDashboard();
+        } catch (err) {
+          api.showToast("Failed to add expense", "error");
+          chip.disabled = false;
         }
+      });
     });
 
-    if(expenses.length === 0){
-        alertsBox.innerText =
-            "Add your first expense to receive smart alerts.";
-        return;
-    }
+    return;
+  }
 
-    let alerts = "";
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 24px 16px; text-align: center; color: var(--text-muted); font-size: 0.8125rem;">
+        No expenses found for this filter.
+      </div>
+    `;
+    return;
+  }
 
-    if(food > 4000){
-        alerts += "⚠️ Food budget is close to limit.\n";
-    }
+  // Render Swiss Financial Ledger Table & Mobile Native Feed
+  const tableWrapper = document.createElement("div");
+  tableWrapper.className = "ledger-table-wrapper";
 
-    if(total > 10000){
-        alerts += "🚨 Monthly spending is getting high.\n";
-    }
+  let tableRowsHtml = "";
+  let mobileCardsHtml = "";
 
-    if(expenses.length >= 5){
-        alerts += "🔥 Great! You are tracking expenses regularly.\n";
-    }
+  filtered.slice(0, 6).forEach((expense) => {
+    const catBadge = getCategoryBadge(expense.category);
+    const moodBadge = getMoodBadge(expense.mood);
+    const dateFormatted = formatDate(expense.date || expense.createdAt);
+    const formattedAmount = Number(expense.amount).toLocaleString("en-IN");
 
-    if(alerts === ""){
-        alerts = "✅ Your spending looks under control.";
-    }
+    // Desktop Table Row
+    tableRowsHtml += `
+      <tr>
+        <td>
+          <div style="font-weight: 600; color: var(--text-primary);">${escapeHtml(expense.title)}</div>
+          <small>${dateFormatted}</small>
+        </td>
+        <td>${catBadge}</td>
+        <td>${moodBadge}</td>
+        <td class="text-right amount">₹${formattedAmount}</td>
+        <td class="text-right" style="width: 40px;">
+          <button class="delete-action-btn" title="Delete" data-id="${expense._id}">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </td>
+      </tr>
+    `;
 
-    alertsBox.innerText = alerts;
-}
+    // Mobile Transaction Feed Card
+    mobileCardsHtml += `
+      <div class="mobile-tx-card">
+        <div class="mobile-tx-left">
+          <div class="mobile-tx-title">${escapeHtml(expense.title)}</div>
+          <div class="mobile-tx-meta">
+            <span>${dateFormatted}</span>
+            <span>•</span>
+            ${catBadge}
+          </div>
+        </div>
+        <div class="mobile-tx-right">
+          <span class="amount text-rose">₹${formattedAmount}</span>
+          <button class="delete-action-btn" title="Delete" data-id="${expense._id}">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  });
 
-function setupDarkMode(){
+  tableWrapper.innerHTML = `
+    <table class="ledger-table desktop-table-view">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Mood</th>
+          <th class="text-right">Amount</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRowsHtml}
+      </tbody>
+    </table>
 
-    const darkModeToggle =
-        document.getElementById("darkModeToggle");
+    <div class="mobile-tx-feed">
+      ${mobileCardsHtml}
+    </div>
+  `;
 
-    if(localStorage.getItem("theme") === "dark"){
-        document.body.classList.add("dark");
-    }
-
-    darkModeToggle.addEventListener("click", ()=>{
-        document.body.classList.toggle("dark");
-
-        if(document.body.classList.contains("dark")){
-            localStorage.setItem("theme","dark");
+  const deleteBtns = tableWrapper.querySelectorAll(".delete-action-btn");
+  deleteBtns.forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      const id = btn.getAttribute("data-id");
+      if (confirm("Delete this expense?")) {
+        try {
+          await api.deleteExpense(id);
+          api.showToast("Expense deleted", "success");
+          await initDashboard();
+        } catch (err) {
+          api.showToast("Failed to delete expense", "error");
+          console.error(err);
         }
-        else{
-            localStorage.setItem("theme","light");
-        }
+      }
     });
+  });
+
+  container.appendChild(tableWrapper);
 }
 
-async function initDashboard(){
+function setupQuickAddModal() {
+  const openBtn = document.getElementById("openQuickAddBtn");
+  if (openBtn) openBtn.addEventListener("click", openQuickAddModal);
 
-    loadSettingsData();
-    setupDarkMode();
+  // Preset addition buttons
+  const presetBtns = document.querySelectorAll(".preset-amt-btn");
+  presetBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const addVal = Number(btn.getAttribute("data-add") || 0);
+      const amtInput = document.getElementById("quickAmount");
+      if (amtInput) {
+        const cur = Number(amtInput.value || 0);
+        amtInput.value = cur + addVal;
+        api.playSound("click");
+      }
+    });
+  });
 
-    await loadDashboardData();
-    await loadUserData();
-    await loadChart();
-    await loadTransactions();
-    await loadBudgetProgress();
-    await loadLineChart();
-    await loadAIInsights();
-    await loadSmartAlerts();
+  const moodPills = document.querySelectorAll(".mood-pill-btn");
+  moodPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      moodPills.forEach((p) => {
+        p.style.borderColor = "var(--border)";
+        p.style.background = "var(--surface)";
+        p.style.color = "var(--text-primary)";
+      });
+      pill.style.borderColor = "var(--primary)";
+      pill.style.background = "var(--primary-light)";
+      pill.style.color = "var(--primary)";
+      quickModalMood = pill.getAttribute("data-mood") || "Happy";
+      api.playSound("click");
+    });
+  });
+
+  const form = document.getElementById("quickAddForm");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = document.getElementById("quickTitle").value;
+      const amount = Number(document.getElementById("quickAmount").value);
+      const category = document.getElementById("quickCategory").value;
+      const saveBtn = document.getElementById("saveQuickExpenseBtn");
+
+      try {
+        if (saveBtn) {
+          saveBtn.disabled = true;
+          saveBtn.innerText = "Recording...";
+        }
+
+        await api.addExpense({
+          title,
+          amount,
+          category,
+          mood: quickModalMood,
+          date: new Date().toISOString().split("T")[0],
+        });
+
+        api.showToast(`Recorded ₹${amount} for ${title}`, "success");
+        closeQuickAddModal();
+        await initDashboard();
+      } catch (err) {
+        api.showToast(err.message || "Failed to record expense", "error");
+      } finally {
+        if (saveBtn) {
+          saveBtn.disabled = false;
+          saveBtn.innerText = "Record Transaction";
+        }
+      }
+    });
+  }
 }
 
-initDashboard();
+function setupExportCSV(expenses) {
+  const exportBtn = document.getElementById("exportCsvBtn");
+  if (!exportBtn) return;
+
+  exportBtn.addEventListener("click", () => {
+    if (!expenses || expenses.length === 0) {
+      api.showToast("No transaction records available to export", "error");
+      return;
+    }
+
+    const headers = ["Title,Category,Mood,Amount,Date"];
+    const rows = expenses.map(
+      (e) => `"${e.title}","${e.category}","${e.mood || 'Neutral'}",${e.amount},"${e.date || e.createdAt}"`
+    );
+    const csvContent = "data:text/csv;charset=utf-8," + [headers, ...rows].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `PocketPilot_Ledger_${new Date().toISOString().split("T")[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    api.showToast("CSV Ledger exported successfully", "success");
+  });
+}
+
+function setupSearchFilter() {
+  const searchInput = document.getElementById("dashboardSearchInput");
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      dashboardSearchQuery = e.target.value.toLowerCase().trim();
+      loadTransactionsList();
+    });
+  }
+}
+
+function setupThemeToggle() {
+  const themeBtn = document.getElementById("themeToggleBtn");
+  const themeIcon = document.getElementById("themeIcon");
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const isDark = api.toggleTheme();
+      if (themeIcon) {
+        themeIcon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+      }
+      api.getExpenses().then(loadWeeklyTrendChart);
+    });
+
+    const isDark = localStorage.getItem("theme") === "dark";
+    if (themeIcon) {
+      themeIcon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    }
+  }
+}
+
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+async function initDashboard() {
+  try { setupThemeToggle(); } catch (e) { console.warn("Theme toggle init:", e); }
+  try { setupQuickAddModal(); } catch (e) { console.warn("Quick add init:", e); }
+  try { setupSearchFilter(); } catch (e) { console.warn("Search filter init:", e); }
+  try { setupCategoryFilterPills(); } catch (e) { console.warn("Category pills init:", e); }
+
+  let user = { monthlyBudget: 15000, name: "Student" };
+  try { user = await loadUserData(); } catch (e) { console.warn("User load:", e); }
+
+  try { allDashboardExpenses = await api.getExpenses(); } catch (e) { console.warn("Expenses load:", e); }
+
+  try { await loadDashboardData(allDashboardExpenses, user); } catch (e) { console.warn("Dashboard data load:", e); }
+  try { loadTransactionsList(); } catch (e) { console.warn("Transactions load:", e); }
+  try { loadCategoryChart(allDashboardExpenses); } catch (e) { console.warn("Category chart load:", e); }
+  try { loadWeeklyTrendChart(allDashboardExpenses); } catch (e) { console.warn("Weekly chart load:", e); }
+  try { loadSmartAlerts(allDashboardExpenses); } catch (e) { console.warn("Alerts load:", e); }
+  try { await loadAIInsights(); } catch (e) { console.warn("AI insights load:", e); }
+  try { setupExportCSV(allDashboardExpenses); } catch (e) { console.warn("Export CSV init:", e); }
+}
+
+document.addEventListener("DOMContentLoaded", initDashboard);
