@@ -28,10 +28,41 @@ app.use(express.json());
 /* SERVE FRONTEND STATIC FILES */
 const frontendPath = path.join(__dirname, "../Frontend");
 app.use(express.static(frontendPath));
+app.use(express.static(path.join(frontendPath, "html")));
 
-/* ROOT ROUTE -> REDIRECT TO HOME PAGE */
+/* ROOT ROUTE -> SERVE HOME PAGE */
 app.get("/", (req, res) => {
   res.sendFile(path.join(frontendPath, "html", "index.html"));
+});
+
+/* CLEAN PAGE ROUTE ALIASES (Supports /dashboard, /dashboard.html, /html/dashboard.html) */
+const htmlPages = [
+  "index",
+  "dashboard",
+  "add-expense",
+  "analytics",
+  "voice",
+  "rewards",
+  "mood",
+  "settings",
+  "login",
+  "signup",
+  "onboarding",
+];
+
+htmlPages.forEach((page) => {
+  app.get(`/${page}`, (req, res) => {
+    res.sendFile(path.join(frontendPath, "html", `${page}.html`));
+  });
+  app.get(`/${page}.html`, (req, res) => {
+    res.sendFile(path.join(frontendPath, "html", `${page}.html`));
+  });
+  app.get(`/html/${page}`, (req, res) => {
+    res.sendFile(path.join(frontendPath, "html", `${page}.html`));
+  });
+  app.get(`/html/${page}.html`, (req, res) => {
+    res.sendFile(path.join(frontendPath, "html", `${page}.html`));
+  });
 });
 
 /* HEALTH CHECK */
@@ -39,7 +70,7 @@ app.get("/test", (req, res) => {
   res.json({
     status: "online",
     service: "PocketPilot API Server",
-    version: "2.0.0",
+    version: "2.5.0",
     frontend: `http://localhost:${PORT}/html/index.html`,
     dashboard: `http://localhost:${PORT}/html/dashboard.html`,
     timestamp: new Date().toISOString(),
