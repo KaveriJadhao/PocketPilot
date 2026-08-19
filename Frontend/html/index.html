@@ -3,131 +3,150 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PocketPilot</title>
-
+  <title>PocketPilot — Easy Student Budget & Expense Tracker</title>
+  
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/style.css" />
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 
-<body>
+<body class="landing-body">
 
   <!-- NAVBAR -->
-
-  <nav class="navbar">
-    <div class="logo">
-      <i class="fa-solid fa-wallet"></i>
-      PocketPilot
-    </div>
+  <header class="navbar">
+    <a href="index.html" class="nav-brand">
+      <div class="logo-icon" style="width: 32px; height: 32px; font-size: 0.95rem;">
+        <i class="fa-solid fa-layer-group"></i>
+      </div>
+      <span>PocketPilot</span>
+    </a>
 
     <ul class="nav-links">
-      <li><a href="#">Features</a></li>
-      <li><a href="#">AI Insights</a></li>
-      <li><a href="#">Rewards</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#capabilities">Features</a></li>
+      <li><a href="analytics.html">Analytics</a></li>
+      <li><a href="voice.html">Voice</a></li>
+      <li><a href="rewards.html">Rewards</a></li>
     </ul>
 
-   <a href="signup.html" class="nav-btn">Get Started</a>
-  </nav>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <a href="login.html" class="btn btn-secondary">Sign In</a>
+      <a href="signup.html" class="btn btn-primary">Get Started</a>
+    </div>
+  </header>
 
   <!-- HERO SECTION -->
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <div class="badge badge-sapphire" style="margin-bottom: 16px;">
+          Smart Money Tracker for Students
+        </div>
 
-  <section class="hero">
+        <h1>
+          Simple money tracking for college students
+        </h1>
 
-    <div class="hero-left">
-
-      <h1>
-        Your AI Money <span>Co-Pilot</span> for Smarter Student Spending
-      </h1>
-
-      <p>
-        Track expenses, build saving streaks, unlock rewards,
-        and let AI guide your financial habits.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="signup.html" class="primary-btn">Start Saving</a>
-        <a href="#" class="secondary-btn">Explore Features</a>
-      </div>
-
-    </div>
-
-    <div class="hero-right">
-
-      <div class="card card1">
-        <h3>Monthly Savings</h3>
-        <h2>₹4,250</h2>
-        <p>+18% this month</p>
-      </div>
-
-      <div class="card card2">
-        <h3>Current Streak</h3>
-        <h2>12 Days 🔥</h2>
-        <p>Keep saving daily</p>
-      </div>
-
-      <div class="card card3">
-        <h3>AI Alert</h3>
         <p>
-          You spend more on food during weekends.
+          Track daily spending with your voice, stay within your monthly budget, and get helpful AI tips to save more money.
         </p>
+
+        <div class="hero-cta">
+          <a href="signup.html" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.95rem;">
+            <i class="fa-solid fa-arrow-right"></i> Create Free Account
+          </a>
+          <a href="dashboard.html" class="btn btn-secondary" style="padding: 12px 20px; font-size: 0.95rem;">
+            <i class="fa-solid fa-desktop"></i> Try Live Demo
+          </a>
+        </div>
       </div>
 
-    </div>
+      <div class="hero-visual-stack">
+        <div class="hero-float-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Money Left to Spend</span>
+            <span class="badge badge-emerald">+18.4% Saved</span>
+          </div>
+          <div class="amount text-emerald" style="font-size: 2rem;">₹4,250.00</div>
+          <p style="font-size: 0.8125rem; margin-top: 2px;">Remaining from your ₹15,000 monthly budget</p>
+        </div>
 
-  </section>
+        <div class="hero-float-card" style="margin-left: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Daily Streak</span>
+            <span class="badge badge-amber">12 Days in a Row</span>
+          </div>
+          <div style="font-size: 1.15rem; font-weight: 700;">Level 3 Student Tier</div>
+          <small style="color: var(--text-muted);">150 gems earned • 3 discount coupons active</small>
+        </div>
 
-  <!-- FEATURES -->
+        <div class="hero-float-card" style="border-left: 3px solid var(--primary);">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <i class="fa-solid fa-microchip" style="color: var(--primary);"></i>
+            <strong style="font-size: 0.8125rem; color: var(--text-primary);">Smart AI Tip</strong>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--text-secondary);">
+            "Spending ₹100 or less per canteen meal will help you save ₹1,500 this month."
+          </p>
+        </div>
+      </div>
+    </section>
 
-  <section class="features">
-
-    <h2>Why PocketPilot?</h2>
-
-    <div class="feature-container">
-
-      <div class="feature-box">
-        <i class="fa-solid fa-robot"></i>
-        <h3>AI Insights</h3>
-        <p>
-          Get smart suggestions and spending predictions.
-        </p>
+    <!-- CAPABILITIES -->
+    <section class="features-section" id="capabilities">
+      <div class="features-header">
+        <h2>Everything you need to manage your pocket money</h2>
+        <p>Simple tools to help you track expenses, save more, and build great money habits.</p>
       </div>
 
-      <div class="feature-box">
-        <i class="fa-solid fa-fire"></i>
-        <h3>Saving Streaks</h3>
-        <p>
-          Stay consistent and earn exciting rewards.
-        </p>
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <i class="fa-solid fa-microphone"></i>
+          </div>
+          <h3>Quick Voice Logging</h3>
+          <p>
+            Just speak to add expenses. PocketPilot automatically understands the amount and category.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <h3>Spending & Budget Trends</h3>
+          <p>
+            See where your money goes with simple charts, weekly trends, and easy export.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <h3>Daily Rewards & Coupons</h3>
+          <p>
+            Earn gems for tracking your expenses daily and unlock real food and book discounts.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <h3>Mood & Spending Habits</h3>
+          <p>
+            Learn how your mood affects your spending and cut down on impulse shopping.
+          </p>
+        </div>
       </div>
-
-      <div class="feature-box">
-        <i class="fa-solid fa-microphone"></i>
-        <h3>Voice Assistant</h3>
-        <p>
-          Add expenses using simple voice commands.
-        </p>
-      </div>
-
-      <div class="feature-box">
-        <i class="fa-solid fa-face-smile"></i>
-        <h3>Mood Tracking</h3>
-        <p>
-          Understand emotional spending patterns with AI.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
+    </section>
+  </main>
 
   <!-- FOOTER -->
-
-  <footer class="footer">
-    <p>© 2026 PocketPilot. Built for smarter student spending.</p>
+  <footer class="landing-footer">
+    <p>© 2026 PocketPilot. Simple money tracking made for college students.</p>
   </footer>
 
 </body>

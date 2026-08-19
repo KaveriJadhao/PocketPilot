@@ -3,251 +3,331 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard - PocketPilot</title>
-
-  <link rel="stylesheet" href="../css/dashboard.css"/>
+  <title>Overview — PocketPilot</title>
+  
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/typography.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 
 <body>
 
-  <div class="sidebar">
-    <div class="logo">
-      <i class="fa-solid fa-wallet"></i>
-      PocketPilot
-    </div>
-
-    <ul class="menu">
-      <li class="active"><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-      <li><a href="analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
-      <li><a href="voice.html"><i class="fa-solid fa-microphone"></i> Voice AI</a></li>
-      <li><a href="rewards.html"><i class="fa-solid fa-gift"></i> Rewards</a></li>
-      <li><a href="mood.html"><i class="fa-solid fa-face-smile"></i> Mood Tracker</a></li>
-      <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
-    </ul>
+  <!-- Mobile Topbar -->
+  <div class="mobile-topbar">
+    <a href="dashboard.html" class="mobile-brand">
+      <div class="logo-icon" style="width: 26px; height: 26px; font-size: 0.8rem;"><i class="fa-solid fa-layer-group"></i></div>
+      <span>PocketPilot</span>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
   </div>
 
-  <div class="main-content">
-
-    <div class="topbar">
-      <div class="topbar-left">
-        <h1 id="dashboardUserName">Hello, Kaveri 👋</h1>
-        <p>Track your money smarter with AI.</p>
-      </div>
-
-      <div class="topbar-buttons">
-        <button id="darkModeToggle" class="dark-btn">🌙</button>
-
-        <button class="add-expense-btn" onclick="window.location.href='add-expense.html'">
-          + Add Expense
-        </button>
-      </div>
-    </div>
-
-    <div id="welcomeState" class="welcome-state">
-      <div>
-        <h2>Welcome to PocketPilot 👋</h2>
-        <p>Add your first expense to start tracking spending, rewards, moods, and savings.</p>
-      </div>
-
-      <button onclick="window.location.href='add-expense.html'">
-        + Add First Expense
-      </button>
-    </div>
-
-    <div class="cards">
-
-      <div class="card balance">
-        <h3>Total Balance</h3>
-        <h2 id="totalBalance">₹0</h2>
-        <p>Your monthly budget</p>
-      </div>
-
-      <div class="card expenses">
-        <h3>Monthly Expenses</h3>
-        <h2 id="monthlyExpenses">₹0</h2>
-        <p>Track every rupee</p>
-      </div>
-
-      <div class="card savings">
-        <h3>Total Savings</h3>
-        <h2 id="totalSavings">₹0</h2>
-        <p>Balance after expenses</p>
-      </div>
-
-      <div class="card streak">
-        <h3>Saving Streak 🔥</h3>
-        <h2 id="streakDays">1 Day</h2>
-        <p>Keep it going!</p>
-      </div>
-
-      <div class="card level">
-        <h3>Level 🎮</h3>
-        <h2 id="levelValue">1</h2>
-        <p>Keep earning gems!</p>
-      </div>
-
-      <div class="card analytics-card">
-        <h3>Analytics</h3>
-
-        <div class="chart-container">
-          <canvas id="expenseChart"></canvas>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="appSidebar">
+      <a href="dashboard.html" class="sidebar-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-layer-group"></i>
         </div>
-
-        <div class="analytics-labels">
-          <div class="label-item"><span class="color food-color"></span> Food</div>
-          <div class="label-item"><span class="color travel-color"></span> Travel</div>
-          <div class="label-item"><span class="color shopping-color"></span> Shopping</div>
-          <div class="label-item"><span class="color other-color"></span> Other</div>
+        <div>
+          <h2>PocketPilot</h2>
+          <span>Student Finance</span>
         </div>
-      </div>
+      </a>
 
-    </div>
+      <div class="menu-title">Main</div>
+      <ul class="menu">
+        <li class="active">
+          <a href="dashboard.html">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li>
+          <a href="add-expense.html">
+            <i class="fa-solid fa-plus-circle"></i>
+            <span>Expenses</span>
+          </a>
+        </li>
+        <li>
+          <a href="analytics.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="voice.html">
+            <i class="fa-solid fa-microphone"></i>
+            <span>Voice Assistant</span>
+          </a>
+        </li>
+      </ul>
 
-    <div class="dashboard-grid" id="dashboardGrid">
+      <div class="menu-title">Tools & Rewards</div>
+      <ul class="menu">
+        <li>
+          <a href="rewards.html">
+            <i class="fa-solid fa-award"></i>
+            <span>Rewards Hub</span>
+          </a>
+        </li>
+        <li>
+          <a href="mood.html">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>Mood Patterns</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
 
-      <div class="left-column">
-
-        <div class="section">
-          <div class="section-title">
-            <h2>Recent Transactions</h2>
-          </div>
-
-          <div class="transactions-container" id="transactionsContainer"></div>
-        </div>
-
-        <div id="starterGuide" class="starter-guide">
+      <div class="sidebar-user">
+        <div class="sidebar-user-info">
+          <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="User" id="userAvatar">
           <div>
-            <h2>Keep Building Healthy Money Habits 💰</h2>
-
-            <p>
-              Track expenses, earn gems, unlock rewards and improve your savings habits.
-            </p>
-
-            <button onclick="window.location.href='add-expense.html'">
-              Add First Expense
-            </button>
+            <h4 id="sidebarUserName">Kaveri</h4>
+            <small id="sidebarUserEmail">Student Plan</small>
           </div>
-
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png"
-            alt="money"
-          >
         </div>
-
+        <a href="settings.html" style="color: var(--text-muted);" title="Account Settings">
+          <i class="fa-solid fa-gear"></i>
+        </a>
       </div>
+    </aside>
 
-      <div class="right-column">
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 id="dashboardGreeting">Overview</h1>
+        </div>
 
-        <div class="section">
-          <div class="section-title">
-            <h2>Budget Progress</h2>
+        <div class="topbar-buttons">
+          <button id="themeToggleBtn" class="icon-btn" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+          </button>
+
+          <button onclick="window.print()" class="btn btn-secondary" title="Print Monthly Statement">
+            <i class="fa-solid fa-print"></i> Statement
+          </button>
+
+          <button id="exportCsvBtn" class="btn btn-secondary" title="Export Transactions as CSV">
+            <i class="fa-solid fa-download"></i> CSV
+          </button>
+
+          <button id="openQuickAddBtn" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> New Expense
+          </button>
+        </div>
+      </header>
+
+      <!-- KPI Metric Cards -->
+      <section class="cards">
+        <div class="card metric-card">
+          <div class="metric-header">
+            <h3>Monthly Budget</h3>
+            <div class="metric-icon"><i class="fa-solid fa-wallet"></i></div>
           </div>
-
-          <div class="budget-container">
-
-            <div class="budget-card">
-              <div class="budget-info">
-                <h3>Food Budget</h3>
-                <p id="foodBudgetText">₹0 / ₹5000</p>
-              </div>
-
-              <div class="progress-bar">
-                <div class="progress food-progress"></div>
-              </div>
-            </div>
-
-            <div class="budget-card">
-              <div class="budget-info">
-                <h3>Travel Budget</h3>
-                <p id="travelBudgetText">₹0 / ₹10000</p>
-              </div>
-
-              <div class="progress-bar">
-                <div class="progress travel-progress"></div>
-              </div>
-            </div>
-
+          <div class="metric-value amount" id="totalBalance">₹15,000</div>
+          <div class="metric-footer">
+            <span class="badge badge-sapphire">Budget Limit</span>
           </div>
         </div>
 
-        <div class="section">
+        <div class="card metric-card">
+          <div class="metric-header">
+            <h3>Total Spent</h3>
+            <div class="metric-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+          </div>
+          <div class="metric-value amount text-rose" id="monthlyExpenses">₹0</div>
+          <div class="metric-footer" id="spentPercentageFooter">
+            0% used
+          </div>
+        </div>
+
+        <div class="card metric-card">
+          <div class="metric-header">
+            <h3>Money Left</h3>
+            <div class="metric-icon"><i class="fa-solid fa-vault"></i></div>
+          </div>
+          <div class="metric-value amount text-emerald" id="totalSavings">₹15,000</div>
+          <div class="metric-footer">
+            Remaining
+          </div>
+        </div>
+
+        <div class="card metric-card">
+          <div class="metric-header">
+            <h3>Daily Streak</h3>
+            <div class="metric-icon"><i class="fa-solid fa-bolt"></i></div>
+          </div>
+          <div class="metric-value" id="streakDays">1 Day</div>
+          <div class="metric-footer">
+            <span class="badge badge-amber">Streak</span>
+          </div>
+        </div>
+
+        <div class="card metric-card">
+          <div class="metric-header">
+            <h3>Level & Gems</h3>
+            <div class="metric-icon"><i class="fa-solid fa-gem"></i></div>
+          </div>
+          <div class="metric-value text-primary" id="gemsValue">0 Gems</div>
+          <div class="metric-footer">
+            <span id="levelValue">Level 1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Row 1: Ledger Table & Category Breakdown -->
+      <section class="dashboard-main-grid">
+        <!-- Recent Ledger -->
+        <div class="card">
           <div class="section-title">
-            <h2>Monthly Spending Trend</h2>
+            <h2>Recent Expenses</h2>
+            <div class="activity-header-actions">
+              <div class="table-search-box activity-search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="dashboardSearchInput" placeholder="Search...">
+              </div>
+              <a href="add-expense.html" class="btn btn-subtle activity-ledger-btn">View All</a>
+            </div>
           </div>
 
+          <!-- 1-Tap Category Filters -->
+          <div class="dashboard-category-filters">
+            <button class="cat-filter-btn active" data-cat="all">All</button>
+            <button class="cat-filter-btn" data-cat="food">Food</button>
+            <button class="cat-filter-btn" data-cat="travel">Transit</button>
+            <button class="cat-filter-btn" data-cat="shopping">Shopping</button>
+            <button class="cat-filter-btn" data-cat="education">Books</button>
+            <button class="cat-filter-btn" data-cat="other">Other</button>
+          </div>
+
+          <div id="transactionsContainer"></div>
+        </div>
+
+        <!-- Category Breakdown -->
+        <div class="card">
+          <div class="section-title">
+            <h2>Spending by Category</h2>
+          </div>
+          <div class="chart-container">
+            <canvas id="expenseChart"></canvas>
+          </div>
+          <div class="analytics-labels">
+            <div class="label-item"><span class="color food-color"></span> Food</div>
+            <div class="label-item"><span class="color travel-color"></span> Transit</div>
+            <div class="label-item"><span class="color shopping-color"></span> Shopping</div>
+            <div class="label-item"><span class="color other-color"></span> Utilities</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Row 2: Weekly Spending Trend & AI Briefing -->
+      <section class="dashboard-secondary-grid">
+        <div class="card">
+          <div class="section-title">
+            <h2>Weekly Spending Trend</h2>
+            <span class="badge badge-neutral">Mon – Sun</span>
+          </div>
           <div class="line-chart-card">
             <canvas id="lineChart"></canvas>
           </div>
         </div>
 
-      </div>
-
-    </div>
-
-    <div class="bottom-grid" id="bottomGrid">
-
-      <div class="section">
-        <div class="section-title">
-          <h2>Mood Spending Tracker</h2>
-        </div>
-
-        <div class="mood-container">
-          <div class="mood happy">😊 Happy</div>
-          <div class="mood stressed">😩 Stressed</div>
-          <div class="mood bored">😴 Bored</div>
-          <div class="mood sad">😔 Sad</div>
-        </div>
-      </div>
-
-      <div class="reward-box">
-        <div class="reward-content">
-          <h3>Rewards & Gems</h3>
-
-          <h1 id="gemsValue">0 💎</h1>
-          <p id="levelDisplay">Level 1 🎮</p>
-
-          <p class="next-level-text">Progress to Level 2</p>
-
-          <div class="reward-progress-bar">
-            <div class="reward-progress" id="rewardProgress"></div>
+        <div class="card ai-insight-box">
+          <div class="ai-insight-header">
+            <div class="ai-badge-icon"><i class="fa-solid fa-microchip"></i></div>
+            <div>
+              <h3>AI Tips & Insights</h3>
+              <small style="color: var(--text-dim);">Smart Coach</small>
+            </div>
+          </div>
+          <div class="ai-content" id="aiInsightCard" style="white-space: pre-line;">
+            Analyzing your spending records...
+          </div>
+          <div style="border-top: 1px solid var(--border-subtle); margin-top: 14px; padding-top: 10px;">
+            <div style="font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px;">Budget Alert</div>
+            <div id="alertsBox" style="font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.4;">Analyzing limits...</div>
           </div>
         </div>
-
-        <button onclick="window.location.href='rewards.html'">
-          <h3>View Rewards</h3>
-        </button>
-      </div>
-
-    </div>
-
-    <div class="bottom-ai-grid">
-
-      <div class="section">
-        <div class="section-title">
-          <h2>🤖 AI Insights</h2>
-        </div>
-
-        <div id="aiInsightCard" class="ai-insight-card">
-          Loading insights...
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">
-          <h2>🔔 Smart Alerts</h2>
-        </div>
-
-        <div class="alerts-box" id="alertsBox">
-          Loading alerts...
-        </div>
-      </div>
-
-    </div>
-
+      </section>
+    </main>
   </div>
 
+  <!-- Quick Add Expense Modal -->
+  <div class="modal-overlay" id="quickAddModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Add New Expense</h3>
+        <button class="icon-btn" onclick="closeQuickAddModal()" style="border: none;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="quickAddForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="quickTitle">Description</label>
+            <input type="text" id="quickTitle" class="form-input" placeholder="e.g. Lunch, Metro Ticket, Notebook" required>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="quickAmount">Amount (₹)</label>
+              <input type="number" id="quickAmount" class="form-input" placeholder="150" min="1" required>
+              <!-- 1-Tap Preset Additions -->
+              <div style="display: flex; gap: 4px; margin-top: 6px;">
+                <button type="button" class="preset-amt-btn" data-add="50" style="flex: 1; padding: 3px; font-size: 0.6875rem; border: 1px solid var(--border); background: var(--bg-subtle); border-radius: var(--radius-xs); cursor: pointer; color: var(--text-secondary);">+₹50</button>
+                <button type="button" class="preset-amt-btn" data-add="100" style="flex: 1; padding: 3px; font-size: 0.6875rem; border: 1px solid var(--border); background: var(--bg-subtle); border-radius: var(--radius-xs); cursor: pointer; color: var(--text-secondary);">+₹100</button>
+                <button type="button" class="preset-amt-btn" data-add="200" style="flex: 1; padding: 3px; font-size: 0.6875rem; border: 1px solid var(--border); background: var(--bg-subtle); border-radius: var(--radius-xs); cursor: pointer; color: var(--text-secondary);">+₹200</button>
+                <button type="button" class="preset-amt-btn" data-add="500" style="flex: 1; padding: 3px; font-size: 0.6875rem; border: 1px solid var(--border); background: var(--bg-subtle); border-radius: var(--radius-xs); cursor: pointer; color: var(--text-secondary);">+₹500</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="quickCategory">Category</label>
+              <select id="quickCategory" class="form-select">
+                <option value="Food">Food & Dining</option>
+                <option value="Travel">Travel & Transit</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Education">Books & Study</option>
+                <option value="Bills">Bills & Recharge</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">How are you feeling?</label>
+            <div class="modal-mood-grid">
+              <button type="button" class="mood-pill-btn active" data-mood="Happy" style="padding: 7px; border: 1px solid var(--primary); background: var(--primary-light); color: var(--primary); border-radius: var(--radius-xs); font-size: 0.8125rem; font-weight: 600; cursor: pointer;">Happy</button>
+              <button type="button" class="mood-pill-btn" data-mood="Stressed" style="padding: 7px; border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); border-radius: var(--radius-xs); font-size: 0.8125rem; font-weight: 600; cursor: pointer;">Stressed</button>
+              <button type="button" class="mood-pill-btn" data-mood="Bored" style="padding: 7px; border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); border-radius: var(--radius-xs); font-size: 0.8125rem; font-weight: 600; cursor: pointer;">Bored</button>
+              <button type="button" class="mood-pill-btn" data-mood="Sad" style="padding: 7px; border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); border-radius: var(--radius-xs); font-size: 0.8125rem; font-weight: 600; cursor: pointer;">Sad</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeQuickAddModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveQuickExpenseBtn">Add Expense</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/api.js"></script>
   <script src="../js/dashboard.js"></script>
 </body>
 </html>

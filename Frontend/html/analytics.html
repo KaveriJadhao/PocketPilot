@@ -3,72 +3,196 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Analytics - PocketPilot</title>
-
+  <title>Analytics — PocketPilot</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/sidebar.css" />
   <link rel="stylesheet" href="../css/analytics.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 <body>
 
-  <div class="sidebar">
-    <div class="logo"><i class="fa-solid fa-wallet"></i> PocketPilot</div>
-
-    <ul class="menu">
-      <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-      <li class="active"><a href="analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
-      <li><a href="voice.html"><i class="fa-solid fa-microphone"></i> Voice AI</a></li>
-      <li><a href="rewards.html"><i class="fa-solid fa-gift"></i> Rewards</a></li>
-      <li><a href="mood.html"><i class="fa-solid fa-face-smile"></i> Mood Tracker</a></li>
-      <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
-    </ul>
+  <!-- Mobile Topbar -->
+  <div class="mobile-topbar">
+    <a href="dashboard.html" class="mobile-brand">
+      <div class="logo-icon" style="width: 26px; height: 26px; font-size: 0.8rem;"><i class="fa-solid fa-layer-group"></i></div>
+      <span>PocketPilot</span>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
   </div>
 
-  <div class="main-content">
-    <div class="topbar">
-      <div>
-        <h1>Analytics 📊</h1>
-        <p>Understand where your money goes.</p>
-      </div>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="dashboard.html" class="sidebar-logo">
+        <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div>
+          <h2>PocketPilot</h2>
+          <span>Student Finance</span>
+        </div>
+      </a>
 
-      <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
-    </div>
+      <div class="menu-title">Main</div>
+      <ul class="menu">
+        <li>
+          <a href="dashboard.html">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li>
+          <a href="add-expense.html">
+            <i class="fa-solid fa-plus-circle"></i>
+            <span>Expenses</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="analytics.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="voice.html">
+            <i class="fa-solid fa-microphone"></i>
+            <span>Voice Assistant</span>
+          </a>
+        </li>
+      </ul>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Total Spending</h3>
-        <h2 id="totalSpending">₹0</h2>
-      </div>
+      <div class="menu-title">Tools & Rewards</div>
+      <ul class="menu">
+        <li>
+          <a href="rewards.html">
+            <i class="fa-solid fa-award"></i>
+            <span>Rewards Hub</span>
+          </a>
+        </li>
+        <li>
+          <a href="mood.html">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>Mood Patterns</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
 
-      <div class="card">
-        <h3>Food Spending</h3>
-        <h2 id="foodSpending">₹0</h2>
+      <div class="sidebar-user">
+        <div class="sidebar-user-info">
+          <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="User" id="userAvatar">
+          <div>
+            <h4 id="sidebarUserName">Kaveri</h4>
+            <small id="sidebarUserEmail">Student Plan</small>
+          </div>
+        </div>
+        <a href="settings.html" style="color: var(--text-muted);" title="Settings">
+          <i class="fa-solid fa-gear"></i>
+        </a>
       </div>
+    </aside>
 
-      <div class="card">
-        <h3>Travel Spending</h3>
-        <h2 id="travelSpending">₹0</h2>
-      </div>
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="analytics-header-bar">
+        <div class="topbar-left">
+          <h1>Analytics</h1>
+        </div>
 
-      <div class="card">
-        <h3>Highest Category</h3>
-        <h2 id="highestCategory">-</h2>
-      </div>
-    </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <div class="timeframe-pills">
+            <button class="timeframe-btn active" data-range="all">All Time</button>
+            <button class="timeframe-btn" data-range="month">This Month</button>
+            <button class="timeframe-btn" data-range="week">Past 7 Days</button>
+          </div>
 
-    <div class="charts-grid">
-      <div class="chart-card">
-        <h2>Category Breakdown</h2>
-        <canvas id="categoryChart"></canvas>
-      </div>
+          <button id="themeToggleBtn" class="icon-btn" title="Toggle Theme">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+          </button>
+        </div>
+      </header>
 
-      <div class="chart-card">
-        <h2>Weekly Spending Trend</h2>
-        <canvas id="weeklyChart"></canvas>
-      </div>
-    </div>
+      <!-- KPI Metric Row -->
+      <section class="analytics-kpi-grid">
+        <div class="analytics-kpi-card">
+          <div class="metric-header">
+            <h3>Total Spent</h3>
+          </div>
+          <div class="metric-value amount text-rose" id="totalSpending">₹0</div>
+          <div class="metric-footer" id="dailyBurnFooter">₹0/day avg</div>
+        </div>
+
+        <div class="analytics-kpi-card">
+          <div class="metric-header">
+            <h3>Budget Left</h3>
+          </div>
+          <div class="metric-value amount text-emerald" id="budgetVariance">100%</div>
+          <div class="metric-footer" id="remainingBudgetFooter">₹15,000 remaining</div>
+        </div>
+
+        <div class="analytics-kpi-card">
+          <div class="metric-header">
+            <h3>Estimated Month Spend</h3>
+          </div>
+          <div class="metric-value amount text-primary" id="projectedSpend">₹0</div>
+          <div class="metric-footer">Projected</div>
+        </div>
+
+        <div class="analytics-kpi-card">
+          <div class="metric-header">
+            <h3>Highest Spending</h3>
+          </div>
+          <div class="metric-value" id="highestCategory" style="font-size: 1.25rem; font-weight: 700;">None</div>
+          <div class="metric-footer" id="highestCategoryPct">0% of spend</div>
+        </div>
+      </section>
+
+      <!-- Charts & Breakdown Grid -->
+      <section class="analytics-charts-grid">
+        <!-- Daily Spend Velocity Line Chart -->
+        <div class="card">
+          <div class="section-title">
+            <h2>Daily Spending Trend</h2>
+            <span class="badge badge-neutral">Mon – Sun</span>
+          </div>
+          <div style="height: 250px; position: relative; margin-top: 10px;">
+            <canvas id="weeklyChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Category Doughnut Matrix -->
+        <div class="card">
+          <div class="section-title">
+            <h2>Spending by Category</h2>
+          </div>
+          <div style="height: 180px; position: relative; margin: 8px 0;">
+            <canvas id="categoryChart"></canvas>
+          </div>
+          <div class="category-bars-list" id="categoryListContainer"></div>
+        </div>
+      </section>
+
+      <!-- Category Comparison Data Table -->
+      <section class="card">
+        <div class="section-title">
+          <h2>Category Spending Details</h2>
+        </div>
+        <div class="ledger-table-wrapper" id="categoryTableWrapper"></div>
+      </section>
+    </main>
   </div>
+
+  <div id="toast" class="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/api.js"></script>
   <script src="../js/analytics.js"></script>
 </body>
 </html>

@@ -3,137 +3,203 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Add Expense - PocketPilot</title>
-
+  <title>Expenses — PocketPilot</title>
+  <link rel="stylesheet" href="../css/variables.css"/>
+  <link rel="stylesheet" href="../css/typography.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/sidebar.css"/>
   <link rel="stylesheet" href="../css/add-expense.css"/>
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 
 <body>
 
-  <div class="container">
+  <!-- Mobile Topbar -->
+  <div class="mobile-topbar">
+    <a href="dashboard.html" class="mobile-brand">
+      <div class="logo-icon" style="width: 26px; height: 26px; font-size: 0.8rem;"><i class="fa-solid fa-layer-group"></i></div>
+      <span>PocketPilot</span>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
 
-    <!-- LEFT SIDE -->
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="dashboard.html" class="sidebar-logo">
+        <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div>
+          <h2>PocketPilot</h2>
+          <span>Student Finance</span>
+        </div>
+      </a>
 
-    <div class="left-section">
+      <div class="menu-title">Main</div>
+      <ul class="menu">
+        <li>
+          <a href="dashboard.html">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="add-expense.html">
+            <i class="fa-solid fa-plus-circle"></i>
+            <span>Expenses</span>
+          </a>
+        </li>
+        <li>
+          <a href="analytics.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="voice.html">
+            <i class="fa-solid fa-microphone"></i>
+            <span>Voice Assistant</span>
+          </a>
+        </li>
+      </ul>
 
-      <div class="logo">
-        <i class="fa-solid fa-wallet"></i>
-        PocketPilot
+      <div class="menu-title">Tools & Rewards</div>
+      <ul class="menu">
+        <li>
+          <a href="rewards.html">
+            <i class="fa-solid fa-award"></i>
+            <span>Rewards Hub</span>
+          </a>
+        </li>
+        <li>
+          <a href="mood.html">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>Mood Patterns</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-user">
+        <div class="sidebar-user-info">
+          <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="User" id="userAvatar">
+          <div>
+            <h4 id="sidebarUserName">Kaveri</h4>
+            <small id="sidebarUserEmail">Student Plan</small>
+          </div>
+        </div>
+        <a href="settings.html" style="color: var(--text-muted);" title="Settings">
+          <i class="fa-solid fa-gear"></i>
+        </a>
       </div>
+    </aside>
 
-      <h1>Add New Expense 💸</h1>
-
-      <p>
-        Track your spending smartly and let AI analyze your habits.
-      </p>
-
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png"
-        alt="expense"
-      />
-
-    </div>
-
-    <!-- RIGHT SIDE -->
-
-    <div class="right-section">
-
-      <form id="expenseForm">
-
-        <div class="input-group">
-          <label>Expense Title</label>
-          <input
-            type="text"
-            id="title"
-            placeholder="Example: Pizza"
-            required
-          />
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1>Expenses</h1>
         </div>
 
-        <div class="input-group">
-          <label>Amount</label>
-          <input
-            type="number"
-            id="amount"
-            placeholder="Enter amount"
-            required
-          />
+        <div class="topbar-buttons">
+          <button id="themeToggleBtn" class="icon-btn" title="Toggle Theme">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+          </button>
+          <a href="dashboard.html" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Overview
+          </a>
+        </div>
+      </header>
+
+      <div class="expense-page-grid">
+        <!-- Entry Form -->
+        <div class="card">
+          <h2 style="margin-bottom: 16px;">Add New Expense</h2>
+
+          <form id="expenseForm">
+            <div class="form-group">
+              <label class="form-label" for="title">Item Name / Description</label>
+              <input type="text" id="title" class="form-input" placeholder="e.g. Canteen Lunch, Books, Bus Pass" required />
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="amount">Amount (₹)</label>
+                <input type="number" id="amount" class="form-input" placeholder="150" min="1" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="category">Category</label>
+                <select id="category" class="form-select">
+                  <option value="Food">Food & Dining</option>
+                  <option value="Travel">Travel & Transit</option>
+                  <option value="Shopping">Shopping</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Education">Books & Study</option>
+                  <option value="Bills">Bills & Recharge</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">How are you feeling?</label>
+              <div class="mood-selector">
+                <button type="button" class="mood-btn active" data-mood="Happy">Happy</button>
+                <button type="button" class="mood-btn" data-mood="Stressed">Stressed</button>
+                <button type="button" class="mood-btn" data-mood="Bored">Bored</button>
+                <button type="button" class="mood-btn" data-mood="Sad">Sad</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="expenseDate">Date</label>
+              <input type="date" id="expenseDate" class="form-input"/>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+              <i class="fa-solid fa-check"></i> Add Expense
+            </button>
+          </form>
         </div>
 
-        <div class="input-group">
-          <label>Category</label>
+        <!-- Ledger History with Instant Search & Sorting -->
+        <div class="card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h2>Expense History</h2>
+              <small id="expenseCountText" class="badge badge-neutral">0 entries</small>
+            </div>
 
-          <select id="category">
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <div class="table-search-box" style="width: 140px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="expenseSearchInput" placeholder="Search...">
+              </div>
 
-            <option>Food</option>
-            <option>Travel</option>
-            <option>Shopping</option>
-            <option>Entertainment</option>
-            <option>Education</option>
-            <option>Bills</option>
-
-          </select>
-
-        </div>
-
-        <!-- MOOD -->
-
-        <div class="input-group">
-
-          <label>Select Mood</label>
-
-          <div class="moods">
-
-            <div class="mood">😊 Happy</div>
-
-            <div class="mood">😩 Stressed</div>
-
-            <div class="mood">😴 Bored</div>
-
-            <div class="mood">😔 Sad</div>
-
+              <select id="expenseSortSelect" class="form-select" style="width: auto; padding: 6px 10px; font-size: 0.75rem;">
+                <option value="newest">Newest</option>
+                <option value="highest">Highest</option>
+                <option value="lowest">Lowest</option>
+              </select>
+            </div>
           </div>
 
+          <div id="expenseContainer" class="expense-feed-list"></div>
         </div>
-
-        <!-- IMAGE -->
-
-        <div class="input-group">
-
-          <label>Upload Receipt</label>
-
-          <input type="file" id="receipt"/>
-
-        </div>
-
-        <button type="submit">
-          Save Expense
-        </button>
-
-      </form>
-
-      <!-- EXPENSE LIST -->
-
-      <div class="expense-list">
-
-        <h2>Recent Expenses</h2>
-
-        <div id="expenseContainer"></div>
-
       </div>
-
-    </div>
-
+    </main>
   </div>
-  <div id="toast" class="toast">
-    ✅ Expense Added Successfully
-</div>
-  <script src="../js/add-expense.js"></script>
 
+  <div id="toast" class="toast"></div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/add-expense.js"></script>
 </body>
 </html>

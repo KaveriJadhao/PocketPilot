@@ -1,85 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Settings - PocketPilot</title>
-
-<link rel="stylesheet" href="../css/settings.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — PocketPilot</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/typography.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/settings.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-<div class="sidebar">
+  <!-- Mobile Topbar -->
+  <div class="mobile-topbar">
+    <a href="dashboard.html" class="mobile-brand">
+      <div class="logo-icon" style="width: 26px; height: 26px; font-size: 0.8rem;"><i class="fa-solid fa-layer-group"></i></div>
+      <span>PocketPilot</span>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
 
-    <div class="logo">
-        <i class="fa-solid fa-wallet"></i>
-        PocketPilot
-    </div>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="dashboard.html" class="sidebar-logo">
+        <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div>
+          <h2>PocketPilot</h2>
+          <span>Student Finance</span>
+        </div>
+      </a>
 
-    <ul class="menu">
-
-        <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-
-        <li><a href="analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
-
-        <li><a href="voice.html"><i class="fa-solid fa-microphone"></i> Voice AI</a></li>
-
-        <li><a href="rewards.html"><i class="fa-solid fa-gift"></i> Rewards</a></li>
-
-        <li><a href="mood.html"><i class="fa-solid fa-face-smile"></i> Mood Tracker</a></li>
-
-        <li class="active">
-            <a href="settings.html">
-                <i class="fa-solid fa-gear"></i>
-                Settings
-            </a>
+      <div class="menu-title">Main</div>
+      <ul class="menu">
+        <li>
+          <a href="dashboard.html">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+          </a>
         </li>
+        <li>
+          <a href="add-expense.html">
+            <i class="fa-solid fa-plus-circle"></i>
+            <span>Expenses</span>
+          </a>
+        </li>
+        <li>
+          <a href="analytics.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="voice.html">
+            <i class="fa-solid fa-microphone"></i>
+            <span>Voice Assistant</span>
+          </a>
+        </li>
+      </ul>
 
-    </ul>
+      <div class="menu-title">Tools & Rewards</div>
+      <ul class="menu">
+        <li>
+          <a href="rewards.html">
+            <i class="fa-solid fa-award"></i>
+            <span>Rewards Hub</span>
+          </a>
+        </li>
+        <li>
+          <a href="mood.html">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>Mood Patterns</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="settings.html">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
 
-</div>
+      <div class="sidebar-user">
+        <div class="sidebar-user-info">
+          <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="User" id="userAvatar">
+          <div>
+            <h4 id="sidebarUserName">Kaveri</h4>
+            <small id="sidebarUserEmail">Student Plan</small>
+          </div>
+        </div>
+        <a href="settings.html" style="color: var(--text-muted);" title="Settings">
+          <i class="fa-solid fa-gear"></i>
+        </a>
+      </div>
+    </aside>
 
-<div class="main-content">
-
-    <h1>Settings ⚙️</h1>
-
-    <div class="settings-card">
-
-        <label>User Name</label>
-        <input type="text" id="userName" placeholder="Enter your name">
-
-        <label>Monthly Budget</label>
-        <input type="number" id="budget" placeholder="5000">
-
-        <label>Savings Goal</label>
-        <input type="number" id="goal" placeholder="10000">
-
-        <div class="toggle-row">
-            <span>Dark Mode</span>
-            <input type="checkbox" id="darkToggle">
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1>Settings</h1>
         </div>
 
-        <div class="toggle-row">
-            <span>Notifications</span>
-            <input type="checkbox" id="notifyToggle">
+        <div class="topbar-buttons">
+          <button id="themeToggleBtn" class="icon-btn" title="Toggle Theme">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+          </button>
+          <a href="dashboard.html" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Overview
+          </a>
         </div>
+      </header>
 
-        <button id="saveBtn">
-            Save Settings
-        </button>
-        <button id="resetBtn" class="reset-btn">
-    Reset All Data
-</button>
+      <div class="settings-container-grid">
+        <!-- Settings Side Tab Navigation -->
+        <nav class="settings-nav">
+          <button class="settings-nav-btn active" data-tab="tab-profile">
+            <i class="fa-solid fa-user"></i> Profile & Limits
+          </button>
+          <button class="settings-nav-btn" data-tab="tab-system">
+            <i class="fa-solid fa-sliders"></i> Appearance
+          </button>
+          <button class="settings-nav-btn" data-tab="tab-data">
+            <i class="fa-solid fa-database"></i> Backup & Export
+          </button>
+          <button class="settings-nav-btn" data-tab="tab-danger">
+            <i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-rose);"></i> Danger Zone
+          </button>
+        </nav>
 
-    </div>
+        <!-- Settings Content Panes -->
+        <div class="settings-content-pane">
+          <!-- Pane 1: Profile & Budget Limits -->
+          <div class="card settings-pane" id="tab-profile">
+            <div class="settings-card-header">
+              <h3>Profile & Budget</h3>
+            </div>
 
-</div>
+            <div class="form-group">
+              <label class="form-label">Profile Avatar</label>
+              <div class="avatar-picker-grid">
+                <div class="avatar-option active" data-seed="KaveriPilot">
+                  <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="Pilot">
+                </div>
+                <div class="avatar-option" data-seed="ScholarAlex">
+                  <img src="../assets/avatars/avatar-2.svg" onerror="this.src='../assets/avatar.png'" alt="Scholar">
+                </div>
+                <div class="avatar-option" data-seed="FinanceGenius">
+                  <img src="../assets/avatars/avatar-3.svg" onerror="this.src='../assets/avatar.png'" alt="Finance">
+                </div>
+                <div class="avatar-option" data-seed="PilotNova">
+                  <img src="../assets/avatars/avatar-4.svg" onerror="this.src='../assets/avatar.png'" alt="Nova">
+                </div>
+              </div>
+            </div>
 
-<script src="../js/settings.js"></script>
+            <div class="form-group">
+              <label class="form-label" for="userName">Full Name</label>
+              <input type="text" id="userName" class="form-input" placeholder="e.g. Kaveri">
+            </div>
 
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="budget">Monthly Budget (₹)</label>
+                <input type="number" id="budget" class="form-input" placeholder="15000">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="goal">Monthly Savings Goal (₹)</label>
+                <input type="number" id="goal" class="form-input" placeholder="5000">
+              </div>
+            </div>
+
+            <button id="saveBtn" class="btn btn-primary" style="margin-top: 6px;">
+              <i class="fa-solid fa-check"></i> Save Changes
+            </button>
+          </div>
+
+          <!-- Pane 2: Appearance & Alerts -->
+          <div class="card settings-pane" id="tab-system">
+            <div class="settings-card-header">
+              <h3>App Settings</h3>
+            </div>
+
+            <div class="toggle-row">
+              <div class="toggle-label">
+                <h4>Dark Mode</h4>
+                <small>Switch between light and dark theme</small>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="darkToggle">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="toggle-row">
+              <div class="toggle-label">
+                <h4>Budget Alerts</h4>
+                <small>Get notified when spending gets high</small>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="notifyToggle">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pane 3: Backup & Export -->
+          <div class="card settings-pane" id="tab-data">
+            <div class="settings-card-header">
+              <h3>Download My Data</h3>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button id="exportJsonBtn" class="btn btn-secondary">
+                <i class="fa-solid fa-file-code"></i> Download JSON
+              </button>
+              <button id="exportCsvSettingsBtn" class="btn btn-secondary">
+                <i class="fa-solid fa-file-csv"></i> Download CSV
+              </button>
+            </div>
+          </div>
+
+          <!-- Pane 4: Danger Zone -->
+          <div class="card settings-pane" id="tab-danger" style="border-color: var(--accent-rose-border); background: var(--accent-rose-light);">
+            <div class="settings-card-header" style="border-bottom-color: var(--accent-rose-border);">
+              <h3 style="color: var(--accent-rose);">Reset Account</h3>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button id="resetBtn" class="btn btn-danger">
+                <i class="fa-solid fa-trash-can"></i> Reset All Expenses
+              </button>
+              <button id="logoutBtn" class="btn btn-secondary">
+                <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/settings.js"></script>
 </body>
 </html>
