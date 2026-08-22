@@ -78,19 +78,28 @@ Keep each line under 15 words. Mention rupee amounts in ₹.`,
 
       const insight = completion.choices[0]?.message?.content;
       if (insight) {
-        return res.json({ insight });
+        return res.json({ insight, advice: insight });
       }
-      return res.json({ insight: generateLocalInsights(expenses) });
+      const localInsight = generateLocalInsights(expenses);
+      return res.json({ insight: localInsight, advice: localInsight });
     } catch (groqError) {
       console.warn("Groq API error (falling back to smart local insights):", groqError.message);
-      return res.json({ insight: generateLocalInsights(expenses) });
+      const localInsight = generateLocalInsights(expenses);
+      return res.json({ insight: localInsight, advice: localInsight });
     }
   } catch (error) {
     console.error("AI Route Error:", error);
+    const fallbackInsight = "📊 Spending: Spending analysis in progress.\n😊 Mood: Keep logging your purchases.\n💡 Tip: Review weekly totals to stay under budget.";
     res.status(500).json({
-      insight: "📊 Spending: Spending analysis in progress.\n😊 Mood: Keep logging your purchases.\n💡 Tip: Review weekly totals to stay under budget.",
+      insight: fallbackInsight,
+      advice: fallbackInsight,
     });
   }
+});
+
+router.get("/advice", (req, res, next) => {
+  req.url = "/insights";
+  router.handle(req, res, next);
 });
 
 module.exports = router;
