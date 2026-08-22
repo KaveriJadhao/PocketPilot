@@ -24,7 +24,44 @@
       "level": 1,
       "theme": "light",
       "createdAt": "2026-08-22T17:00:02.000Z"
+    },
+    {
+      "_id": "user_1787418555172",
+      "name": "AI Tester",
+      "email": "aitest_1787418555046@college.edu",
+      "password": "$2b$10$hgb12S6JO5GNJPxNJDsy2O3m9Wvjvdx.bbQJepCEJ20loZbAN5He2",
+      "monthlyBudget": 15000,
+      "savingsGoal": 5000,
+      "streak": 1,
+      "gems": 3,
+      "level": 1,
+      "theme": "light",
+      "createdAt": "2026-08-22T17:09:15.172Z"
+    },
+    {
+      "_id": "user_1787419115236",
+      "name": "Tanvi Deshmukh",
+      "email": "final_audit_1787419115109@campus.edu",
+      "password": "$2b$10$7sQ3cwMPAbqfYoubfku.XuefyuW/CpOrON4ne3LOjp1w/V7Tt9lFq",
+      "monthlyBudget": 14000,
+      "savingsGoal": 4000,
+      "streak": 1,
+      "gems": 3,
+      "level": 1,
+      "theme": "light",
+      "createdAt": "2026-08-22T17:18:35.236Z"
     }
   ],
-  "expenses": []
+  "expenses": [
+    {
+      "_id": "exp_1787418555190_y2qi",
+      "title": "Canteen Burger",
+      "amount": 150,
+      "category": "Food",
+      "mood": "Happy",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T17:09:15.190Z",
+      "userId": "user_1787418555172"
+    }
+  ]
 }
