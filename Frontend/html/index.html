@@ -17,20 +17,23 @@
   <!-- NAVBAR -->
   <header class="navbar">
     <a href="index.html" class="nav-brand">
-      <div class="logo-icon" style="width: 32px; height: 32px; font-size: 0.95rem;">
+      <div class="logo-icon">
         <i class="fa-solid fa-layer-group"></i>
       </div>
       <span>PocketPilot</span>
     </a>
 
     <ul class="nav-links">
-      <li><a href="#capabilities">Features</a></li>
+      <li><a href="#features">Features</a></li>
       <li><a href="analytics.html">Analytics</a></li>
-      <li><a href="voice.html">Voice</a></li>
+      <li><a href="voice.html">Voice AI</a></li>
       <li><a href="rewards.html">Rewards</a></li>
     </ul>
 
-    <div style="display: flex; gap: 10px; align-items: center;">
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggleBtn" title="Toggle Theme" style="margin-right: 4px;">
+        <i class="fa-solid fa-moon"></i>
+      </button>
       <a href="login.html" class="btn btn-secondary">Sign In</a>
       <a href="signup.html" class="btn btn-primary">Get Started</a>
     </div>
@@ -40,12 +43,12 @@
   <main>
     <section class="hero">
       <div class="hero-left">
-        <div class="badge badge-sapphire" style="margin-bottom: 16px;">
-          Smart Money Tracker for Students
+        <div class="badge badge-sapphire" style="margin-bottom: 18px; padding: 6px 12px; font-size: 0.8125rem;">
+          <i class="fa-solid fa-sparkles"></i> Smart Money Tracker for Students
         </div>
 
         <h1>
-          Simple money tracking for college students
+          Simple money tracking for <span class="gradient-text">college students</span>
         </h1>
 
         <p>
@@ -53,48 +56,58 @@
         </p>
 
         <div class="hero-cta">
-          <a href="signup.html" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.95rem;">
+          <a href="signup.html" class="btn btn-primary" style="padding: 13px 26px; font-size: 0.95rem;">
             <i class="fa-solid fa-arrow-right"></i> Create Free Account
           </a>
-          <a href="dashboard.html" class="btn btn-secondary" style="padding: 12px 20px; font-size: 0.95rem;">
+          <a href="dashboard.html" class="btn btn-secondary" style="padding: 13px 22px; font-size: 0.95rem;">
             <i class="fa-solid fa-desktop"></i> Try Live Demo
           </a>
         </div>
       </div>
 
+      <!-- Live Hero Visual Card Stack -->
       <div class="hero-visual-stack">
-        <div class="hero-float-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Money Left to Spend</span>
+        <!-- 1. Money Left Card -->
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span class="hero-card-label">Money Left to Spend</span>
             <span class="badge badge-emerald">+18.4% Saved</span>
           </div>
-          <div class="amount text-emerald" style="font-size: 2rem;">₹4,250.00</div>
-          <p style="font-size: 0.8125rem; margin-top: 2px;">Remaining from your ₹15,000 monthly budget</p>
+          <div class="hero-card-amount text-emerald">₹4,250.00</div>
+          <div class="progress-bar" style="margin-top: 10px; height: 6px;">
+            <div class="progress-fill" style="width: 72%;"></div>
+          </div>
+          <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 8px;">Remaining from your ₹15,000 monthly allowance</p>
         </div>
 
-        <div class="hero-float-card" style="margin-left: 20px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Daily Streak</span>
-            <span class="badge badge-amber">12 Days in a Row</span>
+        <!-- 2. Daily Streak & Gems Card -->
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span class="hero-card-label">Daily Streak & Tier</span>
+            <span class="badge badge-amber"><i class="fa-solid fa-fire"></i> 12 Days in a Row</span>
           </div>
-          <div style="font-size: 1.15rem; font-weight: 700;">Level 3 Student Tier</div>
-          <small style="color: var(--text-muted);">150 gems earned • 3 discount coupons active</small>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px;">
+            <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary);">Level 3 Student Tier</div>
+            <div style="font-size: 0.875rem; font-weight: 700; color: var(--accent-amber);"><i class="fa-solid fa-gem"></i> 150 Gems</div>
+          </div>
+          <small style="color: var(--text-muted); display: block; margin-top: 4px;">3 food discount coupons ready to claim</small>
         </div>
 
-        <div class="hero-float-card" style="border-left: 3px solid var(--primary);">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-            <i class="fa-solid fa-microchip" style="color: var(--primary);"></i>
-            <strong style="font-size: 0.8125rem; color: var(--text-primary);">Smart AI Tip</strong>
+        <!-- 3. AI Insights Tip Card -->
+        <div class="hero-card" style="border-left: 3px solid var(--primary);">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <i class="fa-solid fa-brain" style="color: var(--primary); font-size: 0.95rem;"></i>
+            <strong style="font-size: 0.8125rem; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.05em;">Smart AI Tip</strong>
           </div>
-          <p style="font-size: 0.875rem; color: var(--text-secondary);">
+          <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
             "Spending ₹100 or less per canteen meal will help you save ₹1,500 this month."
           </p>
         </div>
       </div>
     </section>
 
-    <!-- CAPABILITIES -->
-    <section class="features-section" id="capabilities">
+    <!-- CAPABILITIES / FEATURES -->
+    <section class="features-section" id="features">
       <div class="features-header">
         <h2>Everything you need to manage your pocket money</h2>
         <p>Simple tools to help you track expenses, save more, and build great money habits.</p>
@@ -102,43 +115,59 @@
 
       <div class="features-grid">
         <div class="feature-box">
-          <div class="feature-icon-wrapper">
+          <div class="feature-icon-wrapper" style="background: var(--primary-light); color: var(--primary);">
             <i class="fa-solid fa-microphone"></i>
           </div>
           <h3>Quick Voice Logging</h3>
           <p>
-            Just speak to add expenses. PocketPilot automatically understands the amount and category.
+            Just speak to add expenses. PocketPilot automatically understands the amount and category in seconds.
           </p>
         </div>
 
         <div class="feature-box">
-          <div class="feature-icon-wrapper">
+          <div class="feature-icon-wrapper" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
             <i class="fa-solid fa-chart-pie"></i>
           </div>
           <h3>Spending & Budget Trends</h3>
           <p>
-            See where your money goes with simple charts, weekly trends, and easy export.
+            See where your money goes with simple charts, weekly category trends, and instant statement export.
           </p>
         </div>
 
         <div class="feature-box">
-          <div class="feature-icon-wrapper">
-            <i class="fa-solid fa-award"></i>
+          <div class="feature-icon-wrapper" style="background: var(--accent-amber-light); color: var(--accent-amber);">
+            <i class="fa-solid fa-gift"></i>
           </div>
           <h3>Daily Rewards & Coupons</h3>
           <p>
-            Earn gems for tracking your expenses daily and unlock real food and book discounts.
+            Earn gems for tracking your expenses daily and unlock real food and study book discount coupons.
           </p>
         </div>
 
         <div class="feature-box">
-          <div class="feature-icon-wrapper">
+          <div class="feature-icon-wrapper" style="background: var(--accent-rose-light); color: var(--accent-rose);">
             <i class="fa-solid fa-heart-pulse"></i>
           </div>
           <h3>Mood & Spending Habits</h3>
           <p>
-            Learn how your mood affects your spending and cut down on impulse shopping.
+            Learn how your mood affects your spending and cut down on impulse shopping with emotional insights.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+      <div class="cta-banner-inner">
+        <h2>Ready to take control of your pocket money?</h2>
+        <p>Join thousands of college students building better savings habits with PocketPilot.</p>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <a href="signup.html" class="btn btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
+            <i class="fa-solid fa-rocket"></i> Get Started Free
+          </a>
+          <a href="dashboard.html" class="btn btn-secondary" style="padding: 12px 22px; font-size: 0.95rem;">
+            <i class="fa-solid fa-arrow-right"></i> Explore Dashboard
+          </a>
         </div>
       </div>
     </section>
@@ -146,8 +175,19 @@
 
   <!-- FOOTER -->
   <footer class="landing-footer">
-    <p>© 2026 PocketPilot. Simple money tracking made for college students.</p>
+    <p>© 2026 PocketPilot. Simple money tracking engineered for college students.</p>
   </footer>
 
+  <script src="../js/api.js"></script>
+  <script>
+    const themeBtn = document.getElementById("themeToggleBtn");
+    if (themeBtn) {
+      themeBtn.addEventListener("click", () => {
+        api.toggleTheme();
+        const isDark = document.body.classList.contains("dark");
+        themeBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+      });
+    }
+  </script>
 </body>
 </html>
