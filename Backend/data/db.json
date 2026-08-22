@@ -128,9 +128,55 @@
       "level": 1,
       "theme": "light",
       "createdAt": "2026-08-22T15:01:31.388Z"
+    },
+    {
+      "_id": "user_1787416793842",
+      "name": "Alex Johnson",
+      "email": "alex_1787416793594@university.edu",
+      "password": "$2b$10$Pn3pWQVKVkb8aOvaGTs1Fu3zYcB592dNjvNRGqo6UG9a3HnvAtvRO",
+      "monthlyBudget": 12000,
+      "savingsGoal": 5000,
+      "streak": 1,
+      "gems": 6,
+      "level": 1,
+      "theme": "light",
+      "createdAt": "2026-08-22T16:39:53.842Z"
+    },
+    {
+      "_id": "user_1787416794027",
+      "name": "Priya Patel",
+      "email": "priya_1787416793913@university.edu",
+      "password": "$2b$10$fsdi3cNlCrZLTSq6NDvdiezNdz/4XJk0hqSlsHWLbr4VY217y.aGK",
+      "monthlyBudget": 20000,
+      "savingsGoal": 5000,
+      "streak": 1,
+      "gems": 0,
+      "level": 1,
+      "theme": "light",
+      "createdAt": "2026-08-22T16:39:54.027Z"
     }
   ],
   "expenses": [
+    {
+      "_id": "exp_1787416793893_8k95",
+      "title": "Alex Books",
+      "amount": 400,
+      "category": "Education",
+      "mood": "Neutral",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T16:39:53.893Z",
+      "userId": "user_1787416793842"
+    },
+    {
+      "_id": "exp_1787416793876_tsz9",
+      "title": "Alex Lunch",
+      "amount": 120,
+      "category": "Food",
+      "mood": "Happy",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T16:39:53.876Z",
+      "userId": "user_1787416793842"
+    },
     {
       "_id": "exp_1787410891307_061p",
       "title": "Alex Books",

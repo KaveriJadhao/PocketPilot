@@ -27,12 +27,33 @@ presetPills.forEach((pill) => {
   });
 });
 
+// Pre-fill user data on load
+document.addEventListener("DOMContentLoaded", () => {
+  const userData = api.getUserData() || {};
+  const currentName = userData.name || localStorage.getItem("userName") || "";
+  const nameInput = document.getElementById("name");
+  if (nameInput && currentName) {
+    nameInput.value = currentName;
+  }
+  const currentBudget = userData.monthlyBudget || localStorage.getItem("monthlyBudget") || "";
+  const budgetInput = document.getElementById("budget");
+  if (budgetInput && currentBudget) {
+    budgetInput.value = currentBudget;
+  }
+  const currentGoal = userData.savingsGoal || localStorage.getItem("savingsGoal") || "";
+  const goalInput = document.getElementById("goal");
+  if (goalInput && currentGoal) {
+    goalInput.value = currentGoal;
+  }
+});
+
 // Form Submission
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById("name").value.trim() || "Kaveri";
+    const userData = api.getUserData() || {};
+    const name = document.getElementById("name").value.trim() || userData.name || localStorage.getItem("userName") || "Student";
     const budget = Number(document.getElementById("budget").value) || 15000;
     const goal = Number(document.getElementById("goal").value) || 5000;
     const submitBtn = document.getElementById("submitBtn");
