@@ -8,8 +8,21 @@ const { requireAuth, JWT_SECRET } = require("../middleware/auth");
 const router = express.Router();
 
 // Generate JWT Helper
-const generateToken = (userId) => {
-  return jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: "30d" });
+const generateToken = (user) => {
+  return jwt.sign(
+    {
+      id: user._id || user.id,
+      name: user.name,
+      email: user.email,
+      monthlyBudget: user.monthlyBudget,
+      savingsGoal: user.savingsGoal,
+      streak: user.streak || 1,
+      gems: user.gems || 0,
+      level: user.level || 1,
+    },
+    JWT_SECRET,
+    { expiresIn: "30d" }
+  );
 };
 
 /* POST /api/auth/register */
@@ -38,7 +51,7 @@ router.post("/register", async (req, res) => {
         savingsGoal: Number(savingsGoal) || 5000,
       });
 
-      const token = generateToken(user._id);
+      const token = generateToken(user);
       return res.status(201).json({
         message: "Account created successfully",
         token,
@@ -69,7 +82,7 @@ router.post("/register", async (req, res) => {
       savingsGoal: Number(savingsGoal) || 5000,
     });
 
-    const token = generateToken(user._id);
+    const token = generateToken(user);
     res.status(201).json({
       message: "Account created successfully",
       token,
@@ -115,7 +128,7 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    const token = generateToken(user._id);
+    const token = generateToken(user);
 
     res.json({
       message: "Login successful",
@@ -143,7 +156,7 @@ router.get("/me", requireAuth, async (req, res) => {
   try {
     res.json({
       user: {
-        id: req.user._id,
+        id: req.user._id || req.user.id,
         name: req.user.name,
         email: req.user.email,
         monthlyBudget: req.user.monthlyBudget,
@@ -162,21 +175,30 @@ router.get("/me", requireAuth, async (req, res) => {
 /* POST /api/auth/guest */
 router.post("/guest", async (req, res) => {
   try {
-    let guest = null;
+    let guest = {
+      _id: "guest_" + Date.now(),
+      name: "Guest Student",
+      monthlyBudget: 15000,
+      savingsGoal: 5000,
+      streak: 1,
+      gems: 0,
+      level: 1,
+    };
+
     if (storage.isMongoConnected()) {
-      guest = await User.findOne({ email: { $exists: false } });
-      if (!guest) {
+      const dbGuest = await User.findOne({ email: { $exists: false } });
+      if (dbGuest) {
+        guest = dbGuest;
+      } else {
         guest = await User.create({
-          name: "Kaveri",
+          name: "Guest Student",
           monthlyBudget: 15000,
           savingsGoal: 5000,
         });
       }
-    } else {
-      guest = storage.getUser();
     }
 
-    const token = generateToken(guest._id);
+    const token = generateToken(guest);
 
     res.json({
       message: "Guest session ready",

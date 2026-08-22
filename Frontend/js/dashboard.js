@@ -45,9 +45,28 @@ function getGreeting(name) {
 }
 
 async function loadUserData() {
-  const user = await api.getUser();
-  const userName = user.name || localStorage.getItem("userName") || "Student";
-  const email = user.email || "Student Account";
+  const cachedUser = api.getUserData() || {};
+  let user = await api.getUser();
+
+  // Prioritize the actual authenticated user's name and budget
+  const userName = (user && user.name && user.name !== "Student" && user.name !== "Guest Student" && user.name !== "Kaveri")
+    ? user.name
+    : (cachedUser.name || localStorage.getItem("userName") || (user ? user.name : "Student"));
+
+  const email = (user && user.email && user.email !== "student@university.edu" && user.email !== "guest@university.edu")
+    ? user.email
+    : (cachedUser.email || localStorage.getItem("userEmail") || (user && user.email ? user.email : "Student Account"));
+
+  const budget = Number(user && user.monthlyBudget) || Number(cachedUser.monthlyBudget) || Number(localStorage.getItem("monthlyBudget")) || 15000;
+  const savingsGoal = Number(user && user.savingsGoal) || Number(cachedUser.savingsGoal) || Number(localStorage.getItem("savingsGoal")) || 5000;
+
+  user = {
+    ...user,
+    name: userName,
+    email: email,
+    monthlyBudget: budget,
+    savingsGoal: savingsGoal,
+  };
 
   const greetingEl = document.getElementById("dashboardGreeting");
   if (greetingEl) greetingEl.innerText = getGreeting(userName);
