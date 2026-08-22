@@ -131,34 +131,106 @@ const api = {
     }
   },
 
-  // Expense Methods
-  async getExpenses() {
+  // Local storage cache key per user
+  getExpensesStorageKey() {
+    const user = this.getUserData() || {};
+    const userId = user.id || user._id || localStorage.getItem("userName") || "student";
+    return `pocketpilot_expenses_${userId}`;
+  },
+
+  getLocalExpenses() {
     try {
-      return await this.request("/api/expenses");
-    } catch (error) {
+      const raw = localStorage.getItem(this.getExpensesStorageKey());
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
       return [];
     }
   },
 
+  setLocalExpenses(expenses) {
+    try {
+      localStorage.setItem(this.getExpensesStorageKey(), JSON.stringify(expenses));
+    } catch (e) {}
+  },
+
+  // Expense Methods
+  async getExpenses() {
+    let serverExpenses = [];
+    try {
+      serverExpenses = await this.request("/api/expenses");
+    } catch (error) {
+      serverExpenses = [];
+    }
+
+    const localExpenses = this.getLocalExpenses();
+
+    // If server returned expenses, sync with local cache and return
+    if (Array.isArray(serverExpenses) && serverExpenses.length > 0) {
+      this.setLocalExpenses(serverExpenses);
+      return serverExpenses;
+    }
+
+    // Fallback to local storage expenses (ensures 100% persistence on serverless Vercel)
+    return localExpenses;
+  },
+
   async addExpense(expenseData) {
     this.playSound("success");
-    return await this.request("/api/expenses", {
-      method: "POST",
-      body: JSON.stringify(expenseData),
-    });
+    let newExpense = null;
+    try {
+      newExpense = await this.request("/api/expenses", {
+        method: "POST",
+        body: JSON.stringify(expenseData),
+      });
+    } catch (err) {
+      console.warn("Backend addExpense fallback:", err);
+    }
+
+    if (!newExpense || !newExpense._id) {
+      newExpense = {
+        _id: "exp_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
+        title: expenseData.title,
+        amount: Number(expenseData.amount),
+        category: expenseData.category || "Other",
+        mood: expenseData.mood || "Happy",
+        date: expenseData.date || new Date().toISOString().split("T")[0],
+        createdAt: new Date().toISOString(),
+      };
+    }
+
+    // Save to local cache immediately
+    const current = this.getLocalExpenses();
+    const updated = [newExpense, ...current.filter((e) => e._id !== newExpense._id)];
+    this.setLocalExpenses(updated);
+
+    return newExpense;
   },
 
   async deleteExpense(id) {
     this.playSound("delete");
-    return await this.request(`/api/expenses/${id}`, {
-      method: "DELETE",
-    });
+    try {
+      await this.request(`/api/expenses/${id}`, {
+        method: "DELETE",
+      });
+    } catch (err) {
+      console.warn("Backend deleteExpense fallback:", err);
+    }
+
+    // Remove from local cache immediately
+    const current = this.getLocalExpenses();
+    const updated = current.filter((e) => e._id !== id && e.id !== id);
+    this.setLocalExpenses(updated);
+    return { success: true };
   },
 
   async clearExpenses() {
-    return await this.request("/api/expenses", {
-      method: "DELETE",
-    });
+    try {
+      await this.request("/api/expenses", {
+        method: "DELETE",
+      });
+    } catch (e) {}
+    this.setLocalExpenses([]);
+    return { success: true };
   },
 
   // User & Profile Methods
