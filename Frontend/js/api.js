@@ -452,6 +452,20 @@ const api = {
     });
   },
 
+  // Auth Guard for Protected App Pages
+  checkAuth() {
+    const path = window.location.pathname.toLowerCase();
+    const isPublicPage = path.includes("login") || 
+                         path.includes("signup") || 
+                         path.includes("onboarding") || 
+                         path.endsWith("index.html") || 
+                         path === "/" || 
+                         path === "";
+    if (!isPublicPage && !this.getToken()) {
+      window.location.href = "login.html";
+    }
+  },
+
   // Avatar Management
   initAvatar() {
     const seed = localStorage.getItem("userAvatarSeed") || "KaveriPilot";
@@ -474,6 +488,7 @@ const api = {
 
 // Initialize theme, responsive mobile nav, global command palette, and user avatar on load
 document.addEventListener("DOMContentLoaded", () => {
+  api.checkAuth();
   api.initTheme();
   api.initAvatar();
   api.setupMobileNav();

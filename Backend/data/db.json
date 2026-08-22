@@ -7,7 +7,7 @@
       "monthlyBudget": 16000,
       "savingsGoal": 6000,
       "streak": 1,
-      "gems": 55,
+      "gems": 72,
       "level": 2,
       "theme": "light",
       "createdAt": "2026-08-15T14:50:27.411Z"
@@ -37,9 +37,62 @@
       "level": 1,
       "theme": "light",
       "createdAt": "2026-08-22T12:15:10.817Z"
+    },
+    {
+      "_id": "user_1787402513001",
+      "name": "Audit Student Updated",
+      "email": "student_1787402512874@university.edu",
+      "password": "$2b$10$kfWiXBnKg8MkgY3mGkK3cO2qJ6Wsc5Qn1cpfSSiEJgsjyyx.1Pz.6",
+      "monthlyBudget": 18000,
+      "savingsGoal": 7500,
+      "streak": 1,
+      "gems": 0,
+      "level": 1,
+      "theme": "light",
+      "createdAt": "2026-08-22T12:41:53.001Z"
     }
   ],
   "expenses": [
+    {
+      "_id": "exp_1787402513086_v6g4",
+      "title": "Weekend Movie Ticket",
+      "amount": 250,
+      "category": "Entertainment",
+      "mood": "Happy",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T12:41:53.086Z",
+      "userId": "user_1787402513001"
+    },
+    {
+      "_id": "exp_1787402513075_u7ju",
+      "title": "Late Night Coffee",
+      "amount": 40,
+      "category": "Food",
+      "mood": "Bored",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T12:41:53.075Z",
+      "userId": "user_1787402513001"
+    },
+    {
+      "_id": "exp_1787402513064_wgl4",
+      "title": "Data Structures Textbook",
+      "amount": 450,
+      "category": "Education",
+      "mood": "Stressed",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T12:41:53.064Z",
+      "userId": "user_1787402513001"
+    },
+    {
+      "_id": "exp_1787402513052_pl12",
+      "title": "Metro Smart Card Recharge",
+      "amount": 200,
+      "category": "Travel",
+      "mood": "Happy",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T12:41:53.052Z",
+      "userId": "user_1787402513001"
+    },
     {
       "_id": "exp_1787400910865_3fv0",
       "title": "Campus Coffee",
