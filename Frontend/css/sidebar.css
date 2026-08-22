@@ -170,6 +170,51 @@
   color: var(--text-muted);
 }
 
+.sidebar-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-icon-btn,
+.sidebar-logout-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.sidebar-icon-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary-border);
+  background: var(--primary-light);
+}
+
+.sidebar-logout-btn:hover {
+  color: var(--accent-rose);
+  border-color: var(--accent-rose-border);
+  background: var(--accent-rose-light);
+}
+
+.menu li a.nav-logout-link:hover {
+  color: var(--accent-rose);
+  background-color: var(--accent-rose-light);
+}
+
+.menu li a.nav-logout-link:hover i {
+  color: var(--accent-rose);
+}
+
 /* Main Content: Desktop Alignment */
 .main-content {
   margin-left: var(--sidebar-width);

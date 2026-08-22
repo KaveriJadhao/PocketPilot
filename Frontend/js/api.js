@@ -107,6 +107,19 @@ const api = {
     return await this.request("/api/auth/me");
   },
 
+  logout() {
+    if (confirm("Are you sure you want to sign out?")) {
+      this.setToken("");
+      this.setUserData(null);
+      localStorage.removeItem("pocketpilot_token");
+      localStorage.removeItem("pocketpilot_user");
+      this.showToast("Signed out successfully", "info");
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 350);
+    }
+  },
+
   // Expense Methods
   async getExpenses() {
     try {

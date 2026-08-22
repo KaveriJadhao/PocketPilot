@@ -84,6 +84,12 @@
             <span>Settings</span>
           </a>
         </li>
+        <li>
+          <a href="#" class="nav-logout-link" onclick="event.preventDefault(); api.logout();">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Sign Out</span>
+          </a>
+        </li>
       </ul>
 
       <div class="sidebar-user">
@@ -94,9 +100,14 @@
             <small id="sidebarUserEmail">Student Plan</small>
           </div>
         </div>
-        <a href="settings.html" style="color: var(--text-muted);" title="Settings">
-          <i class="fa-solid fa-gear"></i>
-        </a>
+        <div class="sidebar-user-actions">
+          <a href="settings.html" class="sidebar-icon-btn" title="Settings">
+            <i class="fa-solid fa-gear"></i>
+          </a>
+          <button class="sidebar-logout-btn" title="Sign Out" onclick="api.logout()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
       </div>
     </aside>
 
