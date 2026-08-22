@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PocketPilot — Easy Student Budget & Expense Tracker</title>
+  <title>PocketPilot — The Intelligent Student Finance OS</title>
   
   <link rel="stylesheet" href="../css/variables.css" />
   <link rel="stylesheet" href="../css/typography.css" />
@@ -14,180 +14,532 @@
 
 <body class="landing-body">
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <a href="index.html" class="nav-brand">
-      <div class="logo-icon">
-        <i class="fa-solid fa-layer-group"></i>
+  <!-- ==========================================
+       1. STICKY GLASS NAVBAR
+       ========================================== -->
+  <div class="landing-navbar-wrapper">
+    <header class="landing-navbar">
+      <a href="index.html" class="landing-brand">
+        <div class="logo-icon">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <span>PocketPilot</span>
+        <span class="badge-pill">Student OS</span>
+      </a>
+
+      <ul class="landing-nav-links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#voice-ai">Voice AI</a></li>
+        <li><a href="#budgeting">Budgeting</a></li>
+        <li><a href="#rewards">Rewards & Gems</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="landing-nav-actions">
+        <button class="icon-btn" id="landingThemeBtn" title="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="login.html" class="btn btn-secondary">Sign In</a>
+        <a href="signup.html" class="btn btn-primary">Get Started</a>
       </div>
-      <span>PocketPilot</span>
-    </a>
+    </header>
+  </div>
 
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#analytics-preview">Analytics</a></li>
-      <li><a href="#voice-preview">Voice AI</a></li>
-      <li><a href="#rewards-preview">Rewards</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <button class="icon-btn" id="themeToggleBtn" title="Toggle Theme" style="margin-right: 4px;">
-        <i class="fa-solid fa-moon"></i>
-      </button>
-      <a href="login.html" class="btn btn-secondary">Sign In</a>
-      <a href="signup.html" class="btn btn-primary">Get Started</a>
-    </div>
-  </header>
-
-  <!-- HERO SECTION -->
+  <!-- ==========================================
+       2. HERO SECTION WITH LIVE APP MOCKUP
+       ========================================== -->
   <main>
-    <section class="hero">
-      <div class="hero-left">
-        <div class="badge badge-sapphire" style="margin-bottom: 18px; padding: 6px 12px; font-size: 0.8125rem;">
-          <i class="fa-solid fa-sparkles"></i> Smart Money Tracker for Students
+    <section class="landing-hero">
+      <div class="landing-hero-left">
+        <div class="hero-tag">
+          <i class="fa-solid fa-sparkles"></i>
+          <span>Built 100% for College & University Students</span>
         </div>
 
         <h1>
-          Simple money tracking for <span class="gradient-text">college students</span>
+          Stop wondering where your <span class="highlight-blue">pocket money</span> went.
         </h1>
 
-        <p>
-          Track daily spending with your voice, stay within your monthly budget, and get helpful AI tips to save more money.
+        <p class="hero-desc">
+          PocketPilot is the hands-free, voice-powered finance OS for students. Log canteen snacks in 2 seconds, never run out of money before month-end, and earn real student food coupons.
         </p>
 
-        <div class="hero-cta">
-          <a href="signup.html" class="btn btn-primary" style="padding: 13px 26px; font-size: 0.95rem;">
-            <i class="fa-solid fa-arrow-right"></i> Create Free Account
+        <div class="hero-cta-row">
+          <a href="signup.html" class="btn btn-primary hero-cta-btn-primary">
+            <i class="fa-solid fa-rocket"></i>
+            <span>Create Free Account</span>
           </a>
-          <a href="dashboard.html" class="btn btn-secondary" style="padding: 13px 22px; font-size: 0.95rem;">
-            <i class="fa-solid fa-desktop"></i> Try Live Demo
+          <a href="login.html" class="btn btn-secondary hero-cta-btn-secondary">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Sign In to Cockpit</span>
           </a>
+        </div>
+
+        <div class="hero-trust-badges">
+          <span><i class="fa-solid fa-circle-check"></i> 100% Free Forever</span>
+          <span><i class="fa-solid fa-circle-check"></i> No Credit Card Required</span>
+          <span><i class="fa-solid fa-circle-check"></i> Offline Safe</span>
         </div>
       </div>
 
-      <!-- Live Hero Visual Card Stack -->
-      <div class="hero-visual-stack">
-        <!-- 1. Money Left Card -->
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <span class="hero-card-label">Money Left to Spend</span>
-            <span class="badge badge-emerald">+18.4% Saved</span>
+      <!-- Live Realistic App Mockup Window -->
+      <div class="hero-mockup-window">
+        <div class="mockup-window-header">
+          <div class="mockup-dots">
+            <div class="mockup-dot red"></div>
+            <div class="mockup-dot yellow"></div>
+            <div class="mockup-dot green"></div>
           </div>
-          <div class="hero-card-amount text-emerald">₹4,250.00</div>
-          <div class="progress-bar" style="margin-top: 10px; height: 6px;">
-            <div class="progress-fill" style="width: 72%;"></div>
-          </div>
-          <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 8px;">Remaining from your ₹15,000 monthly allowance</p>
+          <span class="mockup-window-title">PocketPilot Cockpit Live</span>
+          <span class="badge badge-emerald" style="font-size: 0.6875rem;"><i class="fa-solid fa-wifi"></i> Online</span>
         </div>
 
-        <!-- 2. Daily Streak & Gems Card -->
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <span class="hero-card-label">Daily Streak & Tier</span>
-            <span class="badge badge-amber"><i class="fa-solid fa-fire"></i> 12 Days in a Row</span>
+        <div class="mockup-window-body">
+          <!-- Mockup Header Profile -->
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="Avatar" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);">
+              <div>
+                <strong style="font-size: 0.875rem; color: var(--text-primary);">Kaveri's Allowance</strong>
+                <div style="font-size: 0.6875rem; color: var(--text-muted);">Monthly Cap: ₹15,000</div>
+              </div>
+            </div>
+            <span class="badge badge-amber" style="font-weight: 700;"><i class="fa-solid fa-fire"></i> 12-Day Streak</span>
           </div>
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px;">
-            <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary);">Level 3 Student Tier</div>
-            <div style="font-size: 0.875rem; font-weight: 700; color: var(--accent-amber);"><i class="fa-solid fa-gem"></i> 150 Gems</div>
-          </div>
-          <small style="color: var(--text-muted); display: block; margin-top: 4px;">3 food discount coupons ready to claim</small>
-        </div>
 
-        <!-- 3. AI Insights Tip Card -->
-        <div class="hero-card" style="border-left: 3px solid var(--primary);">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-            <i class="fa-solid fa-brain" style="color: var(--primary); font-size: 0.95rem;"></i>
-            <strong style="font-size: 0.8125rem; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.05em;">Smart AI Tip</strong>
+          <!-- KPI Cards -->
+          <div class="mockup-kpi-grid">
+            <div class="mockup-kpi-card" style="border-left: 3px solid var(--accent-emerald);">
+              <div class="mockup-kpi-label">Money Left to Spend</div>
+              <div class="mockup-kpi-val text-emerald">₹4,250.00</div>
+              <div class="progress-bar" style="margin-top: 8px; height: 5px;">
+                <div class="progress-fill" style="width: 71.6%;"></div>
+              </div>
+            </div>
+
+            <div class="mockup-kpi-card" style="border-left: 3px solid var(--primary);">
+              <div class="mockup-kpi-label">Total Spent</div>
+              <div class="mockup-kpi-val text-sapphire" style="color: var(--primary);">₹10,750</div>
+              <small style="color: var(--text-muted); font-size: 0.6875rem;">18 Transactions</small>
+            </div>
           </div>
-          <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; margin: 0;">
-            "Spending ₹100 or less per canteen meal will help you save ₹1,500 this month."
-          </p>
+
+          <!-- Voice HUD Preview -->
+          <div class="mockup-voice-banner">
+            <div class="voice-pulse-circle">
+              <i class="fa-solid fa-microphone"></i>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.05em;">Voice AI Detected:</div>
+              <div class="voice-transcript-text">"Spent 120 for Canteen Lunch"</div>
+              <div class="voice-detected-tags">
+                <span class="badge badge-sapphire" style="font-size: 0.6875rem;">🍔 Food</span>
+                <span class="badge badge-emerald" style="font-size: 0.6875rem;">₹120</span>
+                <span class="badge badge-emerald" style="font-size: 0.6875rem;">😊 Happy</span>
+              </div>
+            </div>
+            <span class="badge badge-emerald" style="font-size: 0.6875rem;"><i class="fa-solid fa-check"></i> Saved</span>
+          </div>
+
+          <!-- Mini Activity Feed -->
+          <div class="mockup-mini-feed">
+            <div class="mockup-feed-item">
+              <div>
+                <strong>Metro Card Pass</strong>
+                <small style="color: var(--text-muted); margin-left: 6px;">Today</small>
+              </div>
+              <span style="font-weight: 700; color: var(--accent-rose);">₹200</span>
+            </div>
+            <div class="mockup-feed-item">
+              <div>
+                <strong>Campus Coffee</strong>
+                <small style="color: var(--text-muted); margin-left: 6px;">Yesterday</small>
+              </div>
+              <span style="font-weight: 700; color: var(--accent-rose);">₹40</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CAPABILITIES / FEATURES -->
-    <section class="features-section" id="features">
-      <div class="features-header">
-        <h2>Everything you need to manage your pocket money</h2>
-        <p>Simple tools to help you track expenses, save more, and build great money habits.</p>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-box" id="voice-preview">
-          <div class="feature-icon-wrapper" style="background: var(--primary-light); color: var(--primary);">
-            <i class="fa-solid fa-microphone"></i>
-          </div>
-          <h3>Quick Voice Logging</h3>
-          <p>
-            Just speak to add expenses. PocketPilot automatically understands the amount and category in seconds.
-          </p>
+    <!-- ==========================================
+         3. STATS STRIP
+         ========================================== -->
+    <section class="stats-strip">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-number">₹2,400+</div>
+          <div class="stat-label">Average Monthly Student Savings</div>
         </div>
-
-        <div class="feature-box" id="analytics-preview">
-          <div class="feature-icon-wrapper" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
-            <i class="fa-solid fa-chart-pie"></i>
-          </div>
-          <h3>Spending & Budget Trends</h3>
-          <p>
-            See where your money goes with simple charts, weekly category trends, and instant statement export.
-          </p>
+        <div class="stat-box">
+          <div class="stat-number">&lt; 2 Sec</div>
+          <div class="stat-label">Instant Hands-Free Voice Logging</div>
         </div>
-
-        <div class="feature-box" id="rewards-preview">
-          <div class="feature-icon-wrapper" style="background: var(--accent-amber-light); color: var(--accent-amber);">
-            <i class="fa-solid fa-gift"></i>
-          </div>
-          <h3>Daily Rewards & Coupons</h3>
-          <p>
-            Earn gems for tracking your expenses daily and unlock real food and study book discount coupons.
-          </p>
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Student-First & Ad-Free</div>
         </div>
-
-        <div class="feature-box" id="mood-preview">
-          <div class="feature-icon-wrapper" style="background: var(--accent-rose-light); color: var(--accent-rose);">
-            <i class="fa-solid fa-heart-pulse"></i>
-          </div>
-          <h3>Mood & Spending Habits</h3>
-          <p>
-            Learn how your mood affects your spending and cut down on impulse shopping with emotional insights.
-          </p>
+        <div class="stat-box">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Redeemable Campus & Food Coupons</div>
         </div>
       </div>
     </section>
 
-    <!-- CTA BANNER -->
-    <section class="cta-banner">
-      <div class="cta-banner-inner">
+    <!-- ==========================================
+         4. HOW IT WORKS (3 SIMPLE STEPS)
+         ========================================== -->
+    <section class="section-wrapper" id="how-it-works">
+      <div class="section-header-center">
+        <div class="section-eyebrow">Zero Learning Curve</div>
+        <h2>How PocketPilot works in 3 easy steps</h2>
+        <p>Built to fit effortlessly into your busy student routine between lectures and canteen breaks.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number-badge">1</div>
+          <h3>Set Your Monthly Allowance</h3>
+          <p>Tell PocketPilot how much pocket money you get each month (e.g. ₹5,000, ₹10,000, ₹15,000) and your savings goal in 30 seconds.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-badge">2</div>
+          <h3>Speak to Log Daily Spends</h3>
+          <p>While walking out of the canteen or metro station, tap the microphone and speak naturally. We extract the item, price in ₹, category, and mood automatically.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-badge">3</div>
+          <h3>Earn Gems & Save Money</h3>
+          <p>Get helpful AI advice in ₹ on where you can cut back. Maintain your daily streak to earn gems and unlock real food and book discount coupons.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         5. DEEP DIVE FEATURE SHOWCASES
+         ========================================== -->
+    <section class="section-wrapper" id="voice-ai">
+      <!-- Showcase 1: Voice AI -->
+      <div class="feature-showcase-row">
+        <div class="showcase-text-col">
+          <div class="badge badge-sapphire" style="margin-bottom: 12px;"><i class="fa-solid fa-microphone"></i> Hands-Free Voice AI</div>
+          <h3>Log any expense in 2 seconds without typing</h3>
+          <p>
+            Typing in manual finance apps is tedious. With PocketPilot's Voice AI, you simply speak like you talk to a friend.
+          </p>
+          <div class="showcase-bullets">
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Understands natural Indian student speech (e.g., "Paid 60 for canteen sandwich")</span>
+            </div>
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Automatically tags Food, Travel, Books, Shopping, and Utilities</span>
+            </div>
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Gives audio confirmation tone & text-to-speech verification</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card-visual">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px;">Try Saying These:</div>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="padding: 10px 14px; background: var(--bg-subtle); border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between;">
+                <span>🗣️ "40 rupees for coffee"</span>
+                <span class="badge badge-sapphire">☕ ₹40 Food</span>
+              </div>
+              <div style="padding: 10px 14px; background: var(--bg-subtle); border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between;">
+                <span>🗣️ "Metro recharge 200"</span>
+                <span class="badge badge-emerald">🚌 ₹200 Travel</span>
+              </div>
+              <div style="padding: 10px 14px; background: var(--bg-subtle); border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between;">
+                <span>🗣️ "Study books 350 stressed"</span>
+                <span class="badge badge-rose">📚 ₹350 Books</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Showcase 2: Budgeting & Analytics -->
+      <div class="feature-showcase-row reverse" id="budgeting">
+        <div class="showcase-text-col">
+          <div class="badge badge-emerald" style="margin-bottom: 12px;"><i class="fa-solid fa-chart-line"></i> Visual Student Budgeting</div>
+          <h3>Never run out of money before the 30th of the month</h3>
+          <p>
+            Know exactly what you can spend each day. PocketPilot breaks down your pocket money into safe daily velocity limits.
+          </p>
+          <div class="showcase-bullets">
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Live doughnut category distribution (Food, Metro, Books, Bills, Shopping)</span>
+            </div>
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Weekly spending trends to spot high-outflow weekend habits</span>
+            </div>
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Color-coded budget health warnings before you overspend</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card-visual">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <strong style="font-size: 0.875rem;">Budget Health Status</strong>
+              <span class="badge badge-emerald">Within Budget</span>
+            </div>
+            <div class="progress-bar" style="height: 10px; margin-bottom: 8px;">
+              <div class="progress-fill" style="width: 71%; background: var(--accent-emerald);"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
+              <span>Spent: ₹10,750</span>
+              <span>Allowance: ₹15,000</span>
+            </div>
+            <hr style="margin: 16px 0; border: none; border-top: 1px solid var(--border);">
+            <div style="font-size: 0.8125rem; color: var(--text-secondary);">
+              💡 <strong>Daily Safe Spend:</strong> You have <strong>₹425/day</strong> left for the remaining 10 days of this month.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Showcase 3: Gamification & Rewards -->
+      <div class="feature-showcase-row" id="rewards">
+        <div class="showcase-text-col">
+          <div class="badge badge-amber" style="margin-bottom: 12px;"><i class="fa-solid fa-gift"></i> Gamified Streaks & Rewards</div>
+          <h3>Turn saving money into a rewarding daily game</h3>
+          <p>
+            Build financial discipline naturally. Log daily to maintain your streak, earn gems, and unlock discount vouchers.
+          </p>
+          <div class="showcase-bullets">
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Earn 10 Gems on every daily expense logged</span>
+            </div>
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Level up from Bronze Scholar to Gold Master tier</span>
+            </div>
+            <div class="showcase-bullet-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Claim real vouchers for canteen meals, burgers, and study books</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card-visual">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Reward Balance</div>
+                <div style="font-size: 1.4rem; font-weight: 800; color: var(--accent-amber);"><i class="fa-solid fa-gem"></i> 150 Gems</div>
+              </div>
+              <span class="badge badge-amber">Level 3 Student</span>
+            </div>
+
+            <div style="padding: 12px; background: var(--bg-subtle); border: 1px dashed var(--accent-amber); border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="font-size: 0.8125rem; display: block;">🍔 ₹50 Off Canteen Burger Combo</strong>
+                <small style="color: var(--text-muted);">Cost: 100 Gems</small>
+              </div>
+              <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.75rem;">Claim</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         6. STUDENT TESTIMONIALS
+         ========================================== -->
+    <section class="section-wrapper">
+      <div class="section-header-center">
+        <div class="section-eyebrow">Loved by Students</div>
+        <h2>What college students are saying</h2>
+        <p>Students from engineering, medical, and commerce universities use PocketPilot every day.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "Before PocketPilot, my ₹10,000 allowance used to vanish by the 18th of every month. The Voice logging takes 2 seconds outside the canteen, and I saved ₹2,800 in my very first month!"
+          </p>
+          <div class="testimonial-user">
+            <img src="../assets/avatars/avatar-1.svg" alt="Student">
+            <div>
+              <div class="testimonial-name">Pooja Sharma</div>
+              <div class="testimonial-role">B.Tech 3rd Year • Pune University</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "The mood tracker is an eye-opener. I realized I was spending ₹1,500 on Swiggy snacks whenever I was stressed before exams. PocketPilot helped me cut impulse spending completely."
+          </p>
+          <div class="testimonial-user">
+            <img src="../assets/avatars/avatar-2.svg" alt="Student">
+            <div>
+              <div class="testimonial-name">Rohan Mehta</div>
+              <div class="testimonial-role">B.Com Student • Mumbai</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "I love the daily streak and gems! It actually makes logging expenses fun rather than a boring chore. Claimed my first coffee discount coupon yesterday."
+          </p>
+          <div class="testimonial-user">
+            <img src="../assets/avatars/avatar-3.svg" alt="Student">
+            <div>
+              <div class="testimonial-name">Ananya Iyer</div>
+              <div class="testimonial-role">Medical Student • Bangalore</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         7. INTERACTIVE FAQ ACCORDION
+         ========================================== -->
+    <section class="section-wrapper" id="faq">
+      <div class="section-header-center">
+        <div class="section-eyebrow">Got Questions?</div>
+        <h2>Frequently Asked Questions</h2>
+        <p>Everything you need to know about getting started with PocketPilot.</p>
+      </div>
+
+      <div class="faq-accordion-list">
+        <div class="faq-item open">
+          <div class="faq-question">
+            <span>Is PocketPilot completely free to use?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Yes! PocketPilot is 100% free for college and university students. There are no subscriptions, no credit card requirements, and no hidden paywalls.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How does the Voice AI logging work?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            PocketPilot uses your browser's built-in speech recognition engine. When you tap the microphone and say something like <em>"Spent 150 for canteen lunch"</em>, our NLP parser extracts the price (₹150), title (Canteen Lunch), and category (Food) in real-time.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Does it work on mobile phones and tablets?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Yes! PocketPilot is 100% responsive and optimized for all mobile screen sizes (from 320px up to 4K displays). You can easily use it on your iPhone, Android phone, iPad, or laptop.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Is my financial data private and secure?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Absolutely. Your password is encrypted with bcrypt hashing, and your account data is protected with secure JWT authentication tokens. PocketPilot never sells or shares your personal information.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         8. HIGH-CONVERTING FINAL CALL-TO-ACTION
+         ========================================== -->
+    <section class="final-cta-section">
+      <div class="final-cta-card">
         <h2>Ready to take control of your pocket money?</h2>
-        <p>Join thousands of college students building better savings habits with PocketPilot.</p>
-        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-          <a href="signup.html" class="btn btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
-            <i class="fa-solid fa-rocket"></i> Get Started Free
+        <p>
+          Join college students across India building smarter savings habits, tracking daily spends in seconds, and unlocking rewards.
+        </p>
+
+        <div class="final-cta-actions">
+          <a href="signup.html" class="final-cta-btn-white">
+            <i class="fa-solid fa-rocket"></i>
+            <span>Create Free Account</span>
           </a>
-          <a href="dashboard.html" class="btn btn-secondary" style="padding: 12px 22px; font-size: 0.95rem;">
-            <i class="fa-solid fa-arrow-right"></i> Explore Dashboard
+          <a href="login.html" class="final-cta-btn-outline">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Sign In to Cockpit</span>
           </a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="landing-footer">
-    <p>© 2026 PocketPilot. Simple money tracking engineered for college students.</p>
+  <!-- ==========================================
+       9. FOOTER
+       ========================================== -->
+  <footer class="landing-footer-main">
+    <div class="footer-inner">
+      <div class="footer-brand-side">
+        <a href="index.html" class="landing-brand">
+          <div class="logo-icon" style="width: 28px; height: 28px; font-size: 0.85rem;">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <span>PocketPilot</span>
+        </a>
+        <p>© 2026 PocketPilot. The Intelligent Student Finance OS engineered by Kaveri Jadhao.</p>
+      </div>
+
+      <div class="footer-links-row">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#voice-ai">Voice AI</a>
+        <a href="#budgeting">Budgeting</a>
+        <a href="#rewards">Rewards</a>
+        <a href="#faq">FAQ</a>
+        <a href="login.html">Sign In</a>
+        <a href="signup.html">Create Account</a>
+      </div>
+    </div>
   </footer>
 
   <script src="../js/api.js"></script>
   <script>
-    const themeBtn = document.getElementById("themeToggleBtn");
-    if (themeBtn) {
-      themeBtn.addEventListener("click", () => {
+    // Theme Toggle Handler
+    const landingThemeBtn = document.getElementById("landingThemeBtn");
+    if (landingThemeBtn) {
+      landingThemeBtn.addEventListener("click", () => {
         api.toggleTheme();
         const isDark = document.body.classList.contains("dark");
-        themeBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        landingThemeBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
       });
     }
+
+    // FAQ Accordion Toggle
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach((item) => {
+      const q = item.querySelector(".faq-question");
+      if (q) {
+        q.addEventListener("click", () => {
+          const isOpen = item.classList.contains("open");
+          faqItems.forEach((it) => it.classList.remove("open"));
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
