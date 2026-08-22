@@ -101,14 +101,20 @@ module.exports = {
   // Expense methods
   getExpenses: (userId) => {
     const db = readDb();
-    return (db.expenses || []).sort(
-      (a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt)
-    );
+    const allExpenses = db.expenses || [];
+    if (!userId) {
+      return allExpenses.sort(
+        (a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt)
+      );
+    }
+    return allExpenses
+      .filter((e) => e.userId === userId || (!e.userId && userId === "default_user_1"))
+      .sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt));
   },
 
   getExpenseById: (id) => {
     const db = readDb();
-    return db.expenses.find((e) => e._id === id);
+    return (db.expenses || []).find((e) => e._id === id);
   },
 
   addExpense: (expenseData) => {
@@ -121,13 +127,13 @@ module.exports = {
       mood: expenseData.mood || "Neutral",
       date: expenseData.date || new Date().toISOString().split("T")[0],
       createdAt: new Date().toISOString(),
-      userId: expenseData.userId,
+      userId: expenseData.userId || (db.users[0] ? db.users[0]._id : "default_user_1"),
     };
     if (!db.expenses) db.expenses = [];
     db.expenses.unshift(newExpense);
 
-    // Gamification updates on the user
-    const user = db.users[0] || defaultState.users[0];
+    // Gamification updates on the specific user
+    const user = db.users.find((u) => u._id === newExpense.userId || u.id === newExpense.userId) || db.users[0] || defaultState.users[0];
     if (newExpense.amount <= 100) {
       user.gems = (user.gems || 0) + 5;
     } else if (newExpense.amount <= 500) {

@@ -10,16 +10,20 @@ router.use(authMiddleware);
 /* GET ALL EXPENSES */
 router.get("/", async (req, res) => {
   try {
+    const userId = req.user ? req.user._id : null;
+    if (!userId) {
+      return res.json([]);
+    }
     if (storage.isMongoConnected()) {
-      const query = req.user ? { $or: [{ userId: req.user._id }, { userId: { $exists: false } }] } : {};
-      const expenses = await Expense.find(query).sort({ date: -1, createdAt: -1 });
+      const expenses = await Expense.find({ userId: userId }).sort({ date: -1, createdAt: -1 });
       return res.json(expenses);
     }
-    const expenses = storage.getExpenses(req.user ? req.user._id : null);
+    const expenses = storage.getExpenses(userId);
     res.json(expenses);
   } catch (error) {
     console.warn("Mongo fetch failed, using fallback:", error.message);
-    const expenses = storage.getExpenses(req.user ? req.user._id : null);
+    const userId = req.user ? req.user._id : null;
+    const expenses = storage.getExpenses(userId);
     res.json(expenses);
   }
 });
@@ -27,8 +31,9 @@ router.get("/", async (req, res) => {
 /* GET SINGLE EXPENSE */
 router.get("/:id", async (req, res) => {
   try {
+    const userId = req.user ? req.user._id : null;
     if (storage.isMongoConnected()) {
-      const expense = await Expense.findById(req.params.id);
+      const expense = await Expense.findOne({ _id: req.params.id, ...(userId ? { userId } : {}) });
       if (expense) return res.json(expense);
     }
     const expense = storage.getExpenseById(req.params.id);
@@ -52,9 +57,11 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ message: "Title and a valid numeric amount are required" });
     }
 
+    const userId = req.user ? req.user._id : null;
+
     if (storage.isMongoConnected()) {
       const newExpense = new Expense({
-        userId: req.user ? req.user._id : undefined,
+        userId: userId,
         title: title.trim(),
         amount: Number(amount),
         category: category ? category.trim() : "Other",

@@ -73,8 +73,20 @@ const api = {
     }
   },
 
+  clearUserData() {
+    this.setToken("");
+    this.setUserData(null);
+    localStorage.removeItem("pocketpilot_token");
+    localStorage.removeItem("pocketpilot_user");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("monthlyBudget");
+    localStorage.removeItem("savingsGoal");
+    localStorage.removeItem("onboardingDone");
+  },
+
   // Auth Methods
   async register(name, email, password, monthlyBudget, savingsGoal) {
+    this.clearUserData();
     const data = await this.request("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({ name, email, password, monthlyBudget, savingsGoal }),
@@ -85,6 +97,7 @@ const api = {
   },
 
   async login(email, password) {
+    this.clearUserData();
     const data = await this.request("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
@@ -95,6 +108,7 @@ const api = {
   },
 
   async guestLogin() {
+    this.clearUserData();
     const data = await this.request("/api/auth/guest", {
       method: "POST",
     });
@@ -109,10 +123,7 @@ const api = {
 
   logout() {
     if (confirm("Are you sure you want to sign out?")) {
-      this.setToken("");
-      this.setUserData(null);
-      localStorage.removeItem("pocketpilot_token");
-      localStorage.removeItem("pocketpilot_user");
+      this.clearUserData();
       this.showToast("Signed out successfully", "info");
       setTimeout(() => {
         window.location.href = "login.html";
@@ -144,6 +155,12 @@ const api = {
     });
   },
 
+  async clearExpenses() {
+    return await this.request("/api/expenses", {
+      method: "DELETE",
+    });
+  },
+
   // User & Profile Methods
   async getUser() {
     try {
@@ -151,7 +168,7 @@ const api = {
     } catch (error) {
       const cached = this.getUserData();
       return {
-        name: cached.name || localStorage.getItem("userName") || "Kaveri",
+        name: cached.name || localStorage.getItem("userName") || "Student",
         streak: 1,
         gems: 0,
         level: 1,
