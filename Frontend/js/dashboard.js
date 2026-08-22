@@ -476,6 +476,25 @@ function loadTransactionsList() {
   container.appendChild(tableWrapper);
 }
 
+function openQuickAddModal() {
+  const modal = document.getElementById("quickAddModal");
+  if (modal) {
+    modal.classList.add("active");
+    const input = document.getElementById("quickTitle");
+    if (input) setTimeout(() => input.focus(), 50);
+  }
+}
+
+function closeQuickAddModal() {
+  const modal = document.getElementById("quickAddModal");
+  if (modal) {
+    modal.classList.remove("active");
+  }
+}
+
+window.openQuickAddModal = openQuickAddModal;
+window.closeQuickAddModal = closeQuickAddModal;
+
 function setupQuickAddModal() {
   const openBtn = document.getElementById("openQuickAddBtn");
   if (openBtn) openBtn.addEventListener("click", openQuickAddModal);

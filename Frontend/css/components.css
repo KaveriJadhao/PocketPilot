@@ -543,3 +543,152 @@ input:checked + .slider:before {
     padding: 12px 10px;
   }
 }
+
+/* ==========================================================================
+   Universal Swiss Financial Ledger Tables & Responsive Feeds
+   ========================================================================== */
+.ledger-table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 6px;
+}
+
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84375rem;
+  table-layout: auto;
+}
+
+.ledger-table th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+.ledger-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.ledger-table th.text-right,
+.ledger-table td.text-right {
+  text-align: right !important;
+}
+
+.ledger-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ledger-table tr:hover td {
+  background-color: var(--surface-hover);
+}
+
+.ledger-table td small {
+  display: block;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.delete-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+  font-size: 0.875rem;
+}
+
+.delete-action-btn:hover {
+  color: var(--accent-rose);
+  background: var(--accent-rose-light);
+}
+
+/* Visibility Switching for Table vs Mobile Feed */
+.desktop-table-view {
+  display: table !important;
+  width: 100%;
+}
+
+.mobile-tx-feed {
+  display: none !important;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.mobile-tx-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.mobile-tx-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.mobile-tx-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-tx-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.mobile-tx-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.mobile-tx-right .amount {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+/* Mobile Breakpoint for Tables */
+@media (max-width: 768px) {
+  .desktop-table-view {
+    display: none !important;
+  }
+  .mobile-tx-feed {
+    display: flex !important;
+  }
+}

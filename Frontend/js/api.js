@@ -236,11 +236,17 @@ const api = {
   // User & Profile Methods
   async getUser() {
     try {
-      return await this.request("/api/user");
+      const user = await this.request("/api/user");
+      if (user && user.name && user.name !== "Student" && user.name !== "Guest Student") {
+        this.setUserData(user);
+        this.initSidebarUser();
+      }
+      return user;
     } catch (error) {
-      const cached = this.getUserData();
+      const cached = this.getUserData() || {};
       return {
         name: cached.name || localStorage.getItem("userName") || "Student",
+        email: cached.email || localStorage.getItem("userEmail") || "Student Account",
         streak: 1,
         gems: 0,
         level: 1,
@@ -255,7 +261,10 @@ const api = {
       method: "PUT",
       body: JSON.stringify(profileData),
     });
-    if (data.user) this.setUserData(data.user);
+    if (data.user) {
+      this.setUserData(data.user);
+      this.initSidebarUser();
+    }
     return data;
   },
 
@@ -555,6 +564,28 @@ const api = {
     }
   },
 
+  // Initialize and Sync Sidebar User Profile across all pages
+  initSidebarUser() {
+    try {
+      const cached = this.getUserData() || {};
+      const name = (cached && cached.name && cached.name !== "Student" && cached.name !== "Guest Student")
+        ? cached.name
+        : (localStorage.getItem("userName") || (cached && cached.name ? cached.name : "Student"));
+
+      const email = (cached && cached.email && cached.email !== "student@university.edu" && cached.email !== "guest@university.edu")
+        ? cached.email
+        : (localStorage.getItem("userEmail") || (name !== "Student" ? `${name.toLowerCase().replace(/\s+/g, '')}@campus.edu` : "Student Account"));
+
+      const sidebarName = document.getElementById("sidebarUserName");
+      if (sidebarName) sidebarName.innerText = name;
+
+      const sidebarEmail = document.getElementById("sidebarUserEmail");
+      if (sidebarEmail) sidebarEmail.innerText = email;
+    } catch (e) {
+      console.warn("Sidebar user init:", e);
+    }
+  },
+
   // Avatar Management
   initAvatar() {
     const seed = localStorage.getItem("userAvatarSeed") || "KaveriPilot";
@@ -579,6 +610,7 @@ const api = {
 document.addEventListener("DOMContentLoaded", () => {
   api.checkAuth();
   api.initTheme();
+  api.initSidebarUser();
   api.initAvatar();
   api.setupMobileNav();
   api.setupGlobalCommandPalette();
