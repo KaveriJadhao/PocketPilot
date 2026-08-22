@@ -10,20 +10,20 @@ router.use(authMiddleware);
 // GET USER
 router.get("/", async (req, res) => {
   try {
+    if (req.user) {
+      return res.json(req.user);
+    }
     if (storage.isMongoConnected()) {
-      let user = req.user;
+      let user = await User.findOne();
       if (!user) {
-        user = await User.findOne();
-      }
-      if (!user) {
-        user = await User.create({ name: "Kaveri" });
+        user = await User.create({ name: "Student" });
       }
       return res.json(user);
     }
-    const user = storage.getUser(req.user ? req.user._id : null);
+    const user = storage.getUser();
     res.json(user);
   } catch (error) {
-    const user = storage.getUser(req.user ? req.user._id : null);
+    const user = storage.getUser();
     res.json(user);
   }
 });
@@ -31,16 +31,18 @@ router.get("/", async (req, res) => {
 // GET USER PROFILE ALIAS
 router.get("/profile", async (req, res) => {
   try {
+    if (req.user) {
+      return res.json(req.user);
+    }
     if (storage.isMongoConnected()) {
-      let user = req.user;
-      if (!user) user = await User.findOne();
-      if (!user) user = await User.create({ name: "Kaveri" });
+      let user = await User.findOne();
+      if (!user) user = await User.create({ name: "Student" });
       return res.json(user);
     }
-    const user = storage.getUser(req.user ? req.user._id : null);
+    const user = storage.getUser();
     res.json(user);
   } catch (error) {
-    const user = storage.getUser(req.user ? req.user._id : null);
+    const user = storage.getUser();
     res.json(user);
   }
 });
