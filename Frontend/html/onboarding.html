@@ -27,23 +27,36 @@
 
         <div class="onboarding-hero-text">
           <h1>Welcome to PocketPilot 🧭</h1>
-          <p>Let's personalize your student money tracker with simple budgets and smart AI tips.</p>
+          <p>Let's personalize your student money tracker with simple budgets and helpful AI tips.</p>
+
+          <div class="onboarding-perks-list">
+            <div class="onboarding-perk-card">
+              <div class="onboarding-perk-icon" style="background: var(--primary-light); color: var(--primary);">
+                <i class="fa-solid fa-microphone"></i>
+              </div>
+              <span class="onboarding-perk-text">Add expenses hands-free with voice</span>
+            </div>
+            <div class="onboarding-perk-card">
+              <div class="onboarding-perk-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+              <span class="onboarding-perk-text">Track spending & stay on budget</span>
+            </div>
+            <div class="onboarding-perk-card">
+              <div class="onboarding-perk-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">
+                <i class="fa-solid fa-gift"></i>
+              </div>
+              <span class="onboarding-perk-text">Unlock food and book coupons</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="onboarding-perks-list">
-        <div class="perk-pill">
-          <i class="fa-solid fa-microphone"></i>
-          <span>Add expenses with your voice in seconds</span>
-        </div>
-        <div class="perk-pill">
-          <i class="fa-solid fa-chart-pie"></i>
-          <span>Track where your pocket money goes</span>
-        </div>
-        <div class="perk-pill">
-          <i class="fa-solid fa-gift"></i>
-          <span>Earn gems and unlock food discount coupons</span>
-        </div>
+      <div style="padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 10px;">
+        <i class="fa-solid fa-sparkles" style="color: var(--primary); font-size: 1.1rem;"></i>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0; line-height: 1.4;">
+          Your settings can be easily changed anytime from the Settings page.
+        </p>
       </div>
     </div>
 
@@ -59,16 +72,16 @@
         <div class="form-group">
           <label class="form-label">Choose Your Avatar</label>
           <div class="onboarding-avatar-grid">
-            <div class="avatar-item active" data-seed="KaveriPilot">
+            <div class="avatar-item active" data-seed="KaveriPilot" title="Pilot">
               <img src="../assets/avatars/avatar-1.svg" onerror="this.src='../assets/avatar.png'" alt="Pilot">
             </div>
-            <div class="avatar-item" data-seed="ScholarAlex">
+            <div class="avatar-item" data-seed="ScholarAlex" title="Scholar">
               <img src="../assets/avatars/avatar-2.svg" onerror="this.src='../assets/avatar.png'" alt="Scholar">
             </div>
-            <div class="avatar-item" data-seed="FinanceGenius">
+            <div class="avatar-item" data-seed="FinanceGenius" title="Finance">
               <img src="../assets/avatars/avatar-3.svg" onerror="this.src='../assets/avatar.png'" alt="Finance">
             </div>
-            <div class="avatar-item" data-seed="PilotNova">
+            <div class="avatar-item" data-seed="PilotNova" title="Nova">
               <img src="../assets/avatars/avatar-4.svg" onerror="this.src='../assets/avatar.png'" alt="Nova">
             </div>
           </div>
@@ -77,7 +90,7 @@
         <!-- Name Input -->
         <div class="form-group">
           <label class="form-label" for="name">Your Name</label>
-          <div class="input-with-icon">
+          <div class="onboarding-input-wrapper">
             <i class="fa-solid fa-user input-icon"></i>
             <input type="text" id="name" class="form-input" placeholder="e.g. Kaveri" required />
           </div>
@@ -86,7 +99,7 @@
         <!-- Monthly Budget -->
         <div class="form-group">
           <label class="form-label" for="budget">Monthly Budget / Pocket Money (₹)</label>
-          <div class="input-with-icon">
+          <div class="onboarding-input-wrapper">
             <i class="fa-solid fa-wallet input-icon"></i>
             <input type="number" id="budget" class="form-input" placeholder="15000" min="100" required />
           </div>
@@ -101,7 +114,7 @@
         <!-- Savings Goal -->
         <div class="form-group">
           <label class="form-label" for="goal">Monthly Savings Goal (₹)</label>
-          <div class="input-with-icon">
+          <div class="onboarding-input-wrapper">
             <i class="fa-solid fa-piggy-bank input-icon"></i>
             <input type="number" id="goal" class="form-input" placeholder="5000" min="0" required />
           </div>

@@ -15,31 +15,46 @@
 <body class="auth-page">
 
   <div class="auth-container">
-    <!-- Left Info Hero -->
+    <!-- Left Hero Column -->
     <div class="auth-left">
       <div>
-        <a href="index.html" class="nav-brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff; font-weight: 800; font-size: 1.25rem;">
-          <div class="logo-icon" style="width: 34px; height: 34px; font-size: 1rem; border-radius: var(--radius-xs); background: rgba(255, 255, 255, 0.2); color: #ffffff; display: flex; align-items: center; justify-content: center;">
+        <a href="index.html" class="auth-brand">
+          <div class="logo-icon">
             <i class="fa-solid fa-layer-group"></i>
           </div>
           <span>PocketPilot</span>
         </a>
 
-        <div style="margin-top: 48px;">
-          <h1 style="font-size: 1.85rem; line-height: 1.25; margin-bottom: 12px; font-weight: 800; color: #ffffff;">
-            Smart money tracking for students
-          </h1>
-          <p style="font-size: 0.9375rem; color: rgba(255, 255, 255, 0.85); line-height: 1.5;">
-            Track your daily expenses, stick to your monthly budget, and get helpful AI tips.
-          </p>
+        <div class="auth-hero-content">
+          <h1>Smart money tracking for students</h1>
+          <p>Sign in to track your expenses, manage your monthly budget, and get personalized AI tips.</p>
+
+          <div class="auth-perks-list">
+            <div class="auth-perk-card">
+              <div class="auth-perk-icon" style="background: var(--primary-light); color: var(--primary);">
+                <i class="fa-solid fa-microphone"></i>
+              </div>
+              <span class="auth-perk-text">Instant voice expense logging</span>
+            </div>
+            <div class="auth-perk-card">
+              <div class="auth-perk-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+              <span class="auth-perk-text">Live budget & cash flow analytics</span>
+            </div>
+            <div class="auth-perk-card">
+              <div class="auth-perk-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">
+                <i class="fa-solid fa-fire"></i>
+              </div>
+              <span class="auth-perk-text">Daily streak gems & student coupons</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div style="padding: 16px 20px; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-sm); color: #ffffff;">
-        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fde047; margin-bottom: 4px;">
-          <i class="fa-solid fa-shield-halved"></i> Safe & Private
-        </div>
-        <p style="font-size: 0.8125rem; color: rgba(255, 255, 255, 0.9); margin: 0;">Your data is private, secure, and stored safely.</p>
+      <div class="auth-trust-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <p>Private & secure. Your student financial data is protected and stored safely.</p>
       </div>
     </div>
 
@@ -51,35 +66,37 @@
 
         <div class="form-group">
           <label class="form-label" for="loginEmail">Email Address</label>
-          <div style="position: relative; display: flex; align-items: center;">
-            <i class="fa-solid fa-envelope" style="position: absolute; left: 14px; color: var(--text-muted); font-size: 0.875rem;"></i>
-            <input type="email" id="loginEmail" class="form-input" style="padding-left: 38px;" placeholder="student@university.edu" required>
+          <div class="auth-input-wrapper">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input type="email" id="loginEmail" class="form-input" placeholder="student@university.edu" required />
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="loginPassword">Password</label>
-          <div style="position: relative; display: flex; align-items: center;">
-            <i class="fa-solid fa-lock" style="position: absolute; left: 14px; color: var(--text-muted); font-size: 0.875rem;"></i>
-            <input type="password" id="loginPassword" class="form-input" style="padding-left: 38px; padding-right: 38px;" placeholder="••••••••" required>
-            <button type="button" id="togglePasswordBtn" class="password-eye-btn" style="position: absolute; right: 10px; background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px;" title="Show/Hide password">
+          <div class="auth-input-wrapper">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required />
+            <button type="button" id="togglePasswordBtn" class="password-eye-btn" title="Show or hide password">
               <i class="fa-solid fa-eye" id="eyeIcon"></i>
             </button>
           </div>
         </div>
 
-        <button type="submit" id="loginBtn" class="btn btn-primary" style="width: 100%; padding: 12px; font-weight: 700; font-size: 0.9375rem; margin-top: 8px;">
-          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        <button type="submit" id="loginBtn" class="btn btn-primary auth-submit-btn">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Sign In</span>
         </button>
 
-        <div style="display: flex; align-items: center; gap: 12px; margin: 18px 0;">
-          <hr style="flex: 1; border: none; border-top: 1px solid var(--border);">
-          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">or</span>
-          <hr style="flex: 1; border: none; border-top: 1px solid var(--border);">
+        <div class="auth-divider">
+          <hr />
+          <span>or explore demo</span>
+          <hr />
         </div>
 
-        <button type="button" id="guestLoginBtn" class="btn btn-secondary" style="width: 100%; padding: 10px; font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;">
-          <i class="fa-solid fa-sparkles" style="color: var(--primary);"></i> Try Demo as Guest
+        <button type="button" id="guestLoginBtn" class="auth-guest-btn">
+          <i class="fa-solid fa-sparkles" style="color: var(--primary);"></i>
+          <span>Continue as Guest</span>
         </button>
 
         <p class="auth-footer-text">
