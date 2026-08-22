@@ -28,6 +28,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET USER PROFILE ALIAS
+router.get("/profile", async (req, res) => {
+  try {
+    if (storage.isMongoConnected()) {
+      let user = req.user;
+      if (!user) user = await User.findOne();
+      if (!user) user = await User.create({ name: "Kaveri" });
+      return res.json(user);
+    }
+    const user = storage.getUser(req.user ? req.user._id : null);
+    res.json(user);
+  } catch (error) {
+    const user = storage.getUser(req.user ? req.user._id : null);
+    res.json(user);
+  }
+});
+
 // CREATE / ENSURE USER
 router.get("/create", async (req, res) => {
   try {

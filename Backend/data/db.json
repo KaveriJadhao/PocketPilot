@@ -7,11 +7,58 @@
       "monthlyBudget": 16000,
       "savingsGoal": 6000,
       "streak": 1,
-      "gems": 45,
-      "level": 1,
+      "gems": 55,
+      "level": 2,
       "theme": "light",
       "createdAt": "2026-08-15T14:50:27.411Z"
+    },
+    {
+      "_id": "user_1787400846075",
+      "name": "Test Student",
+      "email": "test_1787400845833@campus.edu",
+      "password": "$2b$10$gY.rzcKinw9eKLZJab/Yueh74diy2SXKKw2NdIAwc3tfAXjTKhhnu",
+      "monthlyBudget": 15000,
+      "savingsGoal": 5000,
+      "streak": 1,
+      "gems": 0,
+      "level": 1,
+      "theme": "light",
+      "createdAt": "2026-08-22T12:14:06.075Z"
+    },
+    {
+      "_id": "user_1787400910817",
+      "name": "Test Student",
+      "email": "test_1787400910597@campus.edu",
+      "password": "$2b$10$tE1ZxWGrcjyWqJiyNYyLeujyevjtiZGXBdvPnJC/bXud1mQQPcRzS",
+      "monthlyBudget": 15000,
+      "savingsGoal": 5000,
+      "streak": 1,
+      "gems": 0,
+      "level": 1,
+      "theme": "light",
+      "createdAt": "2026-08-22T12:15:10.817Z"
     }
   ],
-  "expenses": []
+  "expenses": [
+    {
+      "_id": "exp_1787400910865_3fv0",
+      "title": "Campus Coffee",
+      "amount": 40,
+      "category": "Food",
+      "mood": "Happy",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T12:15:10.865Z",
+      "userId": "user_1787400910817"
+    },
+    {
+      "_id": "exp_1787400846120_p4tc",
+      "title": "Campus Coffee",
+      "amount": 40,
+      "category": "Food",
+      "mood": "Happy",
+      "date": "2026-08-22",
+      "createdAt": "2026-08-22T12:14:06.120Z",
+      "userId": "user_1787400846075"
+    }
+  ]
 }
