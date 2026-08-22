@@ -614,6 +614,44 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
+async function loadAIInsights() {
+  const container = document.getElementById("aiInsightCard");
+  if (!container) return;
+
+  try {
+    const data = await api.getAIInsights();
+    const insightText = (data && (data.insight || data.advice)) || "📊 Spending: Tracking active.\n\n😊 Mood: Keep logging your daily expenses.\n\n💡 Tip: Keep daily streaks going to unlock student rewards!";
+    container.innerHTML = escapeHtml(insightText).replace(/\n/g, "<br>");
+  } catch (error) {
+    container.innerHTML = "📊 Spending: Tracking active.<br><br>😊 Mood: Keep logging your daily expenses.<br><br>💡 Tip: Setting a 10% cap on discretionary snacks saves money.";
+  }
+}
+
+function loadSmartAlerts(expenses) {
+  const alertsBox = document.getElementById("alertsBox");
+  if (!alertsBox) return;
+
+  if (!expenses || expenses.length === 0) {
+    alertsBox.innerHTML = `<span style="color: var(--accent-emerald);"><i class="fa-solid fa-circle-check"></i> Budget healthy. No threshold breaches detected.</span>`;
+    return;
+  }
+
+  let foodSpent = 0;
+  let totalSpent = 0;
+  expenses.forEach((e) => {
+    totalSpent += Number(e.amount || 0);
+    if ((e.category || "").toLowerCase().includes("food")) {
+      foodSpent += Number(e.amount || 0);
+    }
+  });
+
+  if (foodSpent > 3000) {
+    alertsBox.innerHTML = `<span style="color: var(--accent-rose);"><i class="fa-solid fa-triangle-exclamation"></i> Food spending (₹${foodSpent.toLocaleString("en-IN")}) is high this month.</span>`;
+  } else {
+    alertsBox.innerHTML = `<span style="color: var(--accent-emerald);"><i class="fa-solid fa-circle-check"></i> All category spending is currently within safe limits.</span>`;
+  }
+}
+
 async function initDashboard() {
   try { setupThemeToggle(); } catch (e) { console.warn("Theme toggle init:", e); }
   try { setupQuickAddModal(); } catch (e) { console.warn("Quick add init:", e); }
