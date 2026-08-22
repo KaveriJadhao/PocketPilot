@@ -14,12 +14,12 @@ const defaultState = {
   users: [
     {
       _id: "default_user_1",
-      name: "Kaveri",
-      email: "student@university.edu",
+      name: "Guest Student",
+      email: "guest@university.edu",
       monthlyBudget: 15000,
       savingsGoal: 5000,
       streak: 1,
-      gems: 25,
+      gems: 0,
       level: 1,
       theme: "light",
       createdAt: new Date().toISOString(),

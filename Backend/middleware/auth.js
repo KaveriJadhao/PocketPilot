@@ -18,32 +18,34 @@ const authMiddleware = async (req, res, next) => {
             req.user = user;
             return next();
           }
-        } else {
-          const user = storage.getUser(decoded.id);
-          if (user) {
-            req.user = user;
-            return next();
-          }
+        }
+        
+        let user = storage.getUser(decoded.id);
+        if (!user && decoded.name) {
+          user = {
+            _id: decoded.id,
+            name: decoded.name,
+            email: decoded.email,
+            monthlyBudget: decoded.monthlyBudget || 15000,
+            savingsGoal: decoded.savingsGoal || 5000,
+            streak: decoded.streak || 1,
+            gems: decoded.gems || 0,
+            level: decoded.level || 1,
+          };
+        }
+        if (user) {
+          req.user = user;
+          return next();
         }
       } catch (err) {
-        // Token expired/invalid - fallback to guest
+        // Token expired/invalid
       }
     }
 
-    // Guest / Fallback user
-    if (storage.isMongoConnected()) {
-      let defaultUser = await User.findOne();
-      if (!defaultUser) {
-        defaultUser = await User.create({ name: "Kaveri" });
-      }
-      req.user = defaultUser;
-    } else {
-      req.user = storage.getUser();
-    }
+    req.user = null;
     next();
   } catch (error) {
-    // If any DB error occurs, fallback to local storage
-    req.user = storage.getUser();
+    req.user = null;
     next();
   }
 };
