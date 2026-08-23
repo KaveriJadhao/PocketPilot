@@ -84,37 +84,150 @@ const api = {
     localStorage.removeItem("onboardingDone");
   },
 
+  getAccountVault() {
+    try {
+      const raw = localStorage.getItem("pocketpilot_accounts_vault");
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {};
+    }
+  },
+
+  saveAccountVault(vault) {
+    try {
+      localStorage.setItem("pocketpilot_accounts_vault", JSON.stringify(vault));
+    } catch (e) {}
+  },
+
   // Auth Methods
-  async register(name, email, password, monthlyBudget, savingsGoal) {
+  async register(name, email, password, monthlyBudget = 15000, savingsGoal = 5000) {
     this.clearUserData();
-    const data = await this.request("/api/auth/register", {
-      method: "POST",
-      body: JSON.stringify({ name, email, password, monthlyBudget, savingsGoal }),
-    });
-    if (data.token) this.setToken(data.token);
-    if (data.user) this.setUserData(data.user);
-    return data;
+    const cleanEmail = email.toLowerCase().trim();
+    const cleanName = name.trim();
+
+    // Store in client vault
+    const vault = this.getAccountVault();
+    vault[cleanEmail] = {
+      name: cleanName,
+      email: cleanEmail,
+      password: password,
+      monthlyBudget: Number(monthlyBudget) || 15000,
+      savingsGoal: Number(savingsGoal) || 5000,
+      createdAt: new Date().toISOString(),
+    };
+    this.saveAccountVault(vault);
+
+    let data = null;
+    try {
+      data = await this.request("/api/auth/register", {
+        method: "POST",
+        body: JSON.stringify({ name: cleanName, email: cleanEmail, password, monthlyBudget, savingsGoal }),
+      });
+    } catch (err) {
+      console.warn("Backend register fallback to vault:", err.message);
+    }
+
+    if (data && data.token && data.user) {
+      this.setToken(data.token);
+      this.setUserData(data.user);
+      return data;
+    }
+
+    // Client fallback user
+    const fallbackUser = {
+      _id: "user_" + Date.now(),
+      id: "user_" + Date.now(),
+      name: cleanName,
+      email: cleanEmail,
+      monthlyBudget: Number(monthlyBudget) || 15000,
+      savingsGoal: Number(savingsGoal) || 5000,
+      streak: 1,
+      gems: 0,
+      level: 1,
+    };
+    const fallbackToken = "mock_jwt_" + btoa(JSON.stringify(fallbackUser));
+    this.setToken(fallbackToken);
+    this.setUserData(fallbackUser);
+    return { token: fallbackToken, user: fallbackUser };
   },
 
   async login(email, password) {
     this.clearUserData();
-    const data = await this.request("/api/auth/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-    });
-    if (data.token) this.setToken(data.token);
-    if (data.user) this.setUserData(data.user);
-    return data;
+    const cleanEmail = email.toLowerCase().trim();
+    let data = null;
+
+    try {
+      data = await this.request("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ email: cleanEmail, password }),
+      });
+    } catch (err) {
+      console.warn("Backend login failed or offline, checking local vault:", err.message);
+    }
+
+    if (data && data.token && data.user) {
+      this.setToken(data.token);
+      this.setUserData(data.user);
+      return data;
+    }
+
+    // Check client vault for persistent login on serverless/offline environments
+    const vault = this.getAccountVault();
+    const vaultAccount = vault[cleanEmail];
+
+    if (vaultAccount && vaultAccount.password === password) {
+      const fallbackUser = {
+        _id: "user_" + Date.now(),
+        id: "user_" + Date.now(),
+        name: vaultAccount.name,
+        email: vaultAccount.email,
+        monthlyBudget: vaultAccount.monthlyBudget || 15000,
+        savingsGoal: vaultAccount.savingsGoal || 5000,
+        streak: 1,
+        gems: 0,
+        level: 1,
+      };
+      const fallbackToken = "mock_jwt_" + btoa(JSON.stringify(fallbackUser));
+      this.setToken(fallbackToken);
+      this.setUserData(fallbackUser);
+      return { token: fallbackToken, user: fallbackUser };
+    }
+
+    throw new Error("Invalid email or password. Please check your credentials.");
   },
 
   async guestLogin() {
     this.clearUserData();
-    const data = await this.request("/api/auth/guest", {
-      method: "POST",
-    });
-    if (data.token) this.setToken(data.token);
-    if (data.user) this.setUserData(data.user);
-    return data;
+    let data = null;
+    try {
+      data = await this.request("/api/auth/guest", {
+        method: "POST",
+      });
+    } catch (err) {
+      console.warn("Backend guest login fallback:", err.message);
+    }
+
+    if (data && data.token && data.user) {
+      this.setToken(data.token);
+      this.setUserData(data.user);
+      return data;
+    }
+
+    const guestUser = {
+      _id: "guest_" + Date.now(),
+      id: "guest_" + Date.now(),
+      name: "Guest Student",
+      email: "guest@university.edu",
+      monthlyBudget: 15000,
+      savingsGoal: 5000,
+      streak: 1,
+      gems: 0,
+      level: 1,
+    };
+    const guestToken = "mock_jwt_" + btoa(JSON.stringify(guestUser));
+    this.setToken(guestToken);
+    this.setUserData(guestUser);
+    return { token: guestToken, user: guestUser };
   },
 
   async getMe() {

@@ -76,7 +76,7 @@ function setupGuestLogin(btn) {
       }, 600);
     } catch (error) {
       // Fallback to local guest mode
-      localStorage.setItem("userName", "Kaveri (Demo)");
+      localStorage.setItem("userName", "Guest Student");
       localStorage.setItem("monthlyBudget", "15000");
       window.location.href = "dashboard.html";
     }
